@@ -1,0 +1,3512 @@
+[
+  {
+    "player":"A.J. Green",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Durability \u00b7 Strong Efficiency \u00b7 Limited Defensive Impact"
+  },
+  {
+    "player":"Aaron Gordon",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Strong Efficiency \u00b7 Strong Scoring \u00b7 Strong Physical Dominance"
+  },
+  {
+    "player":"Aaron Nesmith",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Limited Playmaking \u00b7 Limited Versatility \u00b7 Limited Efficiency"
+  },
+  {
+    "player":"Aaron Wan-Bissaka",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Durability \u00b7 Strong Defensive Impact \u00b7 Strong Versatility"
+  },
+  {
+    "player":"Aaron Wiggins",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Defensive Impact \u00b7 Limited Efficiency"
+  },
+  {
+    "player":"Abdoulaye Doucour\u00e9",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Durability \u00b7 Strong Efficiency \u00b7 Limited Physical Dominance"
+  },
+  {
+    "player":"Ace Bailey",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Strong Durability \u00b7 Limited Defensive Impact \u00b7 Limited Efficiency"
+  },
+  {
+    "player":"Adam Armstrong",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Strong Scoring \u00b7 Limited Durability \u00b7 Limited Physical Dominance"
+  },
+  {
+    "player":"Adam Smith",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Limited Efficiency \u00b7 Limited Scoring \u00b7 Limited Playmaking"
+  },
+  {
+    "player":"Adam Wharton",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Playmaking \u00b7 Strong Defensive Impact \u00b7 Strong Versatility"
+  },
+  {
+    "player":"Adama Traor\u00e9",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Strong Playmaking \u00b7 Strong Versatility \u00b7 Limited Defensive Impact"
+  },
+  {
+    "player":"Adama-Alpha Bal",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Limited Scoring \u00b7 Limited Versatility \u00b7 Limited Durability"
+  },
+  {
+    "player":"Ajay Mitchell",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Playmaking \u00b7 Strong Versatility \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Al Horford",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Strong Playmaking \u00b7 Limited Durability"
+  },
+  {
+    "player":"Alejandro Garnacho",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Scoring \u00b7 Limited Physical Dominance"
+  },
+  {
+    "player":"Alex Iwobi",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Elite Playmaking \u00b7 Elite Versatility \u00b7 Strong Durability"
+  },
+  {
+    "player":"Alex Sarr",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Strong Physical Dominance \u00b7 Strong Versatility \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Alexander Isak",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Elite Scoring \u00b7 Strong Efficiency \u00b7 Strong Durability"
+  },
+  {
+    "player":"Alexis Mac Allister",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Elite Versatility \u00b7 Strong Defensive Impact \u00b7 Strong Playmaking"
+  },
+  {
+    "player":"Alondes Williams",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Elite Efficiency \u00b7 Strong Physical Dominance \u00b7 Limited Durability"
+  },
+  {
+    "player":"Alperen \u015eeng\u00fcn",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Elite Versatility \u00b7 Elite Defensive Impact \u00b7 Elite Physical Dominance"
+  },
+  {
+    "player":"Amad Diallo",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Elite Versatility \u00b7 Elite Efficiency \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Amadou Onana",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Elite Efficiency \u00b7 Strong Defensive Impact \u00b7 Strong Physical Dominance"
+  },
+  {
+    "player":"Amen Thompson",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Elite Durability \u00b7 Strong Defensive Impact \u00b7 Strong Physical Dominance"
+  },
+  {
+    "player":"Andersson Garcia",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Limited Durability \u00b7 Limited Scoring \u00b7 Limited Efficiency"
+  },
+  {
+    "player":"Andreas Pereira",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Playmaking \u00b7 Strong Versatility \u00b7 Limited Physical Dominance"
+  },
+  {
+    "player":"Andrew Nembhard",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Elite Playmaking \u00b7 Strong Scoring \u00b7 Limited Defensive Impact"
+  },
+  {
+    "player":"Andrew Robertson",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Playmaking \u00b7 Strong Durability \u00b7 Limited Physical Dominance"
+  },
+  {
+    "player":"Andrew Wiggins",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Strong Durability"
+  },
+  {
+    "player":"Andr\u00e9",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Elite Defensive Impact \u00b7 Strong Durability \u00b7 Limited Scoring"
+  },
+  {
+    "player":"Anfernee Simons",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Scoring \u00b7 Limited Defensive Impact \u00b7 Limited Physical Dominance"
+  },
+  {
+    "player":"Anthony Black",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Strong Defensive Impact \u00b7 Strong Versatility \u00b7 Strong Playmaking"
+  },
+  {
+    "player":"Anthony Davis",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Elite Physical Dominance \u00b7 Strong Versatility \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Anthony Edwards",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Elite Scoring \u00b7 Strong Efficiency \u00b7 Strong Versatility"
+  },
+  {
+    "player":"Anthony Elanga",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Strong Playmaking \u00b7 Strong Versatility \u00b7 Strong Durability"
+  },
+  {
+    "player":"Anthony Gordon",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Strong Playmaking \u00b7 Strong Versatility \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Antoine Semenyo",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Elite Durability \u00b7 Strong Versatility \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Antonee Robinson",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Elite Physical Dominance \u00b7 Elite Defensive Impact \u00b7 Strong Durability"
+  },
+  {
+    "player":"Archie Gray",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Limited Efficiency \u00b7 Limited Playmaking \u00b7 Limited Scoring"
+  },
+  {
+    "player":"Ashley Young",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Versatility \u00b7 Strong Defensive Impact \u00b7 Strong Playmaking"
+  },
+  {
+    "player":"Ausar Thompson",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Elite Defensive Impact \u00b7 Strong Physical Dominance \u00b7 Strong Durability"
+  },
+  {
+    "player":"Austin Reaves",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Scoring \u00b7 Strong Efficiency \u00b7 Strong Playmaking"
+  },
+  {
+    "player":"Axel Tuanzebe",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Physical Dominance \u00b7 Limited Versatility \u00b7 Limited Playmaking"
+  },
+  {
+    "player":"Ayo Dosunmu",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Efficiency \u00b7 Strong Playmaking \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Bam Adebayo",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Elite Defensive Impact \u00b7 Elite Physical Dominance \u00b7 Strong Durability"
+  },
+  {
+    "player":"Ben Davies",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Physical Dominance \u00b7 Limited Durability \u00b7 Limited Efficiency"
+  },
+  {
+    "player":"Ben Johnson",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Defensive Impact \u00b7 Strong Physical Dominance \u00b7 Limited Durability"
+  },
+  {
+    "player":"Ben Saraf",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Playmaking \u00b7 Limited Durability \u00b7 Limited Physical Dominance"
+  },
+  {
+    "player":"Ben Sheppard",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Limited Defensive Impact \u00b7 Limited Scoring \u00b7 Limited Physical Dominance"
+  },
+  {
+    "player":"Ben White",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Physical Dominance \u00b7 Strong Playmaking \u00b7 Limited Durability"
+  },
+  {
+    "player":"Bennedict Mathurin",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Strong Scoring \u00b7 Strong Physical Dominance"
+  },
+  {
+    "player":"Bernardo Silva",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Elite Efficiency \u00b7 Strong Versatility \u00b7 Strong Playmaking"
+  },
+  {
+    "player":"Beto",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Elite Scoring \u00b7 Limited Versatility \u00b7 Limited Playmaking"
+  },
+  {
+    "player":"Bez Mbeng",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Playmaking \u00b7 Limited Efficiency \u00b7 Limited Physical Dominance"
+  },
+  {
+    "player":"Bilal Coulibaly",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Physical Dominance \u00b7 Limited Efficiency"
+  },
+  {
+    "player":"Bilal El Khannouss",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Playmaking \u00b7 Strong Versatility"
+  },
+  {
+    "player":"Blake Hinson",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Strong Efficiency \u00b7 Strong Scoring \u00b7 Limited Versatility"
+  },
+  {
+    "player":"Bobby Portis",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Strong Scoring \u00b7 Strong Efficiency"
+  },
+  {
+    "player":"Boubacar Kamara",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Defensive Impact \u00b7 Strong Efficiency"
+  },
+  {
+    "player":"Boubakary Soumar\u00e9",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Physical Dominance \u00b7 Strong Defensive Impact \u00b7 Limited Versatility"
+  },
+  {
+    "player":"Bradley Beal",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Limited Durability \u00b7 Limited Versatility \u00b7 Limited Physical Dominance"
+  },
+  {
+    "player":"Brandin Podziemski",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Elite Durability \u00b7 Strong Playmaking \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Brandon Ingram",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Strong Durability \u00b7 Strong Scoring \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Brandon Miller",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Strong Scoring \u00b7 Strong Versatility \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Brandon Williams",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Strong Playmaking \u00b7 Strong Versatility \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Brennan Johnson",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Elite Scoring \u00b7 Strong Versatility \u00b7 Strong Efficiency"
+  },
+  {
+    "player":"Brice Sensabaugh",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Strong Scoring \u00b7 Strong Durability \u00b7 Limited Defensive Impact"
+  },
+  {
+    "player":"Brook Lopez",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Limited Playmaking"
+  },
+  {
+    "player":"Bruce Brown",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Durability \u00b7 Limited Scoring"
+  },
+  {
+    "player":"Bruno Fernandes",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Elite Versatility \u00b7 Elite Playmaking \u00b7 Strong Durability"
+  },
+  {
+    "player":"Bruno Guimar\u00e3es",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Elite Versatility \u00b7 Elite Durability \u00b7 Strong Playmaking"
+  },
+  {
+    "player":"Bryan Mbeumo",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Elite Durability \u00b7 Elite Versatility \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Bryce McGowens",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Limited Durability \u00b7 Limited Defensive Impact \u00b7 Limited Versatility"
+  },
+  {
+    "player":"Bub Carrington",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Strong Durability \u00b7 Strong Playmaking \u00b7 Limited Efficiency"
+  },
+  {
+    "player":"Bukayo Saka",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Elite Versatility \u00b7 Elite Playmaking \u00b7 Strong Scoring"
+  },
+  {
+    "player":"CJ McCollum",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Strong Durability \u00b7 Strong Scoring \u00b7 Strong Playmaking"
+  },
+  {
+    "player":"Cade Cunningham",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Elite Versatility \u00b7 Elite Playmaking \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Caleb Love",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Playmaking \u00b7 Limited Defensive Impact \u00b7 Limited Physical Dominance"
+  },
+  {
+    "player":"Caleb Okoli",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Physical Dominance \u00b7 Strong Defensive Impact \u00b7 Strong Efficiency"
+  },
+  {
+    "player":"Callum Hudson-Odoi",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Strong Scoring \u00b7 Limited Physical Dominance"
+  },
+  {
+    "player":"Calvin Bassey",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Durability \u00b7 Strong Physical Dominance \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Cam Spencer",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Elite Playmaking \u00b7 Elite Efficiency \u00b7 Limited Physical Dominance"
+  },
+  {
+    "player":"Cam Thomas",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Scoring \u00b7 Strong Playmaking \u00b7 Limited Durability"
+  },
+  {
+    "player":"Cameron Archer",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Strong Scoring \u00b7 Limited Durability \u00b7 Limited Playmaking"
+  },
+  {
+    "player":"Cameron Burgess",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Elite Physical Dominance \u00b7 Limited Scoring \u00b7 Limited Versatility"
+  },
+  {
+    "player":"Cameron Johnson",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Strong Efficiency \u00b7 Limited Versatility"
+  },
+  {
+    "player":"Carlos Baleba",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Elite Defensive Impact \u00b7 Strong Physical Dominance \u00b7 Strong Durability"
+  },
+  {
+    "player":"Carlos Soler",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Limited Durability"
+  },
+  {
+    "player":"Casemiro",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Elite Defensive Impact \u00b7 Elite Physical Dominance \u00b7 Strong Versatility"
+  },
+  {
+    "player":"Cason Wallace",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Durability \u00b7 Strong Defensive Impact \u00b7 Limited Efficiency"
+  },
+  {
+    "player":"Cedric Coward",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Physical Dominance"
+  },
+  {
+    "player":"Chaney Johnson",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Strong Efficiency \u00b7 Strong Physical Dominance \u00b7 Limited Durability"
+  },
+  {
+    "player":"Chet Holmgren",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Elite Physical Dominance \u00b7 Elite Efficiency \u00b7 Elite Defensive Impact"
+  },
+  {
+    "player":"Chris Richards",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Physical Dominance \u00b7 Strong Defensive Impact \u00b7 Limited Efficiency"
+  },
+  {
+    "player":"Chris Wood",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Elite Scoring \u00b7 Strong Durability \u00b7 Strong Efficiency"
+  },
+  {
+    "player":"Christian Braun",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Efficiency \u00b7 Limited Defensive Impact \u00b7 Limited Versatility"
+  },
+  {
+    "player":"Christian Eriksen",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Playmaking \u00b7 Strong Versatility \u00b7 Limited Physical Dominance"
+  },
+  {
+    "player":"Christian N\u00f8rgaard",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Elite Defensive Impact \u00b7 Strong Physical Dominance \u00b7 Strong Versatility"
+  },
+  {
+    "player":"Christopher Nkunku",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Elite Efficiency \u00b7 Strong Scoring \u00b7 Strong Versatility"
+  },
+  {
+    "player":"Coby White",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Scoring \u00b7 Strong Playmaking \u00b7 Limited Defensive Impact"
+  },
+  {
+    "player":"Cody Gakpo",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Elite Scoring \u00b7 Strong Efficiency \u00b7 Strong Versatility"
+  },
+  {
+    "player":"Cody Williams",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Limited Versatility \u00b7 Limited Scoring \u00b7 Limited Defensive Impact"
+  },
+  {
+    "player":"Cole Palmer",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Elite Playmaking \u00b7 Elite Versatility \u00b7 Elite Durability"
+  },
+  {
+    "player":"Collin Gillespie",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Strong Durability \u00b7 Strong Playmaking \u00b7 Limited Physical Dominance"
+  },
+  {
+    "player":"Collin Murray-Boyles",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Strong Efficiency \u00b7 Strong Physical Dominance \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Collin Sexton",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Scoring \u00b7 Strong Efficiency \u00b7 Strong Playmaking"
+  },
+  {
+    "player":"Conor Coady",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Efficiency \u00b7 Limited Playmaking \u00b7 Limited Versatility"
+  },
+  {
+    "player":"Cooper Flagg",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Strong Versatility \u00b7 Strong Physical Dominance \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Cormac Ryan",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Elite Efficiency \u00b7 Strong Scoring \u00b7 Limited Durability"
+  },
+  {
+    "player":"Craig Dawson",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Elite Physical Dominance \u00b7 Limited Efficiency \u00b7 Limited Scoring"
+  },
+  {
+    "player":"Cristian Romero",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Elite Defensive Impact \u00b7 Strong Physical Dominance"
+  },
+  {
+    "player":"Curtis Jones",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Versatility \u00b7 Strong Efficiency \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Daeqwon Plowden",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Limited Durability \u00b7 Limited Physical Dominance \u00b7 Limited Playmaking"
+  },
+  {
+    "player":"Daichi Kamada",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Defensive Impact \u00b7 Limited Scoring \u00b7 Limited Physical Dominance"
+  },
+  {
+    "player":"Dan Burn",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Elite Durability \u00b7 Strong Physical Dominance \u00b7 Limited Playmaking"
+  },
+  {
+    "player":"Dango Ouattara",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Strong Scoring \u00b7 Strong Versatility \u00b7 Strong Playmaking"
+  },
+  {
+    "player":"Daniel Gafford",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Elite Physical Dominance \u00b7 Elite Efficiency \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Daniel Mu\u00f1oz",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Elite Durability \u00b7 Strong Defensive Impact \u00b7 Strong Versatility"
+  },
+  {
+    "player":"Daniss Jenkins",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Strong Playmaking \u00b7 Limited Efficiency"
+  },
+  {
+    "player":"Danny Welbeck",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Elite Scoring \u00b7 Strong Efficiency \u00b7 Strong Versatility"
+  },
+  {
+    "player":"Danny Wolf",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Strong Physical Dominance \u00b7 Limited Efficiency"
+  },
+  {
+    "player":"Dara O'Shea",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Elite Physical Dominance \u00b7 Strong Durability \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Dariq Whitehead",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Limited Versatility \u00b7 Limited Playmaking \u00b7 Limited Physical Dominance"
+  },
+  {
+    "player":"Darius Garland",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Elite Playmaking \u00b7 Strong Scoring \u00b7 Limited Defensive Impact"
+  },
+  {
+    "player":"Darwin N\u00fa\u00f1ez",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Elite Scoring \u00b7 Strong Versatility \u00b7 Limited Physical Dominance"
+  },
+  {
+    "player":"David Brooks",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Strong Scoring \u00b7 Limited Durability"
+  },
+  {
+    "player":"Davion Mitchell",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Elite Playmaking \u00b7 Strong Durability \u00b7 Limited Scoring"
+  },
+  {
+    "player":"De'Aaron Fox",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Elite Playmaking \u00b7 Strong Durability \u00b7 Strong Scoring"
+  },
+  {
+    "player":"De'Andre Hunter",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Limited Efficiency"
+  },
+  {
+    "player":"De'Anthony Melton",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Strong Versatility \u00b7 Limited Efficiency"
+  },
+  {
+    "player":"DeJon Jarreau",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Playmaking \u00b7 Strong Physical Dominance \u00b7 Strong Versatility"
+  },
+  {
+    "player":"DeMar DeRozan",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Strong Durability \u00b7 Strong Playmaking \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Dean Huijsen",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Elite Physical Dominance \u00b7 Strong Efficiency \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Dean Wade",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Limited Versatility \u00b7 Limited Scoring"
+  },
+  {
+    "player":"Deandre Ayton",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Elite Efficiency \u00b7 Strong Defensive Impact \u00b7 Strong Physical Dominance"
+  },
+  {
+    "player":"Declan Rice",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Elite Playmaking \u00b7 Strong Versatility \u00b7 Strong Durability"
+  },
+  {
+    "player":"Dejan Kulusevski",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Versatility \u00b7 Strong Playmaking \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Dejounte Murray",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Elite Versatility \u00b7 Elite Playmaking \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Deni Avdija",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Strong Scoring \u00b7 Strong Playmaking \u00b7 Strong Versatility"
+  },
+  {
+    "player":"Dennis Schr\u00f6der",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Strong Playmaking \u00b7 Limited Defensive Impact \u00b7 Limited Efficiency"
+  },
+  {
+    "player":"Derik Queen",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Elite Physical Dominance \u00b7 Strong Defensive Impact \u00b7 Strong Versatility"
+  },
+  {
+    "player":"Derrick Jones Jr.",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Limited Versatility \u00b7 Limited Playmaking"
+  },
+  {
+    "player":"Derrick White",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Elite Durability \u00b7 Strong Playmaking \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Desmond Bane",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Elite Durability \u00b7 Strong Scoring \u00b7 Strong Efficiency"
+  },
+  {
+    "player":"Destiny Udogie",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Elite Defensive Impact \u00b7 Strong Physical Dominance \u00b7 Limited Scoring"
+  },
+  {
+    "player":"Devin Booker",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Scoring \u00b7 Strong Playmaking \u00b7 Strong Durability"
+  },
+  {
+    "player":"Devin Vassell",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Durability"
+  },
+  {
+    "player":"Dillon Brooks",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Strong Scoring \u00b7 Limited Playmaking"
+  },
+  {
+    "player":"Diogo Dalot",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Durability \u00b7 Strong Defensive Impact \u00b7 Strong Physical Dominance"
+  },
+  {
+    "player":"Diogo Jota",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Elite Scoring \u00b7 Strong Versatility \u00b7 Strong Efficiency"
+  },
+  {
+    "player":"Djed Spence",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Elite Defensive Impact \u00b7 Strong Physical Dominance \u00b7 Strong Versatility"
+  },
+  {
+    "player":"Domantas Sabonis",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Strong Physical Dominance \u00b7 Strong Versatility \u00b7 Strong Playmaking"
+  },
+  {
+    "player":"Dominic Calvert-Lewin",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Strong Scoring \u00b7 Limited Playmaking \u00b7 Limited Efficiency"
+  },
+  {
+    "player":"Dominic Solanke",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Strong Scoring \u00b7 Limited Defensive Impact"
+  },
+  {
+    "player":"Dominick Barlow",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Limited Scoring \u00b7 Limited Playmaking"
+  },
+  {
+    "player":"Dominik Szoboszlai",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Elite Playmaking \u00b7 Strong Versatility \u00b7 Strong Efficiency"
+  },
+  {
+    "player":"Donovan Clingan",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Elite Defensive Impact \u00b7 Strong Physical Dominance \u00b7 Strong Durability"
+  },
+  {
+    "player":"Donovan Mitchell",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Elite Scoring \u00b7 Strong Versatility \u00b7 Strong Playmaking"
+  },
+  {
+    "player":"Donte DiVincenzo",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Elite Durability \u00b7 Strong Defensive Impact \u00b7 Strong Playmaking"
+  },
+  {
+    "player":"Drake Powell",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Limited Scoring \u00b7 Limited Defensive Impact \u00b7 Limited Physical Dominance"
+  },
+  {
+    "player":"Draymond Green",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Strong Playmaking \u00b7 Strong Defensive Impact \u00b7 Limited Scoring"
+  },
+  {
+    "player":"Duncan Robinson",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Durability \u00b7 Strong Efficiency \u00b7 Limited Physical Dominance"
+  },
+  {
+    "player":"Dwight McNeil",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Elite Playmaking \u00b7 Strong Versatility \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Dylan Cardwell",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Strong Physical Dominance \u00b7 Strong Efficiency \u00b7 Limited Durability"
+  },
+  {
+    "player":"Dylan Harper",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Playmaking \u00b7 Strong Versatility"
+  },
+  {
+    "player":"Dyson Daniels",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Durability \u00b7 Strong Playmaking \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Eberechi Eze",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Versatility \u00b7 Strong Playmaking \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Eddie Nketiah",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Strong Scoring \u00b7 Limited Defensive Impact \u00b7 Limited Durability"
+  },
+  {
+    "player":"Edson \u00c1lvarez",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Defensive Impact \u00b7 Strong Physical Dominance \u00b7 Limited Efficiency"
+  },
+  {
+    "player":"Egor D\u0451min",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Strong Playmaking \u00b7 Limited Physical Dominance"
+  },
+  {
+    "player":"Elijah Harkless",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Playmaking \u00b7 Limited Durability \u00b7 Limited Scoring"
+  },
+  {
+    "player":"Elliot Anderson",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Elite Defensive Impact \u00b7 Elite Physical Dominance \u00b7 Elite Versatility"
+  },
+  {
+    "player":"Emerson Palmieri",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Defensive Impact"
+  },
+  {
+    "player":"Emile Smith Rowe",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Elite Efficiency \u00b7 Strong Versatility \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Emmanuel Agbadou",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Physical Dominance \u00b7 Strong Defensive Impact \u00b7 Strong Efficiency"
+  },
+  {
+    "player":"Enzo Fern\u00e1ndez",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Elite Versatility \u00b7 Strong Playmaking \u00b7 Strong Durability"
+  },
+  {
+    "player":"Erling Haaland",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Elite Scoring \u00b7 Strong Durability \u00b7 Limited Defensive Impact"
+  },
+  {
+    "player":"Ethan Pinnock",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Physical Dominance \u00b7 Limited Versatility \u00b7 Limited Playmaking"
+  },
+  {
+    "player":"Ethan Thompson",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Limited Physical Dominance \u00b7 Limited Durability \u00b7 Limited Scoring"
+  },
+  {
+    "player":"Evan Mobley",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Elite Physical Dominance \u00b7 Strong Defensive Impact \u00b7 Strong Versatility"
+  },
+  {
+    "player":"Evanilson",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Strong Scoring \u00b7 Limited Defensive Impact"
+  },
+  {
+    "player":"Ezri Konsa",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Durability \u00b7 Strong Physical Dominance \u00b7 Strong Efficiency"
+  },
+  {
+    "player":"Fabian Sch\u00e4r",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Durability \u00b7 Limited Playmaking"
+  },
+  {
+    "player":"Facundo Buonanotte",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Strong Versatility \u00b7 Strong Scoring \u00b7 Strong Efficiency"
+  },
+  {
+    "player":"Flynn Downes",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Defensive Impact \u00b7 Strong Efficiency \u00b7 Limited Versatility"
+  },
+  {
+    "player":"Franz Wagner",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Strong Scoring \u00b7 Strong Physical Dominance \u00b7 Strong Versatility"
+  },
+  {
+    "player":"GG Jackson II",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Strong Physical Dominance \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Gabriel Magalh\u00e3es",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Elite Efficiency \u00b7 Strong Physical Dominance \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Gabriel Martinelli",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Strong Scoring \u00b7 Strong Playmaking \u00b7 Limited Physical Dominance"
+  },
+  {
+    "player":"Gary Trent Jr.",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Limited Playmaking \u00b7 Limited Efficiency \u00b7 Limited Defensive Impact"
+  },
+  {
+    "player":"Georginio Rutter",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Scoring \u00b7 Strong Versatility \u00b7 Strong Playmaking"
+  },
+  {
+    "player":"Giannis Antetokounmpo",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Elite Versatility \u00b7 Elite Scoring \u00b7 Elite Physical Dominance"
+  },
+  {
+    "player":"Gon\u00e7alo Guedes",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Playmaking \u00b7 Strong Versatility \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Grayson Allen",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Playmaking \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Gui Santos",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Strong Efficiency"
+  },
+  {
+    "player":"Guido Rodr\u00edguez",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Physical Dominance \u00b7 Strong Defensive Impact \u00b7 Limited Durability"
+  },
+  {
+    "player":"Harrison Barnes",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Strong Durability \u00b7 Limited Physical Dominance \u00b7 Limited Versatility"
+  },
+  {
+    "player":"Harry Maguire",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Physical Dominance \u00b7 Limited Playmaking \u00b7 Limited Versatility"
+  },
+  {
+    "player":"Harry Wilson",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Elite Scoring \u00b7 Strong Versatility \u00b7 Limited Durability"
+  },
+  {
+    "player":"Harry Winks",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Limited Efficiency \u00b7 Limited Scoring"
+  },
+  {
+    "player":"Harvey Barnes",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Elite Scoring \u00b7 Strong Efficiency \u00b7 Strong Playmaking"
+  },
+  {
+    "player":"Hayden Gray",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Efficiency \u00b7 Limited Scoring \u00b7 Limited Defensive Impact"
+  },
+  {
+    "player":"Herbert Jones",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Limited Physical Dominance \u00b7 Limited Scoring \u00b7 Limited Efficiency"
+  },
+  {
+    "player":"Ian Maatsen",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Defensive Impact \u00b7 Strong Versatility \u00b7 Strong Playmaking"
+  },
+  {
+    "player":"Ibrahima Konat\u00e9",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Elite Physical Dominance \u00b7 Strong Efficiency \u00b7 Strong Durability"
+  },
+  {
+    "player":"Idrissa Gana Gueye",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Elite Defensive Impact \u00b7 Strong Durability \u00b7 Strong Physical Dominance"
+  },
+  {
+    "player":"Igor",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Physical Dominance \u00b7 Limited Scoring \u00b7 Limited Versatility"
+  },
+  {
+    "player":"Iliman Ndiaye",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Strong Scoring \u00b7 Strong Efficiency \u00b7 Strong Durability"
+  },
+  {
+    "player":"Illia Zabarnyi",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Durability \u00b7 Strong Physical Dominance \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Immanuel Quickley",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Strong Playmaking \u00b7 Strong Durability"
+  },
+  {
+    "player":"Isaac Okoro",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Limited Physical Dominance \u00b7 Limited Scoring \u00b7 Limited Playmaking"
+  },
+  {
+    "player":"Isaiah Collier",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Elite Playmaking \u00b7 Limited Defensive Impact"
+  },
+  {
+    "player":"Isaiah Hartenstein",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Elite Defensive Impact \u00b7 Strong Efficiency \u00b7 Strong Physical Dominance"
+  },
+  {
+    "player":"Isaiah Joe",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Efficiency \u00b7 Strong Scoring \u00b7 Limited Playmaking"
+  },
+  {
+    "player":"Isaiah Stewart",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Strong Efficiency \u00b7 Strong Physical Dominance \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Ismaila Sarr",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Scoring \u00b7 Strong Playmaking \u00b7 Strong Durability"
+  },
+  {
+    "player":"Issa Diop",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Physical Dominance \u00b7 Limited Durability \u00b7 Limited Efficiency"
+  },
+  {
+    "player":"Ivica Zubac",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Strong Efficiency \u00b7 Strong Physical Dominance \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Ja Morant",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Elite Playmaking \u00b7 Strong Versatility \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Ja'Kobe Walter",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Limited Physical Dominance \u00b7 Limited Playmaking \u00b7 Limited Versatility"
+  },
+  {
+    "player":"Jabari Smith Jr.",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Elite Durability \u00b7 Strong Defensive Impact \u00b7 Limited Playmaking"
+  },
+  {
+    "player":"Jack Clarke",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Strong Playmaking \u00b7 Strong Versatility \u00b7 Limited Scoring"
+  },
+  {
+    "player":"Jack Harrison",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Limited Physical Dominance"
+  },
+  {
+    "player":"Jack Hinshelwood",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Efficiency \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Jack Stephens",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Efficiency \u00b7 Limited Playmaking"
+  },
+  {
+    "player":"Jacob Greaves",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Elite Physical Dominance \u00b7 Limited Versatility \u00b7 Limited Playmaking"
+  },
+  {
+    "player":"Jacob Murphy",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Strong Playmaking \u00b7 Strong Scoring \u00b7 Strong Versatility"
+  },
+  {
+    "player":"Jacob Ramsey",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Strong Playmaking"
+  },
+  {
+    "player":"Jaden McDaniels",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Strong Durability \u00b7 Strong Efficiency \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Jadon Sancho",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Strong Playmaking \u00b7 Strong Efficiency \u00b7 Strong Versatility"
+  },
+  {
+    "player":"Jahmai Mashack",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Limited Durability \u00b7 Limited Scoring \u00b7 Limited Efficiency"
+  },
+  {
+    "player":"Jaime Jaquez Jr.",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Strong Playmaking \u00b7 Strong Durability \u00b7 Strong Versatility"
+  },
+  {
+    "player":"Jake LaRavia",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Strong Durability \u00b7 Limited Scoring"
+  },
+  {
+    "player":"Jake O'Brien",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Physical Dominance \u00b7 Limited Playmaking"
+  },
+  {
+    "player":"Jakob Poeltl",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Elite Efficiency \u00b7 Strong Physical Dominance \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Jakub Kiwior",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Efficiency \u00b7 Limited Playmaking \u00b7 Limited Versatility"
+  },
+  {
+    "player":"Jalen Brunson",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Elite Playmaking \u00b7 Strong Scoring \u00b7 Strong Durability"
+  },
+  {
+    "player":"Jalen Duren",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Elite Physical Dominance \u00b7 Elite Efficiency \u00b7 Elite Defensive Impact"
+  },
+  {
+    "player":"Jalen Green",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Scoring \u00b7 Strong Versatility \u00b7 Limited Durability"
+  },
+  {
+    "player":"Jalen Johnson",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Elite Versatility \u00b7 Elite Defensive Impact \u00b7 Elite Playmaking"
+  },
+  {
+    "player":"Jalen Slawson",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Limited Scoring \u00b7 Limited Durability"
+  },
+  {
+    "player":"Jalen Smith",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Strong Physical Dominance \u00b7 Strong Efficiency \u00b7 Limited Playmaking"
+  },
+  {
+    "player":"Jalen Suggs",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Strong Playmaking \u00b7 Strong Versatility \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Jalen Williams",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Playmaking \u00b7 Strong Versatility \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Jamal Murray",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Elite Playmaking \u00b7 Elite Scoring \u00b7 Strong Durability"
+  },
+  {
+    "player":"Jamal Shead",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Elite Playmaking \u00b7 Strong Durability \u00b7 Limited Scoring"
+  },
+  {
+    "player":"James Bree",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Physical Dominance \u00b7 Limited Efficiency \u00b7 Limited Durability"
+  },
+  {
+    "player":"James Garner",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Defensive Impact \u00b7 Limited Scoring \u00b7 Limited Efficiency"
+  },
+  {
+    "player":"James Harden",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Elite Playmaking \u00b7 Strong Scoring \u00b7 Strong Durability"
+  },
+  {
+    "player":"James Justin",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Physical Dominance \u00b7 Strong Durability \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"James Maddison",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Elite Versatility \u00b7 Elite Efficiency \u00b7 Elite Playmaking"
+  },
+  {
+    "player":"James Tarkowski",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Elite Physical Dominance \u00b7 Strong Durability \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"James Ward-Prowse",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Efficiency \u00b7 Strong Versatility \u00b7 Strong Playmaking"
+  },
+  {
+    "player":"Jamie Vardy",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Strong Durability \u00b7 Strong Scoring \u00b7 Limited Defensive Impact"
+  },
+  {
+    "player":"Jamir Watkins",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Limited Playmaking \u00b7 Limited Efficiency \u00b7 Limited Scoring"
+  },
+  {
+    "player":"Jan Bednarek",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Elite Physical Dominance \u00b7 Strong Efficiency \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Jan Paul van Hecke",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Physical Dominance \u00b7 Strong Durability"
+  },
+  {
+    "player":"Jannik Vestergaard",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Physical Dominance \u00b7 Limited Efficiency \u00b7 Limited Scoring"
+  },
+  {
+    "player":"Jarace Walker",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Strong Durability \u00b7 Limited Efficiency"
+  },
+  {
+    "player":"Jaren Jackson Jr.",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Strong Physical Dominance \u00b7 Strong Scoring \u00b7 Strong Versatility"
+  },
+  {
+    "player":"Jarrad Branthwaite",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Physical Dominance \u00b7 Strong Durability \u00b7 Limited Playmaking"
+  },
+  {
+    "player":"Jarrett Allen",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Elite Physical Dominance \u00b7 Elite Efficiency \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Jarrod Bowen",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Strong Durability \u00b7 Strong Scoring \u00b7 Strong Versatility"
+  },
+  {
+    "player":"Javon Small",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Strong Playmaking \u00b7 Strong Efficiency \u00b7 Strong Versatility"
+  },
+  {
+    "player":"Jay Huff",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Strong Durability \u00b7 Strong Efficiency \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Jaylen Brown",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Strong Scoring \u00b7 Strong Versatility \u00b7 Strong Durability"
+  },
+  {
+    "player":"Jaylen Wells",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Limited Playmaking \u00b7 Limited Versatility \u00b7 Limited Defensive Impact"
+  },
+  {
+    "player":"Jaylon Tyson",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Efficiency"
+  },
+  {
+    "player":"Jayson Tatum",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Elite Versatility \u00b7 Strong Playmaking \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Jean-Clair Todibo",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Defensive Impact \u00b7 Strong Physical Dominance \u00b7 Limited Scoring"
+  },
+  {
+    "player":"Jean-Philippe Mateta",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Elite Scoring \u00b7 Strong Durability \u00b7 Limited Physical Dominance"
+  },
+  {
+    "player":"Jean-Ricner Bellegarde",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Versatility \u00b7 Strong Playmaking \u00b7 Strong Efficiency"
+  },
+  {
+    "player":"Jefferson Lerma",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Defensive Impact \u00b7 Strong Physical Dominance \u00b7 Limited Versatility"
+  },
+  {
+    "player":"Jens Cajuste",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Defensive Impact \u00b7 Strong Efficiency"
+  },
+  {
+    "player":"Jerami Grant",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Strong Scoring"
+  },
+  {
+    "player":"Jeremiah Fears",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Strong Durability \u00b7 Strong Versatility \u00b7 Strong Playmaking"
+  },
+  {
+    "player":"Jeremy Doku",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Elite Versatility \u00b7 Elite Playmaking \u00b7 Strong Efficiency"
+  },
+  {
+    "player":"Jesper Lindstr\u00f8m",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Strong Defensive Impact \u00b7 Limited Durability \u00b7 Limited Efficiency"
+  },
+  {
+    "player":"Jimmy Butler",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Strong Efficiency \u00b7 Strong Scoring \u00b7 Strong Versatility"
+  },
+  {
+    "player":"Joachim Andersen",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Elite Physical Dominance \u00b7 Strong Durability \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Jock Landale",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Strong Physical Dominance \u00b7 Strong Efficiency"
+  },
+  {
+    "player":"Joe Aribo",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Elite Efficiency \u00b7 Strong Defensive Impact \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Joe Willock",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Playmaking \u00b7 Strong Versatility \u00b7 Limited Physical Dominance"
+  },
+  {
+    "player":"Joel Embiid",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Elite Physical Dominance \u00b7 Elite Scoring \u00b7 Strong Versatility"
+  },
+  {
+    "player":"Joelinton",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Defensive Impact \u00b7 Strong Versatility \u00b7 Strong Physical Dominance"
+  },
+  {
+    "player":"John Collins",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Strong Efficiency \u00b7 Strong Durability \u00b7 Limited Playmaking"
+  },
+  {
+    "player":"John McGinn",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Playmaking \u00b7 Strong Versatility"
+  },
+  {
+    "player":"Jonathan Kuminga",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Strong Physical Dominance \u00b7 Limited Durability"
+  },
+  {
+    "player":"Jordan Ayew",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Strong Scoring"
+  },
+  {
+    "player":"Jordan Goodwin",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Strong Defensive Impact \u00b7 Limited Efficiency"
+  },
+  {
+    "player":"Jordan Miller",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Strong Efficiency"
+  },
+  {
+    "player":"Jordan Poole",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Strong Playmaking \u00b7 Limited Durability \u00b7 Limited Efficiency"
+  },
+  {
+    "player":"Josh Giddey",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Elite Playmaking \u00b7 Strong Versatility \u00b7 Strong Physical Dominance"
+  },
+  {
+    "player":"Josh Hart",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Strong Defensive Impact \u00b7 Strong Playmaking \u00b7 Strong Efficiency"
+  },
+  {
+    "player":"Josh Oduro",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Strong Efficiency \u00b7 Limited Defensive Impact \u00b7 Limited Playmaking"
+  },
+  {
+    "player":"Joshua Zirkzee",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Strong Scoring \u00b7 Limited Defensive Impact \u00b7 Limited Durability"
+  },
+  {
+    "player":"Jo\u00e3o Gomes",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Durability \u00b7 Strong Defensive Impact \u00b7 Strong Efficiency"
+  },
+  {
+    "player":"Jo\u00e3o Pedro",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Strong Versatility \u00b7 Strong Playmaking \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Jo\u00ebl Veltman",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Physical Dominance \u00b7 Strong Defensive Impact \u00b7 Limited Scoring"
+  },
+  {
+    "player":"Jo\u0161ko Gvardiol",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Elite Efficiency \u00b7 Elite Durability \u00b7 Strong Physical Dominance"
+  },
+  {
+    "player":"Jrue Holiday",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Strong Playmaking \u00b7 Strong Versatility \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Julian Champagnie",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Strong Durability \u00b7 Strong Defensive Impact \u00b7 Limited Playmaking"
+  },
+  {
+    "player":"Julian Reese",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Strong Physical Dominance \u00b7 Limited Durability \u00b7 Limited Playmaking"
+  },
+  {
+    "player":"Julius Randle",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Elite Durability \u00b7 Strong Scoring \u00b7 Strong Versatility"
+  },
+  {
+    "player":"Jurri\u00ebn Timber",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Versatility"
+  },
+  {
+    "player":"Justin Kluivert",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Versatility \u00b7 Strong Playmaking \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Jusuf Nurki\u0107",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Strong Physical Dominance \u00b7 Strong Playmaking \u00b7 Strong Versatility"
+  },
+  {
+    "player":"J\u00f8rgen Strand Larsen",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Elite Scoring \u00b7 Strong Durability \u00b7 Limited Defensive Impact"
+  },
+  {
+    "player":"Kadary Richmond",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Elite Efficiency \u00b7 Strong Playmaking \u00b7 Limited Durability"
+  },
+  {
+    "player":"Kai Havertz",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Elite Scoring \u00b7 Strong Efficiency \u00b7 Limited Defensive Impact"
+  },
+  {
+    "player":"Kalvin Phillips",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Defensive Impact \u00b7 Limited Durability \u00b7 Limited Playmaking"
+  },
+  {
+    "player":"Kamaldeen Sulemana",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Limited Physical Dominance"
+  },
+  {
+    "player":"Kaoru Mitoma",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Strong Scoring \u00b7 Strong Versatility \u00b7 Strong Efficiency"
+  },
+  {
+    "player":"Karl-Anthony Towns",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Elite Physical Dominance \u00b7 Elite Defensive Impact \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Kawhi Leonard",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Elite Scoring \u00b7 Elite Efficiency \u00b7 Elite Versatility"
+  },
+  {
+    "player":"Keane Lewis-Potter",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Durability"
+  },
+  {
+    "player":"Keegan Murray",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Limited Durability \u00b7 Limited Playmaking \u00b7 Limited Efficiency"
+  },
+  {
+    "player":"Kel'el Ware",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Elite Defensive Impact \u00b7 Strong Efficiency \u00b7 Strong Physical Dominance"
+  },
+  {
+    "player":"Keldon Johnson",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Strong Efficiency \u00b7 Strong Durability \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Kelly Oubre Jr.",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Limited Playmaking"
+  },
+  {
+    "player":"Kennedy Chandler",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Elite Playmaking \u00b7 Limited Efficiency \u00b7 Limited Durability"
+  },
+  {
+    "player":"Kenny Tete",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Elite Defensive Impact \u00b7 Strong Physical Dominance \u00b7 Limited Efficiency"
+  },
+  {
+    "player":"Kentavious Caldwell-Pope",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Playmaking \u00b7 Limited Defensive Impact \u00b7 Limited Physical Dominance"
+  },
+  {
+    "player":"Keon Ellis",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Limited Scoring \u00b7 Limited Physical Dominance \u00b7 Limited Versatility"
+  },
+  {
+    "player":"Kevin De Bruyne",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Elite Playmaking \u00b7 Elite Versatility \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Kevin Durant",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Elite Efficiency \u00b7 Elite Durability \u00b7 Elite Scoring"
+  },
+  {
+    "player":"Kevin Huerter",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":""
+  },
+  {
+    "player":"Kevin Porter Jr.",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Elite Playmaking \u00b7 Strong Versatility"
+  },
+  {
+    "player":"Kevin Schade",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Elite Scoring"
+  },
+  {
+    "player":"Keyonte George",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Strong Scoring \u00b7 Strong Playmaking \u00b7 Strong Versatility"
+  },
+  {
+    "player":"Khris Middleton",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Limited Defensive Impact \u00b7 Limited Efficiency"
+  },
+  {
+    "player":"Kieran Trippier",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Versatility \u00b7 Strong Playmaking \u00b7 Strong Physical Dominance"
+  },
+  {
+    "player":"Klay Thompson",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Limited Versatility \u00b7 Limited Efficiency \u00b7 Limited Defensive Impact"
+  },
+  {
+    "player":"Kobbie Mainoo",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Defensive Impact \u00b7 Limited Physical Dominance \u00b7 Limited Scoring"
+  },
+  {
+    "player":"Kon Knueppel",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Elite Durability \u00b7 Strong Efficiency \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Konstantinos Mavropanos",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Elite Physical Dominance \u00b7 Strong Defensive Impact \u00b7 Limited Scoring"
+  },
+  {
+    "player":"Kris Dunn",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Strong Durability \u00b7 Strong Playmaking \u00b7 Limited Scoring"
+  },
+  {
+    "player":"Kris Murray",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Limited Efficiency \u00b7 Limited Versatility \u00b7 Limited Playmaking"
+  },
+  {
+    "player":"Kristaps Porzi\u0146\u0123is",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Elite Physical Dominance \u00b7 Strong Scoring \u00b7 Strong Versatility"
+  },
+  {
+    "player":"Kristoffer Ajer",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Limited Scoring \u00b7 Limited Versatility \u00b7 Limited Efficiency"
+  },
+  {
+    "player":"Kyle Filipowski",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Strong Physical Dominance \u00b7 Strong Versatility \u00b7 Strong Durability"
+  },
+  {
+    "player":"Kyle Kuzma",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":""
+  },
+  {
+    "player":"Kyle Walker",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Limited Efficiency \u00b7 Limited Scoring \u00b7 Limited Durability"
+  },
+  {
+    "player":"Kyle Walker-Peters",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Durability \u00b7 Limited Scoring"
+  },
+  {
+    "player":"Kyshawn George",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Strong Playmaking \u00b7 Strong Versatility"
+  },
+  {
+    "player":"LaMelo Ball",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Elite Playmaking \u00b7 Elite Versatility \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Landry Shamet",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Limited Playmaking \u00b7 Limited Defensive Impact \u00b7 Limited Physical Dominance"
+  },
+  {
+    "player":"Lauri Markkanen",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Elite Scoring \u00b7 Strong Physical Dominance \u00b7 Strong Efficiency"
+  },
+  {
+    "player":"Lawson Lovering",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Strong Physical Dominance \u00b7 Limited Playmaking \u00b7 Limited Scoring"
+  },
+  {
+    "player":"LeBron James",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Elite Playmaking \u00b7 Strong Versatility \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Leaky Black",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Limited Versatility \u00b7 Limited Durability \u00b7 Limited Playmaking"
+  },
+  {
+    "player":"Leandro Trossard",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Strong Playmaking \u00b7 Strong Versatility \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Leif Davis",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Durability \u00b7 Strong Physical Dominance"
+  },
+  {
+    "player":"Leny Yoro",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Limited Playmaking \u00b7 Limited Scoring \u00b7 Limited Durability"
+  },
+  {
+    "player":"Leon Bailey",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Strong Playmaking \u00b7 Limited Physical Dominance \u00b7 Limited Defensive Impact"
+  },
+  {
+    "player":"Lesley Ugochukwu",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Efficiency"
+  },
+  {
+    "player":"Levi Colwill",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Durability \u00b7 Strong Efficiency \u00b7 Strong Physical Dominance"
+  },
+  {
+    "player":"Lewis Cook",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Durability \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Lewis Dunk",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Physical Dominance \u00b7 Limited Scoring \u00b7 Limited Versatility"
+  },
+  {
+    "player":"Lewis Hall",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Defensive Impact \u00b7 Strong Playmaking \u00b7 Strong Versatility"
+  },
+  {
+    "player":"Liam Delap",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Strong Scoring \u00b7 Strong Durability \u00b7 Limited Defensive Impact"
+  },
+  {
+    "player":"Lisandro Mart\u00ednez",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Defensive Impact \u00b7 Strong Efficiency \u00b7 Strong Physical Dominance"
+  },
+  {
+    "player":"Lonzo Ball",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Strong Playmaking \u00b7 Limited Durability \u00b7 Limited Scoring"
+  },
+  {
+    "player":"Lucas Bergvall",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Elite Defensive Impact \u00b7 Limited Scoring \u00b7 Limited Durability"
+  },
+  {
+    "player":"Lucas Digne",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Physical Dominance \u00b7 Strong Defensive Impact \u00b7 Limited Scoring"
+  },
+  {
+    "player":"Lucas Paquet\u00e1",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Efficiency \u00b7 Strong Versatility \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Lucas Williamson",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Limited Defensive Impact \u00b7 Limited Scoring \u00b7 Limited Durability"
+  },
+  {
+    "player":"Luguentz Dort",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Strong Defensive Impact \u00b7 Limited Physical Dominance \u00b7 Limited Scoring"
+  },
+  {
+    "player":"Luis D\u00edaz",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Elite Efficiency \u00b7 Elite Versatility \u00b7 Elite Scoring"
+  },
+  {
+    "player":"Luka Don\u010di\u0107",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Elite Versatility \u00b7 Elite Scoring \u00b7 Elite Playmaking"
+  },
+  {
+    "player":"Luke Kennard",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Elite Efficiency \u00b7 Strong Durability \u00b7 Limited Versatility"
+  },
+  {
+    "player":"Luke Kornet",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Elite Efficiency \u00b7 Strong Physical Dominance \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Luke Thomas",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Defensive Impact \u00b7 Strong Physical Dominance \u00b7 Limited Playmaking"
+  },
+  {
+    "player":"Luke Woolfenden",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Physical Dominance \u00b7 Limited Durability \u00b7 Limited Scoring"
+  },
+  {
+    "player":"Mads Roerslev",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Playmaking \u00b7 Limited Efficiency \u00b7 Limited Durability"
+  },
+  {
+    "player":"Malachi Smith",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Playmaking \u00b7 Strong Efficiency \u00b7 Limited Physical Dominance"
+  },
+  {
+    "player":"Malik Monk",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Playmaking \u00b7 Strong Scoring \u00b7 Limited Physical Dominance"
+  },
+  {
+    "player":"Malo Gusto",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Defensive Impact \u00b7 Limited Scoring"
+  },
+  {
+    "player":"Manuel Akanji",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Limited Scoring \u00b7 Limited Versatility"
+  },
+  {
+    "player":"Manuel Ugarte Ribeiro",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Elite Defensive Impact"
+  },
+  {
+    "player":"Marc Cucurella",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Efficiency \u00b7 Strong Durability \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Marc Gu\u00e9hi",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Durability \u00b7 Strong Physical Dominance \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Marcos Senesi",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Elite Defensive Impact \u00b7 Strong Physical Dominance \u00b7 Limited Durability"
+  },
+  {
+    "player":"Marcus Rashford",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Strong Scoring \u00b7 Strong Efficiency \u00b7 Limited Physical Dominance"
+  },
+  {
+    "player":"Marcus Smart",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Limited Physical Dominance \u00b7 Limited Scoring \u00b7 Limited Efficiency"
+  },
+  {
+    "player":"Marcus Tavernier",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Elite Versatility \u00b7 Strong Playmaking \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Mario Lemina",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Defensive Impact \u00b7 Strong Versatility \u00b7 Strong Physical Dominance"
+  },
+  {
+    "player":"Mark Williams",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Elite Efficiency \u00b7 Elite Physical Dominance \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Marshall Munetsi",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Scoring \u00b7 Limited Durability"
+  },
+  {
+    "player":"Martin \u00d8degaard",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Elite Playmaking \u00b7 Strong Versatility \u00b7 Limited Defensive Impact"
+  },
+  {
+    "player":"Marvin Bagley III",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Elite Efficiency \u00b7 Strong Physical Dominance \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Matas Buzelis",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Strong Durability \u00b7 Strong Physical Dominance \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Mateo Kova\u010di\u0107",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Elite Efficiency \u00b7 Elite Versatility \u00b7 Strong Playmaking"
+  },
+  {
+    "player":"Mateus Fernandes",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Durability \u00b7 Strong Defensive Impact \u00b7 Strong Physical Dominance"
+  },
+  {
+    "player":"Matheus Cunha",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Elite Versatility \u00b7 Elite Playmaking \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Matheus Nunes",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Playmaking \u00b7 Strong Versatility \u00b7 Strong Efficiency"
+  },
+  {
+    "player":"Mathys Tel",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Strong Playmaking \u00b7 Strong Scoring \u00b7 Limited Physical Dominance"
+  },
+  {
+    "player":"Mats Wieffer",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Elite Defensive Impact \u00b7 Elite Versatility \u00b7 Strong Playmaking"
+  },
+  {
+    "player":"Matt Doherty",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Elite Physical Dominance \u00b7 Strong Efficiency \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Matt O'Riley",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Versatility \u00b7 Strong Playmaking \u00b7 Limited Physical Dominance"
+  },
+  {
+    "player":"Matthijs de Ligt",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Elite Physical Dominance \u00b7 Strong Defensive Impact \u00b7 Limited Versatility"
+  },
+  {
+    "player":"Matty Cash",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Defensive Impact \u00b7 Limited Efficiency"
+  },
+  {
+    "player":"Max Christie",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Durability \u00b7 Limited Physical Dominance \u00b7 Limited Versatility"
+  },
+  {
+    "player":"Max Kilman",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Elite Physical Dominance \u00b7 Elite Durability \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Max Strus",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Limited Durability"
+  },
+  {
+    "player":"Maxence Lacroix",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Durability \u00b7 Strong Defensive Impact \u00b7 Strong Physical Dominance"
+  },
+  {
+    "player":"Maxime Raynaud",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Strong Efficiency \u00b7 Strong Durability \u00b7 Strong Physical Dominance"
+  },
+  {
+    "player":"Michael Keane",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Physical Dominance \u00b7 Strong Scoring \u00b7 Strong Efficiency"
+  },
+  {
+    "player":"Michael Porter Jr.",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Elite Scoring \u00b7 Strong Versatility \u00b7 Strong Efficiency"
+  },
+  {
+    "player":"Micky van de Ven",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Limited Scoring \u00b7 Limited Durability"
+  },
+  {
+    "player":"Mikal Bridges",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Elite Durability \u00b7 Strong Defensive Impact \u00b7 Strong Playmaking"
+  },
+  {
+    "player":"Mikel Merino",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Elite Scoring \u00b7 Strong Versatility \u00b7 Strong Efficiency"
+  },
+  {
+    "player":"Mikkel Damsgaard",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Elite Versatility \u00b7 Elite Playmaking \u00b7 Strong Durability"
+  },
+  {
+    "player":"Miles Bridges",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Strong Durability \u00b7 Strong Defensive Impact \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Miles McBride",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Limited Durability \u00b7 Limited Defensive Impact \u00b7 Limited Physical Dominance"
+  },
+  {
+    "player":"Milos Kerkez",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Elite Durability \u00b7 Strong Playmaking"
+  },
+  {
+    "player":"Mohamed Salah",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Elite Scoring \u00b7 Elite Durability \u00b7 Elite Playmaking"
+  },
+  {
+    "player":"Mohammed Kudus",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Strong Durability \u00b7 Strong Scoring \u00b7 Strong Efficiency"
+  },
+  {
+    "player":"Mois\u00e9s Caicedo",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Elite Defensive Impact \u00b7 Elite Durability \u00b7 Strong Physical Dominance"
+  },
+  {
+    "player":"Morato",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Defensive Impact \u00b7 Limited Scoring \u00b7 Limited Versatility"
+  },
+  {
+    "player":"Morgan Gibbs-White",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Versatility \u00b7 Strong Playmaking \u00b7 Strong Durability"
+  },
+  {
+    "player":"Morgan Rogers",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Elite Durability \u00b7 Strong Playmaking \u00b7 Strong Versatility"
+  },
+  {
+    "player":"Moses Moody",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":""
+  },
+  {
+    "player":"Mouhamadou Gueye",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Strong Efficiency \u00b7 Strong Playmaking \u00b7 Limited Defensive Impact"
+  },
+  {
+    "player":"Moussa Diabat\u00e9",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Strong Efficiency \u00b7 Strong Defensive Impact \u00b7 Strong Physical Dominance"
+  },
+  {
+    "player":"Murillo",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Elite Physical Dominance \u00b7 Elite Durability \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Myles Lewis-Skelly",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Efficiency \u00b7 Limited Durability"
+  },
+  {
+    "player":"Myles Turner",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Strong Physical Dominance \u00b7 Strong Durability \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Naji Marshall",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Strong Durability"
+  },
+  {
+    "player":"Nathan Collins",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Elite Physical Dominance \u00b7 Elite Durability \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Naz Reid",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Elite Defensive Impact \u00b7 Strong Durability \u00b7 Strong Versatility"
+  },
+  {
+    "player":"Neco Williams",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Elite Physical Dominance \u00b7 Strong Defensive Impact \u00b7 Strong Durability"
+  },
+  {
+    "player":"Neemias Queta",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Elite Defensive Impact \u00b7 Elite Efficiency \u00b7 Strong Physical Dominance"
+  },
+  {
+    "player":"Nic Claxton",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Strong Physical Dominance \u00b7 Strong Playmaking \u00b7 Strong Efficiency"
+  },
+  {
+    "player":"Nickeil Alexander-Walker",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Elite Durability \u00b7 Strong Scoring \u00b7 Strong Efficiency"
+  },
+  {
+    "player":"Nicolas Jackson",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Strong Scoring \u00b7 Strong Efficiency \u00b7 Strong Versatility"
+  },
+  {
+    "player":"Nicol\u00e1s Dom\u00ednguez",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Elite Defensive Impact \u00b7 Strong Physical Dominance \u00b7 Limited Scoring"
+  },
+  {
+    "player":"Nikola Joki\u0107",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Elite Versatility \u00b7 Elite Efficiency \u00b7 Elite Physical Dominance"
+  },
+  {
+    "player":"Nikola Milenkovi\u0107",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Elite Durability \u00b7 Elite Physical Dominance \u00b7 Strong Efficiency"
+  },
+  {
+    "player":"Nikola Vu\u010devi\u0107",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Strong Defensive Impact \u00b7 Strong Versatility \u00b7 Strong Playmaking"
+  },
+  {
+    "player":"Nique Clifford",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Durability \u00b7 Limited Scoring \u00b7 Limited Efficiency"
+  },
+  {
+    "player":"Noah Clowney",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Strong Physical Dominance \u00b7 Limited Playmaking \u00b7 Limited Efficiency"
+  },
+  {
+    "player":"Nolan Traor\u00e9",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Strong Playmaking \u00b7 Limited Physical Dominance \u00b7 Limited Defensive Impact"
+  },
+  {
+    "player":"Noni Madueke",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Strong Scoring \u00b7 Strong Versatility \u00b7 Strong Playmaking"
+  },
+  {
+    "player":"Norman Powell",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Elite Scoring \u00b7 Strong Efficiency"
+  },
+  {
+    "player":"Noussair Mazraoui",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Defensive Impact \u00b7 Strong Physical Dominance \u00b7 Strong Durability"
+  },
+  {
+    "player":"N\u00e9lson Semedo",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Durability \u00b7 Limited Efficiency \u00b7 Limited Scoring"
+  },
+  {
+    "player":"OG Anunoby",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Strong Defensive Impact \u00b7 Strong Efficiency \u00b7 Strong Durability"
+  },
+  {
+    "player":"Ola Aina",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Durability \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Oliver Skipp",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Physical Dominance \u00b7 Limited Playmaking \u00b7 Limited Efficiency"
+  },
+  {
+    "player":"Ollie Watkins",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Elite Scoring \u00b7 Strong Durability \u00b7 Strong Efficiency"
+  },
+  {
+    "player":"Omar Marmoush",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Elite Scoring \u00b7 Elite Efficiency \u00b7 Limited Defensive Impact"
+  },
+  {
+    "player":"Omari Hutchinson",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Durability \u00b7 Limited Defensive Impact \u00b7 Limited Physical Dominance"
+  },
+  {
+    "player":"Onyeka Okongwu",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Elite Defensive Impact \u00b7 Strong Durability \u00b7 Strong Physical Dominance"
+  },
+  {
+    "player":"Orel Mangala",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Limited Durability \u00b7 Limited Playmaking \u00b7 Limited Versatility"
+  },
+  {
+    "player":"Oso Ighodaro",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Strong Defensive Impact \u00b7 Strong Efficiency \u00b7 Strong Durability"
+  },
+  {
+    "player":"P.J. Washington",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Strong Physical Dominance \u00b7 Strong Defensive Impact \u00b7 Limited Efficiency"
+  },
+  {
+    "player":"Paolo Banchero",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Strong Physical Dominance \u00b7 Strong Durability \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Pape Matar Sarr",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Defensive Impact \u00b7 Strong Versatility \u00b7 Strong Efficiency"
+  },
+  {
+    "player":"Pascal Siakam",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Strong Scoring \u00b7 Strong Versatility \u00b7 Strong Physical Dominance"
+  },
+  {
+    "player":"Patrick Williams",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Limited Versatility \u00b7 Limited Scoring \u00b7 Limited Efficiency"
+  },
+  {
+    "player":"Pau Torres",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Limited Playmaking \u00b7 Limited Efficiency \u00b7 Limited Scoring"
+  },
+  {
+    "player":"Paul George",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Strong Versatility \u00b7 Strong Scoring \u00b7 Strong Playmaking"
+  },
+  {
+    "player":"Paul Onuachu",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Strong Scoring \u00b7 Limited Playmaking \u00b7 Limited Durability"
+  },
+  {
+    "player":"Payton Pritchard",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Elite Durability \u00b7 Strong Playmaking \u00b7 Strong Efficiency"
+  },
+  {
+    "player":"Pedro Neto",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Strong Playmaking \u00b7 Limited Defensive Impact \u00b7 Limited Physical Dominance"
+  },
+  {
+    "player":"Pedro Porro",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Elite Versatility \u00b7 Elite Defensive Impact \u00b7 Strong Playmaking"
+  },
+  {
+    "player":"Pelle Larsson",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Playmaking \u00b7 Strong Durability"
+  },
+  {
+    "player":"Pervis Estupi\u00f1\u00e1n",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Defensive Impact \u00b7 Strong Physical Dominance"
+  },
+  {
+    "player":"Peyton Watson",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Strong Physical Dominance"
+  },
+  {
+    "player":"Phil Foden",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Elite Efficiency \u00b7 Strong Scoring \u00b7 Strong Playmaking"
+  },
+  {
+    "player":"Precious Achiuwa",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Strong Physical Dominance \u00b7 Strong Durability \u00b7 Limited Playmaking"
+  },
+  {
+    "player":"Quentin Grimes",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Durability"
+  },
+  {
+    "player":"RJ Barrett",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Strong Scoring \u00b7 Strong Physical Dominance"
+  },
+  {
+    "player":"Radu Dr\u0103gu\u0219in",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Physical Dominance \u00b7 Limited Durability \u00b7 Limited Playmaking"
+  },
+  {
+    "player":"Rasmus H\u00f8jlund",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Strong Scoring \u00b7 Limited Versatility \u00b7 Limited Physical Dominance"
+  },
+  {
+    "player":"Rayan A\u00eft-Nouri",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Elite Durability \u00b7 Strong Versatility \u00b7 Strong Efficiency"
+  },
+  {
+    "player":"Ra\u00fal Jim\u00e9nez",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Strong Scoring \u00b7 Strong Durability \u00b7 Strong Versatility"
+  },
+  {
+    "player":"Reece James",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Physical Dominance \u00b7 Strong Defensive Impact \u00b7 Limited Durability"
+  },
+  {
+    "player":"Reed Sheppard",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Durability \u00b7 Strong Defensive Impact \u00b7 Strong Playmaking"
+  },
+  {
+    "player":"Riccardo Calafiori",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Versatility \u00b7 Strong Physical Dominance \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Rico Lewis",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Efficiency"
+  },
+  {
+    "player":"Rodrigo Bentancur",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Elite Defensive Impact \u00b7 Strong Efficiency"
+  },
+  {
+    "player":"Rodrigo Muniz",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Elite Scoring \u00b7 Limited Defensive Impact \u00b7 Limited Durability"
+  },
+  {
+    "player":"Royce O'Neale",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Strong Durability \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Rudy Gobert",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Elite Physical Dominance \u00b7 Elite Defensive Impact \u00b7 Strong Efficiency"
+  },
+  {
+    "player":"Rui Hachimura",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Strong Efficiency \u00b7 Strong Durability \u00b7 Limited Physical Dominance"
+  },
+  {
+    "player":"Russell Westbrook",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Elite Playmaking \u00b7 Strong Versatility \u00b7 Limited Efficiency"
+  },
+  {
+    "player":"Ryan Christie",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Elite Defensive Impact \u00b7 Strong Versatility \u00b7 Strong Playmaking"
+  },
+  {
+    "player":"Ryan Gravenberch",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Elite Durability \u00b7 Strong Physical Dominance \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Ryan Kalkbrenner",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Elite Efficiency \u00b7 Strong Physical Dominance \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Ryan Manning",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Elite Physical Dominance \u00b7 Strong Defensive Impact \u00b7 Limited Efficiency"
+  },
+  {
+    "player":"Ryan Rollins",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Strong Durability \u00b7 Strong Playmaking \u00b7 Strong Versatility"
+  },
+  {
+    "player":"Ryan Yates",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Physical Dominance \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"R\u00faben Dias",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Limited Scoring \u00b7 Limited Versatility"
+  },
+  {
+    "player":"Saddiq Bey",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Strong Durability \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Sam Hauser",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Strong Durability \u00b7 Limited Physical Dominance \u00b7 Limited Playmaking"
+  },
+  {
+    "player":"Sam Merrill",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Efficiency \u00b7 Limited Versatility \u00b7 Limited Defensive Impact"
+  },
+  {
+    "player":"Sam Morsy",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Durability \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Sammie Szmodics",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Strong Scoring \u00b7 Limited Physical Dominance \u00b7 Limited Durability"
+  },
+  {
+    "player":"Sander Berge",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Defensive Impact \u00b7 Limited Scoring"
+  },
+  {
+    "player":"Sandro Mamukelashvili",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Strong Efficiency \u00b7 Strong Defensive Impact \u00b7 Strong Durability"
+  },
+  {
+    "player":"Sandro Tonali",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Defensive Impact \u00b7 Strong Efficiency \u00b7 Strong Durability"
+  },
+  {
+    "player":"Santi Aldama",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Strong Physical Dominance \u00b7 Strong Versatility"
+  },
+  {
+    "player":"Santiago Bueno",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Physical Dominance \u00b7 Limited Efficiency \u00b7 Limited Scoring"
+  },
+  {
+    "player":"Sa\u0161a Luki\u0107",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Defensive Impact \u00b7 Limited Scoring"
+  },
+  {
+    "player":"Scoot Henderson",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Strong Playmaking \u00b7 Strong Scoring \u00b7 Limited Defensive Impact"
+  },
+  {
+    "player":"Scottie Barnes",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Elite Defensive Impact \u00b7 Elite Durability \u00b7 Elite Versatility"
+  },
+  {
+    "player":"Scotty Pippen Jr.",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Elite Playmaking \u00b7 Strong Versatility \u00b7 Limited Efficiency"
+  },
+  {
+    "player":"Sepp van den Berg",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Physical Dominance \u00b7 Strong Durability \u00b7 Limited Scoring"
+  },
+  {
+    "player":"Shaedon Sharpe",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Scoring \u00b7 Strong Versatility"
+  },
+  {
+    "player":"Shai Gilgeous-Alexander",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Elite Efficiency \u00b7 Elite Scoring \u00b7 Elite Playmaking"
+  },
+  {
+    "player":"Simon Adingra",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Strong Versatility \u00b7 Strong Playmaking \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Sion James",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Durability \u00b7 Limited Versatility \u00b7 Limited Efficiency"
+  },
+  {
+    "player":"Son Heung-min",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Elite Playmaking \u00b7 Strong Versatility \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Spencer Jones",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Limited Scoring \u00b7 Limited Versatility \u00b7 Limited Playmaking"
+  },
+  {
+    "player":"Stephen Curry",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Elite Scoring \u00b7 Elite Efficiency \u00b7 Strong Playmaking"
+  },
+  {
+    "player":"Stephon Castle",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Elite Playmaking \u00b7 Strong Versatility \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Stephy Mavididi",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Strong Scoring \u00b7 Strong Efficiency"
+  },
+  {
+    "player":"Steven Adams",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Strong Physical Dominance \u00b7 Limited Playmaking \u00b7 Limited Durability"
+  },
+  {
+    "player":"Svi Mykhailiuk",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Strong Efficiency \u00b7 Limited Versatility \u00b7 Limited Physical Dominance"
+  },
+  {
+    "player":"S\u00e1vio",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Elite Playmaking \u00b7 Strong Versatility \u00b7 Limited Physical Dominance"
+  },
+  {
+    "player":"Tari Eason",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Strong Defensive Impact \u00b7 Limited Playmaking \u00b7 Limited Efficiency"
+  },
+  {
+    "player":"Taurean Prince",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Strong Efficiency \u00b7 Limited Defensive Impact \u00b7 Limited Physical Dominance"
+  },
+  {
+    "player":"Taylor Harwood-Bellis",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Physical Dominance \u00b7 Strong Durability \u00b7 Limited Versatility"
+  },
+  {
+    "player":"Terance Mann",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Playmaking \u00b7 Limited Physical Dominance \u00b7 Limited Versatility"
+  },
+  {
+    "player":"Thomas Partey",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Efficiency \u00b7 Strong Versatility \u00b7 Strong Durability"
+  },
+  {
+    "player":"Tim Hardaway Jr.",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Durability \u00b7 Strong Efficiency \u00b7 Limited Defensive Impact"
+  },
+  {
+    "player":"Timothy Castagne",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Defensive Impact \u00b7 Limited Efficiency \u00b7 Limited Scoring"
+  },
+  {
+    "player":"Tobias Harris",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Strong Defensive Impact"
+  },
+  {
+    "player":"Toby Okani",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Limited Scoring \u00b7 Limited Physical Dominance \u00b7 Limited Durability"
+  },
+  {
+    "player":"Tom\u00e1\u0161 Sou\u010dek",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Scoring \u00b7 Strong Physical Dominance \u00b7 Strong Durability"
+  },
+  {
+    "player":"Tosin Adarabioyo",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Efficiency \u00b7 Strong Physical Dominance \u00b7 Limited Playmaking"
+  },
+  {
+    "player":"Toti Gomes",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Elite Physical Dominance \u00b7 Strong Defensive Impact \u00b7 Strong Durability"
+  },
+  {
+    "player":"Toumani Camara",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Elite Durability"
+  },
+  {
+    "player":"Trae Young",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Elite Playmaking \u00b7 Strong Scoring \u00b7 Strong Efficiency"
+  },
+  {
+    "player":"Tre Johnson",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Limited Physical Dominance \u00b7 Limited Efficiency \u00b7 Limited Defensive Impact"
+  },
+  {
+    "player":"Tre Jones",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Elite Playmaking \u00b7 Elite Efficiency \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Tre Scott",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Limited Playmaking \u00b7 Limited Durability \u00b7 Limited Scoring"
+  },
+  {
+    "player":"Trent Alexander-Arnold",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Elite Versatility \u00b7 Elite Playmaking \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Trevoh Chalobah",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Elite Defensive Impact \u00b7 Strong Physical Dominance \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Trey Murphy III",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Strong Efficiency \u00b7 Strong Scoring \u00b7 Strong Durability"
+  },
+  {
+    "player":"Tristan Da Silva",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Strong Durability"
+  },
+  {
+    "player":"Ty Jerome",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Elite Playmaking \u00b7 Elite Scoring \u00b7 Elite Versatility"
+  },
+  {
+    "player":"Tyler Adams",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Elite Defensive Impact \u00b7 Strong Physical Dominance \u00b7 Limited Scoring"
+  },
+  {
+    "player":"Tyler Burton",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Limited Durability \u00b7 Limited Playmaking \u00b7 Limited Efficiency"
+  },
+  {
+    "player":"Tyler Dibling",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Limited Physical Dominance"
+  },
+  {
+    "player":"Tyler Herro",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Scoring \u00b7 Strong Efficiency \u00b7 Strong Playmaking"
+  },
+  {
+    "player":"Tyrese Maxey",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Strong Scoring \u00b7 Strong Playmaking \u00b7 Strong Versatility"
+  },
+  {
+    "player":"Tyrick Mitchell",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Elite Durability \u00b7 Strong Defensive Impact \u00b7 Strong Physical Dominance"
+  },
+  {
+    "player":"Tyrone Mings",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Physical Dominance \u00b7 Limited Scoring \u00b7 Limited Playmaking"
+  },
+  {
+    "player":"VJ Edgecombe",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Durability \u00b7 Strong Defensive Impact \u00b7 Strong Playmaking"
+  },
+  {
+    "player":"Valentino Livramento",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Durability \u00b7 Strong Defensive Impact \u00b7 Limited Efficiency"
+  },
+  {
+    "player":"Victor Bernth Kristiansen",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Defensive Impact \u00b7 Strong Durability \u00b7 Limited Efficiency"
+  },
+  {
+    "player":"Victor Wembanyama",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Elite Physical Dominance \u00b7 Elite Defensive Impact \u00b7 Elite Versatility"
+  },
+  {
+    "player":"Vince Williams Jr.",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Playmaking \u00b7 Limited Scoring \u00b7 Limited Durability"
+  },
+  {
+    "player":"Virgil van Dijk",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Elite Durability \u00b7 Strong Physical Dominance \u00b7 Strong Efficiency"
+  },
+  {
+    "player":"Vitaliy Mykolenko",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Durability \u00b7 Strong Physical Dominance"
+  },
+  {
+    "player":"Vitaly Janelt",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Physical Dominance \u00b7 Strong Defensive Impact"
+  },
+  {
+    "player":"Vladim\u00edr Coufal",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Physical Dominance \u00b7 Limited Versatility \u00b7 Limited Durability"
+  },
+  {
+    "player":"V\u00edt Krej\u010d\u00ed",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Limited Versatility \u00b7 Limited Physical Dominance"
+  },
+  {
+    "player":"Walker Kessler",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Elite Efficiency \u00b7 Elite Physical Dominance \u00b7 Strong Versatility"
+  },
+  {
+    "player":"Walter Clayton",
+    "sport":"basketball",
+    "position":"PG",
+    "dna":"Strong Playmaking \u00b7 Limited Physical Dominance \u00b7 Limited Defensive Impact"
+  },
+  {
+    "player":"Wendell Carter Jr.",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Strong Durability \u00b7 Strong Defensive Impact \u00b7 Strong Physical Dominance"
+  },
+  {
+    "player":"Wes Burns",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Limited Scoring \u00b7 Limited Physical Dominance \u00b7 Limited Durability"
+  },
+  {
+    "player":"Wesley Fofana",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Physical Dominance \u00b7 Strong Defensive Impact \u00b7 Limited Playmaking"
+  },
+  {
+    "player":"Wilfred Ndidi",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Elite Defensive Impact \u00b7 Strong Physical Dominance"
+  },
+  {
+    "player":"Will Hughes",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Defensive Impact \u00b7 Limited Efficiency \u00b7 Limited Scoring"
+  },
+  {
+    "player":"Will Riley",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Limited Efficiency \u00b7 Limited Defensive Impact"
+  },
+  {
+    "player":"William Saliba",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Elite Efficiency \u00b7 Strong Durability \u00b7 Strong Physical Dominance"
+  },
+  {
+    "player":"Wout Faes",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Physical Dominance \u00b7 Strong Efficiency \u00b7 Strong Durability"
+  },
+  {
+    "player":"Yankuba Minteh",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Elite Versatility \u00b7 Strong Scoring \u00b7 Strong Playmaking"
+  },
+  {
+    "player":"Yasin Ayari",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Defensive Impact"
+  },
+  {
+    "player":"Yehor Yarmoliuk",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Defensive Impact \u00b7 Limited Scoring"
+  },
+  {
+    "player":"Yoane Wissa",
+    "sport":"soccer",
+    "position":"FW",
+    "dna":"Elite Scoring \u00b7 Strong Durability \u00b7 Strong Efficiency"
+  },
+  {
+    "player":"Youri Tielemans",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Elite Versatility \u00b7 Strong Durability \u00b7 Strong Playmaking"
+  },
+  {
+    "player":"Yukinari Sugawara",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":""
+  },
+  {
+    "player":"Yves Bissouma",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Defensive Impact \u00b7 Strong Efficiency"
+  },
+  {
+    "player":"Zaccharie Risacher",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Limited Playmaking"
+  },
+  {
+    "player":"Zach Edey",
+    "sport":"basketball",
+    "position":"C",
+    "dna":"Elite Efficiency \u00b7 Elite Physical Dominance \u00b7 Strong Scoring"
+  },
+  {
+    "player":"Zach LaVine",
+    "sport":"basketball",
+    "position":"SG",
+    "dna":"Strong Scoring \u00b7 Strong Efficiency \u00b7 Limited Defensive Impact"
+  },
+  {
+    "player":"Ziaire Williams",
+    "sport":"basketball",
+    "position":"SF",
+    "dna":"Limited Playmaking"
+  },
+  {
+    "player":"Zion Williamson",
+    "sport":"basketball",
+    "position":"PF",
+    "dna":"Elite Efficiency \u00b7 Elite Scoring \u00b7 Strong Physical Dominance"
+  },
+  {
+    "player":"\u00c1lex Moreno",
+    "sport":"soccer",
+    "position":"DF",
+    "dna":"Strong Defensive Impact \u00b7 Limited Efficiency \u00b7 Limited Scoring"
+  },
+  {
+    "player":"\u0130lkay G\u00fcndo\u011fan",
+    "sport":"soccer",
+    "position":"MF",
+    "dna":"Strong Playmaking \u00b7 Strong Efficiency \u00b7 Strong Versatility"
+  }
+]

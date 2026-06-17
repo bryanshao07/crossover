@@ -1,0 +1,2342 @@
+[
+  {
+    "player":"Amen Thompson",
+    "quality":0.9475770087
+  },
+  {
+    "player":"Kevin Durant",
+    "quality":1.0987992022
+  },
+  {
+    "player":"Desmond Bane",
+    "quality":0.7912237788
+  },
+  {
+    "player":"Toumani Camara",
+    "quality":0.8560250249
+  },
+  {
+    "player":"Jabari Smith Jr.",
+    "quality":0.8303341146
+  },
+  {
+    "player":"Mikal Bridges",
+    "quality":0.7682271373
+  },
+  {
+    "player":"Scottie Barnes",
+    "quality":1.1261737884
+  },
+  {
+    "player":"Tyrese Maxey",
+    "quality":1.0461258119
+  },
+  {
+    "player":"Jamal Murray",
+    "quality":1.1780509254
+  },
+  {
+    "player":"Derrick White",
+    "quality":0.860804788
+  },
+  {
+    "player":"VJ Edgecombe",
+    "quality":0.6740247365
+  },
+  {
+    "player":"Julius Randle",
+    "quality":0.9578051988
+  },
+  {
+    "player":"Brandon Ingram",
+    "quality":0.8272350424
+  },
+  {
+    "player":"Nickeil Alexander-Walker",
+    "quality":0.7973750421
+  },
+  {
+    "player":"Jalen Brunson",
+    "quality":0.8928422311
+  },
+  {
+    "player":"Payton Pritchard",
+    "quality":0.840820522
+  },
+  {
+    "player":"Kon Knueppel",
+    "quality":0.7985258657
+  },
+  {
+    "player":"Jalen Johnson",
+    "quality":1.1810520427
+  },
+  {
+    "player":"Dyson Daniels",
+    "quality":0.9304050981
+  },
+  {
+    "player":"Paolo Banchero",
+    "quality":1.0533494832
+  },
+  {
+    "player":"Donte DiVincenzo",
+    "quality":0.8142648705
+  },
+  {
+    "player":"Jaylen Brown",
+    "quality":1.0179885226
+  },
+  {
+    "player":"James Harden",
+    "quality":0.9497289642
+  },
+  {
+    "player":"DeMar DeRozan",
+    "quality":0.7265368999
+  },
+  {
+    "player":"Alperen \u015eeng\u00fcn",
+    "quality":1.1437759665
+  },
+  {
+    "player":"Miles Bridges",
+    "quality":0.6352208298
+  },
+  {
+    "player":"Rudy Gobert",
+    "quality":1.266770721
+  },
+  {
+    "player":"Ryan Rollins",
+    "quality":0.809464192
+  },
+  {
+    "player":"Bam Adebayo",
+    "quality":1.0113802442
+  },
+  {
+    "player":"Cooper Flagg",
+    "quality":1.0228631888
+  },
+  {
+    "player":"Donovan Mitchell",
+    "quality":1.0097423024
+  },
+  {
+    "player":"Trey Murphy III",
+    "quality":0.726829699
+  },
+  {
+    "player":"Brandin Podziemski",
+    "quality":0.6854834938
+  },
+  {
+    "player":"Karl-Anthony Towns",
+    "quality":1.2034997503
+  },
+  {
+    "player":"Jaden McDaniels",
+    "quality":0.6548622612
+  },
+  {
+    "player":"Onyeka Okongwu",
+    "quality":0.8309481294
+  },
+  {
+    "player":"Luka Don\u010di\u0107",
+    "quality":1.324643037
+  },
+  {
+    "player":"Wendell Carter Jr.",
+    "quality":0.9242881358
+  },
+  {
+    "player":"Collin Gillespie",
+    "quality":0.6731474898
+  },
+  {
+    "player":"Bub Carrington",
+    "quality":0.9657862175
+  },
+  {
+    "player":"A.J. Green",
+    "quality":0.7607433452
+  },
+  {
+    "player":"Julian Champagnie",
+    "quality":0.7463032658
+  },
+  {
+    "player":"Nikola Joki\u0107",
+    "quality":1.5399318554
+  },
+  {
+    "player":"CJ McCollum",
+    "quality":0.7390621229
+  },
+  {
+    "player":"Shai Gilgeous-Alexander",
+    "quality":1.2600266756
+  },
+  {
+    "player":"Matas Buzelis",
+    "quality":0.7282340994
+  },
+  {
+    "player":"Saddiq Bey",
+    "quality":0.5025518983
+  },
+  {
+    "player":"Max Christie",
+    "quality":0.6131602292
+  },
+  {
+    "player":"De'Aaron Fox",
+    "quality":0.8400682777
+  },
+  {
+    "player":"Immanuel Quickley",
+    "quality":0.6767607408
+  },
+  {
+    "player":"Kris Dunn",
+    "quality":0.6431842249
+  },
+  {
+    "player":"OG Anunoby",
+    "quality":0.6831690669
+  },
+  {
+    "player":"Royce O'Neale",
+    "quality":0.6526234756
+  },
+  {
+    "player":"Quentin Grimes",
+    "quality":0.5658911165
+  },
+  {
+    "player":"Deni Avdija",
+    "quality":1.0598707987
+  },
+  {
+    "player":"Naji Marshall",
+    "quality":0.5369302799
+  },
+  {
+    "player":"Cade Cunningham",
+    "quality":1.167006147
+  },
+  {
+    "player":"Reed Sheppard",
+    "quality":0.7295378019
+  },
+  {
+    "player":"Devin Booker",
+    "quality":0.80786549
+  },
+  {
+    "player":"Anthony Edwards",
+    "quality":0.9224136498
+  },
+  {
+    "player":"Tim Hardaway Jr.",
+    "quality":0.6882215248
+  },
+  {
+    "player":"Jaime Jaquez Jr.",
+    "quality":0.6771334252
+  },
+  {
+    "player":"Duncan Robinson",
+    "quality":0.7260616335
+  },
+  {
+    "player":"Jeremiah Fears",
+    "quality":0.6816122874
+  },
+  {
+    "player":"Donovan Clingan",
+    "quality":0.9441135648
+  },
+  {
+    "player":"Kawhi Leonard",
+    "quality":1.1290328302
+  },
+  {
+    "player":"Evan Mobley",
+    "quality":0.9693649723
+  },
+  {
+    "player":"Andrew Wiggins",
+    "quality":0.4967954806
+  },
+  {
+    "player":"Jake LaRavia",
+    "quality":0.6534425067
+  },
+  {
+    "player":"Pascal Siakam",
+    "quality":0.7681709862
+  },
+  {
+    "player":"Cason Wallace",
+    "quality":0.7473800146
+  },
+  {
+    "player":"Devin Vassell",
+    "quality":0.4459782692
+  },
+  {
+    "player":"Stephon Castle",
+    "quality":0.9089709283
+  },
+  {
+    "player":"Derik Queen",
+    "quality":1.0711558391
+  },
+  {
+    "player":"LaMelo Ball",
+    "quality":1.0982668218
+  },
+  {
+    "player":"Naz Reid",
+    "quality":0.8125258541
+  },
+  {
+    "player":"Davion Mitchell",
+    "quality":0.909594471
+  },
+  {
+    "player":"Bruce Brown",
+    "quality":0.5537237552
+  },
+  {
+    "player":"Chet Holmgren",
+    "quality":1.1164368529
+  },
+  {
+    "player":"Josh Hart",
+    "quality":0.7343393498
+  },
+  {
+    "player":"LeBron James",
+    "quality":0.9923706822
+  },
+  {
+    "player":"Ace Bailey",
+    "quality":0.6032207102
+  },
+  {
+    "player":"Harrison Barnes",
+    "quality":0.571943016
+  },
+  {
+    "player":"Jalen Duren",
+    "quality":1.2567126219
+  },
+  {
+    "player":"Brandon Miller",
+    "quality":0.7217485855
+  },
+  {
+    "player":"Maxime Raynaud",
+    "quality":0.6738004541
+  },
+  {
+    "player":"Deandre Ayton",
+    "quality":0.809897874
+  },
+  {
+    "player":"Jarace Walker",
+    "quality":0.512511238
+  },
+  {
+    "player":"Sam Hauser",
+    "quality":0.429308349
+  },
+  {
+    "player":"Rui Hachimura",
+    "quality":0.507698797
+  },
+  {
+    "player":"Neemias Queta",
+    "quality":1.1305324632
+  },
+  {
+    "player":"Nic Claxton",
+    "quality":0.7152424711
+  },
+  {
+    "player":"Myles Turner",
+    "quality":0.6011969375
+  },
+  {
+    "player":"Keldon Johnson",
+    "quality":0.7646471841
+  },
+  {
+    "player":"Anthony Black",
+    "quality":0.5202382594
+  },
+  {
+    "player":"Tristan Da Silva",
+    "quality":0.5147151804
+  },
+  {
+    "player":"Moussa Diabat\u00e9",
+    "quality":0.9935442723
+  },
+  {
+    "player":"Ausar Thompson",
+    "quality":0.8184970953
+  },
+  {
+    "player":"Nique Clifford",
+    "quality":0.5895356389
+  },
+  {
+    "player":"Ayo Dosunmu",
+    "quality":0.7350774871
+  },
+  {
+    "player":"John Collins",
+    "quality":0.6768358923
+  },
+  {
+    "player":"Draymond Green",
+    "quality":0.6732395458
+  },
+  {
+    "player":"Victor Wembanyama",
+    "quality":1.2802779479
+  },
+  {
+    "player":"Russell Westbrook",
+    "quality":0.757659021
+  },
+  {
+    "player":"Jamal Shead",
+    "quality":1.0027133743
+  },
+  {
+    "player":"Pelle Larsson",
+    "quality":0.4775453907
+  },
+  {
+    "player":"Luguentz Dort",
+    "quality":0.4545060152
+  },
+  {
+    "player":"Sion James",
+    "quality":0.4658387231
+  },
+  {
+    "player":"Zion Williamson",
+    "quality":0.9414565542
+  },
+  {
+    "player":"Jaylen Wells",
+    "quality":0.368863863
+  },
+  {
+    "player":"Nikola Vu\u010devi\u0107",
+    "quality":0.6519439629
+  },
+  {
+    "player":"Oso Ighodaro",
+    "quality":0.8158519306
+  },
+  {
+    "player":"Kyle Kuzma",
+    "quality":0.3479847533
+  },
+  {
+    "player":"Kyle Filipowski",
+    "quality":0.7271355894
+  },
+  {
+    "player":"Andrew Nembhard",
+    "quality":0.5808177256
+  },
+  {
+    "player":"Keyonte George",
+    "quality":0.7971199031
+  },
+  {
+    "player":"Noah Clowney",
+    "quality":0.3680881849
+  },
+  {
+    "player":"Jaylon Tyson",
+    "quality":0.4018608589
+  },
+  {
+    "player":"Marcus Smart",
+    "quality":0.1566038133
+  },
+  {
+    "player":"Brice Sensabaugh",
+    "quality":0.5782299895
+  },
+  {
+    "player":"Austin Reaves",
+    "quality":0.9144707008
+  },
+  {
+    "player":"Tre Jones",
+    "quality":0.8309104992
+  },
+  {
+    "player":"Sandro Mamukelashvili",
+    "quality":0.8318213852
+  },
+  {
+    "player":"Tobias Harris",
+    "quality":0.4168457654
+  },
+  {
+    "player":"Precious Achiuwa",
+    "quality":0.5514643626
+  },
+  {
+    "player":"P.J. Washington",
+    "quality":0.7330084528
+  },
+  {
+    "player":"Josh Giddey",
+    "quality":0.9652669376
+  },
+  {
+    "player":"RJ Barrett",
+    "quality":0.5999908968
+  },
+  {
+    "player":"Jay Huff",
+    "quality":0.5773897083
+  },
+  {
+    "player":"Norman Powell",
+    "quality":0.60836523
+  },
+  {
+    "player":"Cam Spencer",
+    "quality":0.8502396389
+  },
+  {
+    "player":"Kel'el Ware",
+    "quality":0.8349283998
+  },
+  {
+    "player":"Dillon Brooks",
+    "quality":0.7180394258
+  },
+  {
+    "player":"Dennis Schr\u00f6der",
+    "quality":0.713999901
+  },
+  {
+    "player":"Isaac Okoro",
+    "quality":0.0823326811
+  },
+  {
+    "player":"Jerami Grant",
+    "quality":0.5170157515
+  },
+  {
+    "player":"Dominick Barlow",
+    "quality":0.4376893638
+  },
+  {
+    "player":"Michael Porter Jr.",
+    "quality":0.761935844
+  },
+  {
+    "player":"Luke Kennard",
+    "quality":0.6616499092
+  },
+  {
+    "player":"Cameron Johnson",
+    "quality":0.6901542325
+  },
+  {
+    "player":"Brook Lopez",
+    "quality":0.416490237
+  },
+  {
+    "player":"Will Riley",
+    "quality":0.3449149881
+  },
+  {
+    "player":"Cody Williams",
+    "quality":0.1396389175
+  },
+  {
+    "player":"Bennedict Mathurin",
+    "quality":0.6084316776
+  },
+  {
+    "player":"Bobby Portis",
+    "quality":0.426607305
+  },
+  {
+    "player":"Collin Sexton",
+    "quality":0.7637709283
+  },
+  {
+    "player":"Cedric Coward",
+    "quality":0.494990018
+  },
+  {
+    "player":"Peyton Watson",
+    "quality":0.4423978018
+  },
+  {
+    "player":"Herbert Jones",
+    "quality":0.0
+  },
+  {
+    "player":"Jalen Suggs",
+    "quality":0.7696172734
+  },
+  {
+    "player":"Kelly Oubre Jr.",
+    "quality":0.2088338768
+  },
+  {
+    "player":"Jordan Goodwin",
+    "quality":0.3926475881
+  },
+  {
+    "player":"Jrue Holiday",
+    "quality":0.6650583746
+  },
+  {
+    "player":"Dylan Harper",
+    "quality":0.5822503259
+  },
+  {
+    "player":"Tari Eason",
+    "quality":0.5108242304
+  },
+  {
+    "player":"Kevin Huerter",
+    "quality":0.4027875461
+  },
+  {
+    "player":"Moses Moody",
+    "quality":0.2048449809
+  },
+  {
+    "player":"Terance Mann",
+    "quality":0.4159490306
+  },
+  {
+    "player":"Jarrett Allen",
+    "quality":1.0924649487
+  },
+  {
+    "player":"Isaiah Collier",
+    "quality":0.8017250269
+  },
+  {
+    "player":"Isaiah Joe",
+    "quality":0.5494608721
+  },
+  {
+    "player":"Jock Landale",
+    "quality":0.4359617128
+  },
+  {
+    "player":"Zaccharie Risacher",
+    "quality":0.3699145757
+  },
+  {
+    "player":"Klay Thompson",
+    "quality":0.2317387382
+  },
+  {
+    "player":"Ryan Kalkbrenner",
+    "quality":0.7490604652
+  },
+  {
+    "player":"Keon Ellis",
+    "quality":0.172140962
+  },
+  {
+    "player":"Ja'Kobe Walter",
+    "quality":0.2818303173
+  },
+  {
+    "player":"Patrick Williams",
+    "quality":0.1644431093
+  },
+  {
+    "player":"Ajay Mitchell",
+    "quality":0.622684299
+  },
+  {
+    "player":"Shaedon Sharpe",
+    "quality":0.6821393124
+  },
+  {
+    "player":"Bilal Coulibaly",
+    "quality":0.4021277736
+  },
+  {
+    "player":"Grayson Allen",
+    "quality":0.6047629163
+  },
+  {
+    "player":"Brandon Williams",
+    "quality":0.7407488826
+  },
+  {
+    "player":"Daniss Jenkins",
+    "quality":0.5357588542
+  },
+  {
+    "player":"Jaren Jackson Jr.",
+    "quality":0.7437594767
+  },
+  {
+    "player":"Ivica Zubac",
+    "quality":0.7433077043
+  },
+  {
+    "player":"Tre Johnson",
+    "quality":0.112670502
+  },
+  {
+    "player":"Lauri Markkanen",
+    "quality":0.8463927158
+  },
+  {
+    "player":"Khris Middleton",
+    "quality":0.3703138136
+  },
+  {
+    "player":"Luke Kornet",
+    "quality":0.9762399108
+  },
+  {
+    "player":"Spencer Jones",
+    "quality":0.3502976319
+  },
+  {
+    "player":"Mark Williams",
+    "quality":0.9602756852
+  },
+  {
+    "player":"Aaron Wiggins",
+    "quality":0.486250636
+  },
+  {
+    "player":"Walter Clayton",
+    "quality":0.9898838318
+  },
+  {
+    "player":"Christian Braun",
+    "quality":0.3991695728
+  },
+  {
+    "player":"Gui Santos",
+    "quality":0.4870273532
+  },
+  {
+    "player":"V\u00edt Krej\u010d\u00ed",
+    "quality":0.2373865959
+  },
+  {
+    "player":"Kyshawn George",
+    "quality":0.6040999283
+  },
+  {
+    "player":"Ben Sheppard",
+    "quality":0.0
+  },
+  {
+    "player":"Gary Trent Jr.",
+    "quality":0.0
+  },
+  {
+    "player":"Sam Merrill",
+    "quality":0.5699687546
+  },
+  {
+    "player":"Anfernee Simons",
+    "quality":0.3148296767
+  },
+  {
+    "player":"Malik Monk",
+    "quality":0.4901257153
+  },
+  {
+    "player":"Derrick Jones Jr.",
+    "quality":0.3151884789
+  },
+  {
+    "player":"Darius Garland",
+    "quality":0.7735583828
+  },
+  {
+    "player":"Aaron Nesmith",
+    "quality":0.0
+  },
+  {
+    "player":"Kris Murray",
+    "quality":0.0
+  },
+  {
+    "player":"Stephen Curry",
+    "quality":1.127959358
+  },
+  {
+    "player":"Jordan Miller",
+    "quality":0.3937729651
+  },
+  {
+    "player":"Drake Powell",
+    "quality":0.0
+  },
+  {
+    "player":"Dean Wade",
+    "quality":0.1864615575
+  },
+  {
+    "player":"Isaiah Stewart",
+    "quality":0.7644873827
+  },
+  {
+    "player":"Egor D\u0451min",
+    "quality":0.5466877604
+  },
+  {
+    "player":"Alex Sarr",
+    "quality":0.6848115029
+  },
+  {
+    "player":"Ziaire Williams",
+    "quality":0.0
+  },
+  {
+    "player":"Kevin Porter Jr.",
+    "quality":0.7321076644
+  },
+  {
+    "player":"Coby White",
+    "quality":0.6971561504
+  },
+  {
+    "player":"Collin Murray-Boyles",
+    "quality":0.6293641765
+  },
+  {
+    "player":"Nolan Traor\u00e9",
+    "quality":0.8213213185
+  },
+  {
+    "player":"Zach LaVine",
+    "quality":0.7653491683
+  },
+  {
+    "player":"Joel Embiid",
+    "quality":0.997830022
+  },
+  {
+    "player":"Marvin Bagley III",
+    "quality":0.8324120588
+  },
+  {
+    "player":"Santi Aldama",
+    "quality":0.4783589425
+  },
+  {
+    "player":"Daniel Gafford",
+    "quality":1.1281344765
+  },
+  {
+    "player":"Danny Wolf",
+    "quality":0.3668981145
+  },
+  {
+    "player":"Jimmy Butler",
+    "quality":1.0312494397
+  },
+  {
+    "player":"GG Jackson II",
+    "quality":0.6189298933
+  },
+  {
+    "player":"De'Andre Hunter",
+    "quality":0.2043380602
+  },
+  {
+    "player":"Landry Shamet",
+    "quality":0.0
+  },
+  {
+    "player":"Svi Mykhailiuk",
+    "quality":0.7061640063
+  },
+  {
+    "player":"Jakob Poeltl",
+    "quality":0.7835921183
+  },
+  {
+    "player":"Isaiah Hartenstein",
+    "quality":1.0456305963
+  },
+  {
+    "player":"Paul George",
+    "quality":0.5892435363
+  },
+  {
+    "player":"De'Anthony Melton",
+    "quality":0.4124738394
+  },
+  {
+    "player":"Jalen Smith",
+    "quality":0.5984855349
+  },
+  {
+    "player":"Kentavious Caldwell-Pope",
+    "quality":0.4895409571
+  },
+  {
+    "player":"Jusuf Nurki\u0107",
+    "quality":0.9193251098
+  },
+  {
+    "player":"Miles McBride",
+    "quality":0.0870465657
+  },
+  {
+    "player":"Giannis Antetokounmpo",
+    "quality":1.3426411085
+  },
+  {
+    "player":"Tyler Herro",
+    "quality":0.7606482568
+  },
+  {
+    "player":"Jamir Watkins",
+    "quality":0.2923222146
+  },
+  {
+    "player":"Franz Wagner",
+    "quality":0.7027052116
+  },
+  {
+    "player":"Caleb Love",
+    "quality":0.3107230614
+  },
+  {
+    "player":"Aaron Gordon",
+    "quality":0.7094213731
+  },
+  {
+    "player":"Al Horford",
+    "quality":0.4033163788
+  },
+  {
+    "player":"Jalen Williams",
+    "quality":0.7659958915
+  },
+  {
+    "player":"Jordan Poole",
+    "quality":0.4823328367
+  },
+  {
+    "player":"Ben Saraf",
+    "quality":0.7218283229
+  },
+  {
+    "player":"Dylan Cardwell",
+    "quality":0.5263517595
+  },
+  {
+    "player":"Cam Thomas",
+    "quality":0.6004881668
+  },
+  {
+    "player":"Bryce McGowens",
+    "quality":0.2618225664
+  },
+  {
+    "player":"Daeqwon Plowden",
+    "quality":0.0
+  },
+  {
+    "player":"Javon Small",
+    "quality":0.6746318604
+  },
+  {
+    "player":"Jonathan Kuminga",
+    "quality":0.570363822
+  },
+  {
+    "player":"Jalen Green",
+    "quality":0.6013027414
+  },
+  {
+    "player":"Vince Williams Jr.",
+    "quality":0.5621434776
+  },
+  {
+    "player":"Keegan Murray",
+    "quality":0.097950221
+  },
+  {
+    "player":"Kristaps Porzi\u0146\u0123is",
+    "quality":0.7983176459
+  },
+  {
+    "player":"Scoot Henderson",
+    "quality":0.57402314
+  },
+  {
+    "player":"Steven Adams",
+    "quality":0.6248585529
+  },
+  {
+    "player":"Lonzo Ball",
+    "quality":0.5733701005
+  },
+  {
+    "player":"Jahmai Mashack",
+    "quality":0.0
+  },
+  {
+    "player":"Ethan Thompson",
+    "quality":0.0
+  },
+  {
+    "player":"Anthony Davis",
+    "quality":0.9743072765
+  },
+  {
+    "player":"Taurean Prince",
+    "quality":0.5547733387
+  },
+  {
+    "player":"Ja Morant",
+    "quality":1.0044392549
+  },
+  {
+    "player":"Domantas Sabonis",
+    "quality":0.7874037067
+  },
+  {
+    "player":"Elijah Harkless",
+    "quality":0.6877046922
+  },
+  {
+    "player":"Jayson Tatum",
+    "quality":0.9146674003
+  },
+  {
+    "player":"Bez Mbeng",
+    "quality":0.3990927793
+  },
+  {
+    "player":"Leaky Black",
+    "quality":0.0
+  },
+  {
+    "player":"Julian Reese",
+    "quality":0.8927529417
+  },
+  {
+    "player":"Dejounte Murray",
+    "quality":0.892203884
+  },
+  {
+    "player":"Trae Young",
+    "quality":0.9811659941
+  },
+  {
+    "player":"Malachi Smith",
+    "quality":0.6834765897
+  },
+  {
+    "player":"Kennedy Chandler",
+    "quality":1.1543350642
+  },
+  {
+    "player":"Chaney Johnson",
+    "quality":0.7042600812
+  },
+  {
+    "player":"Ty Jerome",
+    "quality":1.3122295578
+  },
+  {
+    "player":"Jalen Slawson",
+    "quality":0.2912872002
+  },
+  {
+    "player":"Tyler Burton",
+    "quality":0.0
+  },
+  {
+    "player":"Max Strus",
+    "quality":0.2488403687
+  },
+  {
+    "player":"Blake Hinson",
+    "quality":0.9256720969
+  },
+  {
+    "player":"Zach Edey",
+    "quality":0.9387775938
+  },
+  {
+    "player":"Cormac Ryan",
+    "quality":1.0942904415
+  },
+  {
+    "player":"Adama-Alpha Bal",
+    "quality":0.0
+  },
+  {
+    "player":"DeJon Jarreau",
+    "quality":0.712726973
+  },
+  {
+    "player":"Lucas Williamson",
+    "quality":0.0
+  },
+  {
+    "player":"Toby Okani",
+    "quality":0.0
+  },
+  {
+    "player":"Scotty Pippen Jr.",
+    "quality":0.8147339525
+  },
+  {
+    "player":"Dariq Whitehead",
+    "quality":0.2388268445
+  },
+  {
+    "player":"Tre Scott",
+    "quality":0.0
+  },
+  {
+    "player":"Andersson Garcia",
+    "quality":0.3300236788
+  },
+  {
+    "player":"Walker Kessler",
+    "quality":1.0004452475
+  },
+  {
+    "player":"Bradley Beal",
+    "quality":0.0
+  },
+  {
+    "player":"Alondes Williams",
+    "quality":0.8094471966
+  },
+  {
+    "player":"Josh Oduro",
+    "quality":0.3932390305
+  },
+  {
+    "player":"Kadary Richmond",
+    "quality":1.0288339427
+  },
+  {
+    "player":"Lawson Lovering",
+    "quality":0.5091073029
+  },
+  {
+    "player":"Mouhamadou Gueye",
+    "quality":0.6112727027
+  },
+  {
+    "player":"Hayden Gray",
+    "quality":1.0249551152
+  },
+  {
+    "player":"Nathan Collins",
+    "quality":1.016180769
+  },
+  {
+    "player":"Bryan Mbeumo",
+    "quality":1.1324089173
+  },
+  {
+    "player":"Mohamed Salah",
+    "quality":1.2722974045
+  },
+  {
+    "player":"Mois\u00e9s Caicedo",
+    "quality":0.979886865
+  },
+  {
+    "player":"Max Kilman",
+    "quality":1.0962486727
+  },
+  {
+    "player":"Milos Kerkez",
+    "quality":0.6820272554
+  },
+  {
+    "player":"Dan Burn",
+    "quality":1.1529257987
+  },
+  {
+    "player":"Virgil van Dijk",
+    "quality":1.054881493
+  },
+  {
+    "player":"Nikola Milenkovi\u0107",
+    "quality":1.0276100729
+  },
+  {
+    "player":"Jo\u0161ko Gvardiol",
+    "quality":0.9388104609
+  },
+  {
+    "player":"Bruno Guimar\u00e3es",
+    "quality":0.9781596931
+  },
+  {
+    "player":"Daniel Mu\u00f1oz",
+    "quality":0.7956354542
+  },
+  {
+    "player":"Antoine Semenyo",
+    "quality":0.7918541847
+  },
+  {
+    "player":"Cole Palmer",
+    "quality":1.1784116767
+  },
+  {
+    "player":"Murillo",
+    "quality":1.1681730669
+  },
+  {
+    "player":"Antonee Robinson",
+    "quality":1.0917396061
+  },
+  {
+    "player":"Ryan Gravenberch",
+    "quality":0.7989789853
+  },
+  {
+    "player":"Aaron Wan-Bissaka",
+    "quality":0.827668664
+  },
+  {
+    "player":"Levi Colwill",
+    "quality":0.8951500412
+  },
+  {
+    "player":"Dara O'Shea",
+    "quality":0.9933437977
+  },
+  {
+    "player":"Maxence Lacroix",
+    "quality":1.0555092229
+  },
+  {
+    "player":"Morgan Rogers",
+    "quality":0.9813645375
+  },
+  {
+    "player":"Rayan A\u00eft-Nouri",
+    "quality":0.9042023635
+  },
+  {
+    "player":"Illia Zabarnyi",
+    "quality":0.9606146107
+  },
+  {
+    "player":"Keane Lewis-Potter",
+    "quality":0.6376882248
+  },
+  {
+    "player":"Tyrick Mitchell",
+    "quality":0.8158374102
+  },
+  {
+    "player":"Vitaliy Mykolenko",
+    "quality":0.7255106671
+  },
+  {
+    "player":"Calvin Bassey",
+    "quality":0.8388436903
+  },
+  {
+    "player":"Idrissa Gana Gueye",
+    "quality":0.9344216283
+  },
+  {
+    "player":"Marc Gu\u00e9hi",
+    "quality":0.8162293577
+  },
+  {
+    "player":"William Saliba",
+    "quality":0.8542050154
+  },
+  {
+    "player":"Youri Tielemans",
+    "quality":0.9861526539
+  },
+  {
+    "player":"Bruno Fernandes",
+    "quality":1.083552584
+  },
+  {
+    "player":"Ola Aina",
+    "quality":0.7350107327
+  },
+  {
+    "player":"Marc Cucurella",
+    "quality":0.7528518077
+  },
+  {
+    "player":"Alex Iwobi",
+    "quality":0.9911371672
+  },
+  {
+    "player":"Lewis Cook",
+    "quality":0.6842561011
+  },
+  {
+    "player":"Jo\u00e3o Gomes",
+    "quality":0.8232836299
+  },
+  {
+    "player":"Jarrod Bowen",
+    "quality":0.9239324599
+  },
+  {
+    "player":"Chris Wood",
+    "quality":0.9873560609
+  },
+  {
+    "player":"Jan Paul van Hecke",
+    "quality":0.7879492486
+  },
+  {
+    "player":"Enzo Fern\u00e1ndez",
+    "quality":1.0464624028
+  },
+  {
+    "player":"Ezri Konsa",
+    "quality":0.8236255705
+  },
+  {
+    "player":"Fabian Sch\u00e4r",
+    "quality":0.6293124302
+  },
+  {
+    "player":"James Tarkowski",
+    "quality":1.1584924864
+  },
+  {
+    "player":"Yoane Wissa",
+    "quality":0.934740377
+  },
+  {
+    "player":"Kyle Walker-Peters",
+    "quality":0.5800944453
+  },
+  {
+    "player":"James Justin",
+    "quality":0.9312437413
+  },
+  {
+    "player":"Mikkel Damsgaard",
+    "quality":1.1189958508
+  },
+  {
+    "player":"Mateus Fernandes",
+    "quality":0.8630902921
+  },
+  {
+    "player":"N\u00e9lson Semedo",
+    "quality":0.6085969052
+  },
+  {
+    "player":"Valentino Livramento",
+    "quality":0.6019586928
+  },
+  {
+    "player":"Noussair Mazraoui",
+    "quality":1.0059311864
+  },
+  {
+    "player":"Taylor Harwood-Bellis",
+    "quality":0.8017604471
+  },
+  {
+    "player":"Declan Rice",
+    "quality":0.8658246517
+  },
+  {
+    "player":"Jamie Vardy",
+    "quality":0.718380536
+  },
+  {
+    "player":"Christian N\u00f8rgaard",
+    "quality":1.0157501225
+  },
+  {
+    "player":"Wout Faes",
+    "quality":0.785871893
+  },
+  {
+    "player":"Diogo Dalot",
+    "quality":0.7173304777
+  },
+  {
+    "player":"Morgan Gibbs-White",
+    "quality":0.9680953426
+  },
+  {
+    "player":"Thomas Partey",
+    "quality":0.7944989496
+  },
+  {
+    "player":"Alexander Isak",
+    "quality":1.0009292394
+  },
+  {
+    "player":"Sam Morsy",
+    "quality":0.7136707575
+  },
+  {
+    "player":"Leif Davis",
+    "quality":0.5023456658
+  },
+  {
+    "player":"Erling Haaland",
+    "quality":0.8311211752
+  },
+  {
+    "player":"Elliot Anderson",
+    "quality":1.1276649787
+  },
+  {
+    "player":"Ismaila Sarr",
+    "quality":0.7649781725
+  },
+  {
+    "player":"Bernardo Silva",
+    "quality":0.8826800567
+  },
+  {
+    "player":"Carlos Baleba",
+    "quality":0.835422701
+  },
+  {
+    "player":"Jean-Philippe Mateta",
+    "quality":0.8492457354
+  },
+  {
+    "player":"Sandro Tonali",
+    "quality":0.707560843
+  },
+  {
+    "player":"Toti Gomes",
+    "quality":0.8819346351
+  },
+  {
+    "player":"Pedro Porro",
+    "quality":1.1079410111
+  },
+  {
+    "player":"Kaoru Mitoma",
+    "quality":0.8625617893
+  },
+  {
+    "player":"Alexis Mac Allister",
+    "quality":1.077075951
+  },
+  {
+    "player":"Ollie Watkins",
+    "quality":0.7422193176
+  },
+  {
+    "player":"Matheus Cunha",
+    "quality":1.0966097707
+  },
+  {
+    "player":"Neco Williams",
+    "quality":0.8579280529
+  },
+  {
+    "player":"Liam Delap",
+    "quality":0.870794831
+  },
+  {
+    "player":"Mohammed Kudus",
+    "quality":0.629553713
+  },
+  {
+    "player":"Eberechi Eze",
+    "quality":0.8832930891
+  },
+  {
+    "player":"J\u00f8rgen Strand Larsen",
+    "quality":0.8015370914
+  },
+  {
+    "player":"Sepp van den Berg",
+    "quality":0.6213171604
+  },
+  {
+    "player":"Joachim Andersen",
+    "quality":0.8540137633
+  },
+  {
+    "player":"Omari Hutchinson",
+    "quality":0.3740957441
+  },
+  {
+    "player":"Tom\u00e1\u0161 Sou\u010dek",
+    "quality":0.8282345662
+  },
+  {
+    "player":"Abdoulaye Doucour\u00e9",
+    "quality":0.4822241074
+  },
+  {
+    "player":"Ibrahima Konat\u00e9",
+    "quality":0.8493578871
+  },
+  {
+    "player":"Leandro Trossard",
+    "quality":0.9152409781
+  },
+  {
+    "player":"Jan Bednarek",
+    "quality":0.9965937563
+  },
+  {
+    "player":"Jarrad Branthwaite",
+    "quality":0.6426917383
+  },
+  {
+    "player":"Anthony Elanga",
+    "quality":0.7469512635
+  },
+  {
+    "player":"Ra\u00fal Jim\u00e9nez",
+    "quality":0.5903783271
+  },
+  {
+    "player":"Dominik Szoboszlai",
+    "quality":1.0152414467
+  },
+  {
+    "player":"Andrew Robertson",
+    "quality":0.5524701459
+  },
+  {
+    "player":"Victor Bernth Kristiansen",
+    "quality":0.7549022842
+  },
+  {
+    "player":"Andr\u00e9",
+    "quality":0.9616543985
+  },
+  {
+    "player":"Anthony Gordon",
+    "quality":0.7400991956
+  },
+  {
+    "player":"Iliman Ndiaye",
+    "quality":0.784093352
+  },
+  {
+    "player":"Dean Huijsen",
+    "quality":0.8254152117
+  },
+  {
+    "player":"Jurri\u00ebn Timber",
+    "quality":0.4123997116
+  },
+  {
+    "player":"Pervis Estupi\u00f1\u00e1n",
+    "quality":0.6304730936
+  },
+  {
+    "player":"Luis D\u00edaz",
+    "quality":1.2366156732
+  },
+  {
+    "player":"Joelinton",
+    "quality":0.816020356
+  },
+  {
+    "player":"Dejan Kulusevski",
+    "quality":0.9305073638
+  },
+  {
+    "player":"Lucas Paquet\u00e1",
+    "quality":0.6790449064
+  },
+  {
+    "player":"Trent Alexander-Arnold",
+    "quality":0.9566234203
+  },
+  {
+    "player":"Gabriel Magalh\u00e3es",
+    "quality":0.8906283905
+  },
+  {
+    "player":"Jacob Murphy",
+    "quality":0.9850970915
+  },
+  {
+    "player":"Lucas Digne",
+    "quality":0.532982741
+  },
+  {
+    "player":"Sa\u0161a Luki\u0107",
+    "quality":0.4073718361
+  },
+  {
+    "player":"Justin Kluivert",
+    "quality":0.8048321736
+  },
+  {
+    "player":"Martin \u00d8degaard",
+    "quality":0.7635195127
+  },
+  {
+    "player":"Wilfred Ndidi",
+    "quality":0.6736984608
+  },
+  {
+    "player":"Evanilson",
+    "quality":0.7321730681
+  },
+  {
+    "player":"Kevin Schade",
+    "quality":0.576405196
+  },
+  {
+    "player":"Gabriel Martinelli",
+    "quality":0.6315937462
+  },
+  {
+    "player":"Jefferson Lerma",
+    "quality":0.6819169886
+  },
+  {
+    "player":"R\u00faben Dias",
+    "quality":0.2355782728
+  },
+  {
+    "player":"Pedro Neto",
+    "quality":0.5608726132
+  },
+  {
+    "player":"Vitaly Janelt",
+    "quality":0.6026209282
+  },
+  {
+    "player":"Sander Berge",
+    "quality":0.4479677015
+  },
+  {
+    "player":"John McGinn",
+    "quality":0.5027701219
+  },
+  {
+    "player":"\u0130lkay G\u00fcndo\u011fan",
+    "quality":0.6570238249
+  },
+  {
+    "player":"Nicolas Jackson",
+    "quality":0.6897512921
+  },
+  {
+    "player":"Jacob Greaves",
+    "quality":0.7243950253
+  },
+  {
+    "player":"Dominic Solanke",
+    "quality":0.5501848482
+  },
+  {
+    "player":"Alejandro Garnacho",
+    "quality":0.498373638
+  },
+  {
+    "player":"Mateo Kova\u010di\u0107",
+    "quality":0.9640744822
+  },
+  {
+    "player":"Callum Hudson-Odoi",
+    "quality":0.483244208
+  },
+  {
+    "player":"Lewis Hall",
+    "quality":0.707164216
+  },
+  {
+    "player":"Bilal El Khannouss",
+    "quality":0.7109276514
+  },
+  {
+    "player":"Brennan Johnson",
+    "quality":0.7516103149
+  },
+  {
+    "player":"Boubakary Soumar\u00e9",
+    "quality":0.4938800946
+  },
+  {
+    "player":"Flynn Downes",
+    "quality":0.4564301292
+  },
+  {
+    "player":"Matthijs de Ligt",
+    "quality":0.5841225787
+  },
+  {
+    "player":"Ryan Christie",
+    "quality":0.818624032
+  },
+  {
+    "player":"Danny Welbeck",
+    "quality":0.789285478
+  },
+  {
+    "player":"Emerson Palmieri",
+    "quality":0.3721975055
+  },
+  {
+    "player":"Son Heung-min",
+    "quality":0.9023989002
+  },
+  {
+    "player":"Matt Doherty",
+    "quality":0.6930694704
+  },
+  {
+    "player":"Will Hughes",
+    "quality":0.5220543197
+  },
+  {
+    "player":"Lewis Dunk",
+    "quality":0.5041932733
+  },
+  {
+    "player":"Jack Harrison",
+    "quality":0.0692563804
+  },
+  {
+    "player":"Matty Cash",
+    "quality":0.3421191118
+  },
+  {
+    "player":"Konstantinos Mavropanos",
+    "quality":0.959656815
+  },
+  {
+    "player":"Emile Smith Rowe",
+    "quality":0.9226646972
+  },
+  {
+    "player":"Noni Madueke",
+    "quality":0.687715301
+  },
+  {
+    "player":"Pau Torres",
+    "quality":0.0
+  },
+  {
+    "player":"Manuel Akanji",
+    "quality":0.0
+  },
+  {
+    "player":"Andreas Pereira",
+    "quality":0.5627568218
+  },
+  {
+    "player":"Joe Aribo",
+    "quality":0.7975147625
+  },
+  {
+    "player":"Dango Ouattara",
+    "quality":0.7524242366
+  },
+  {
+    "player":"Rasmus H\u00f8jlund",
+    "quality":0.3813538233
+  },
+  {
+    "player":"Tyler Adams",
+    "quality":0.8931446592
+  },
+  {
+    "player":"Yasin Ayari",
+    "quality":0.4433103567
+  },
+  {
+    "player":"Nicol\u00e1s Dom\u00ednguez",
+    "quality":0.9600054802
+  },
+  {
+    "player":"Jens Cajuste",
+    "quality":0.5967016172
+  },
+  {
+    "player":"Jo\u00e3o Pedro",
+    "quality":0.908145901
+  },
+  {
+    "player":"Marcus Tavernier",
+    "quality":1.0234220174
+  },
+  {
+    "player":"Cody Gakpo",
+    "quality":1.0044544533
+  },
+  {
+    "player":"Destiny Udogie",
+    "quality":0.601669194
+  },
+  {
+    "player":"Chris Richards",
+    "quality":0.7264347595
+  },
+  {
+    "player":"Ryan Yates",
+    "quality":0.7419128777
+  },
+  {
+    "player":"Ethan Pinnock",
+    "quality":0.5410784996
+  },
+  {
+    "player":"Pape Matar Sarr",
+    "quality":0.7243698455
+  },
+  {
+    "player":"Amad Diallo",
+    "quality":1.1652649863
+  },
+  {
+    "player":"Rico Lewis",
+    "quality":0.5265158972
+  },
+  {
+    "player":"Ashley Young",
+    "quality":0.5363343238
+  },
+  {
+    "player":"Kai Havertz",
+    "quality":0.8056056927
+  },
+  {
+    "player":"Tyler Dibling",
+    "quality":0.1564194927
+  },
+  {
+    "player":"Malo Gusto",
+    "quality":0.5342154833
+  },
+  {
+    "player":"Jack Hinshelwood",
+    "quality":0.7694131665
+  },
+  {
+    "player":"Yankuba Minteh",
+    "quality":0.8187053118
+  },
+  {
+    "player":"Jean-Clair Todibo",
+    "quality":0.7337574654
+  },
+  {
+    "player":"James Maddison",
+    "quality":1.4648531046
+  },
+  {
+    "player":"Djed Spence",
+    "quality":0.8409266002
+  },
+  {
+    "player":"Manuel Ugarte Ribeiro",
+    "quality":0.5938240272
+  },
+  {
+    "player":"Phil Foden",
+    "quality":1.1334529861
+  },
+  {
+    "player":"Kenny Tete",
+    "quality":0.6834138525
+  },
+  {
+    "player":"Adama Traor\u00e9",
+    "quality":0.7584814032
+  },
+  {
+    "player":"Edson \u00c1lvarez",
+    "quality":0.617226208
+  },
+  {
+    "player":"S\u00e1vio",
+    "quality":0.6900866867
+  },
+  {
+    "player":"Jadon Sancho",
+    "quality":0.8621243077
+  },
+  {
+    "player":"Harry Maguire",
+    "quality":0.6794383739
+  },
+  {
+    "player":"Harvey Barnes",
+    "quality":1.1555739971
+  },
+  {
+    "player":"Archie Gray",
+    "quality":0.1806047707
+  },
+  {
+    "player":"Lisandro Mart\u00ednez",
+    "quality":0.6322144989
+  },
+  {
+    "player":"Bukayo Saka",
+    "quality":0.9905477178
+  },
+  {
+    "player":"Boubacar Kamara",
+    "quality":0.4318746199
+  },
+  {
+    "player":"Conor Coady",
+    "quality":0.3917839212
+  },
+  {
+    "player":"Curtis Jones",
+    "quality":0.7246790404
+  },
+  {
+    "player":"Axel Tuanzebe",
+    "quality":0.4076511147
+  },
+  {
+    "player":"Kevin De Bruyne",
+    "quality":1.0264514001
+  },
+  {
+    "player":"Jo\u00ebl Veltman",
+    "quality":0.7387910573
+  },
+  {
+    "player":"Santiago Bueno",
+    "quality":0.5607018653
+  },
+  {
+    "player":"Jean-Ricner Bellegarde",
+    "quality":0.7249877385
+  },
+  {
+    "player":"Matheus Nunes",
+    "quality":0.7451978714
+  },
+  {
+    "player":"Georginio Rutter",
+    "quality":0.7722490265
+  },
+  {
+    "player":"Lesley Ugochukwu",
+    "quality":0.5462444556
+  },
+  {
+    "player":"Kobbie Mainoo",
+    "quality":0.5884001229
+  },
+  {
+    "player":"Timothy Castagne",
+    "quality":0.4146897515
+  },
+  {
+    "player":"Rodrigo Bentancur",
+    "quality":0.6867704122
+  },
+  {
+    "player":"Jordan Ayew",
+    "quality":0.4765960792
+  },
+  {
+    "player":"Jacob Ramsey",
+    "quality":0.5336556516
+  },
+  {
+    "player":"Amadou Onana",
+    "quality":0.8402085647
+  },
+  {
+    "player":"Stephy Mavididi",
+    "quality":0.6033779636
+  },
+  {
+    "player":"Dominic Calvert-Lewin",
+    "quality":0.5718429841
+  },
+  {
+    "player":"James Garner",
+    "quality":0.8680686041
+  },
+  {
+    "player":"Adam Smith",
+    "quality":0.0
+  },
+  {
+    "player":"Mikel Merino",
+    "quality":0.9250398132
+  },
+  {
+    "player":"Jake O'Brien",
+    "quality":0.5093952716
+  },
+  {
+    "player":"Daichi Kamada",
+    "quality":0.4797399382
+  },
+  {
+    "player":"Yukinari Sugawara",
+    "quality":0.2294037203
+  },
+  {
+    "player":"Cameron Burgess",
+    "quality":1.1634560577
+  },
+  {
+    "player":"Harry Winks",
+    "quality":0.301347016
+  },
+  {
+    "player":"Beto",
+    "quality":0.6657394407
+  },
+  {
+    "player":"Facundo Buonanotte",
+    "quality":0.9332203587
+  },
+  {
+    "player":"Jeremy Doku",
+    "quality":0.984893534
+  },
+  {
+    "player":"Casemiro",
+    "quality":0.8507635989
+  },
+  {
+    "player":"Ryan Manning",
+    "quality":0.6875749711
+  },
+  {
+    "player":"Yehor Yarmoliuk",
+    "quality":0.6046564084
+  },
+  {
+    "player":"Cameron Archer",
+    "quality":0.4363621294
+  },
+  {
+    "player":"Kristoffer Ajer",
+    "quality":0.3669272896
+  },
+  {
+    "player":"Cristian Romero",
+    "quality":0.8371837575
+  },
+  {
+    "player":"Emmanuel Agbadou",
+    "quality":0.7799990943
+  },
+  {
+    "player":"Carlos Soler",
+    "quality":0.1222077396
+  },
+  {
+    "player":"Tosin Adarabioyo",
+    "quality":0.8141538476
+  },
+  {
+    "player":"Yves Bissouma",
+    "quality":0.5638490448
+  },
+  {
+    "player":"Kamaldeen Sulemana",
+    "quality":0.0
+  },
+  {
+    "player":"Joshua Zirkzee",
+    "quality":0.6773008145
+  },
+  {
+    "player":"Jannik Vestergaard",
+    "quality":0.5468403382
+  },
+  {
+    "player":"Jack Stephens",
+    "quality":0.6319367469
+  },
+  {
+    "player":"Dwight McNeil",
+    "quality":0.9364536152
+  },
+  {
+    "player":"Myles Lewis-Skelly",
+    "quality":0.5087939196
+  },
+  {
+    "player":"Mario Lemina",
+    "quality":0.8697004254
+  },
+  {
+    "player":"Ben Johnson",
+    "quality":0.4666776712
+  },
+  {
+    "player":"Issa Diop",
+    "quality":0.6944473422
+  },
+  {
+    "player":"Ben Davies",
+    "quality":0.5284489048
+  },
+  {
+    "player":"Adam Wharton",
+    "quality":0.7132624068
+  },
+  {
+    "player":"Kieran Trippier",
+    "quality":0.8048125888
+  },
+  {
+    "player":"Orel Mangala",
+    "quality":0.1642745838
+  },
+  {
+    "player":"Radu Dr\u0103gu\u0219in",
+    "quality":0.5600807334
+  },
+  {
+    "player":"Adam Armstrong",
+    "quality":0.3982038212
+  },
+  {
+    "player":"Jesper Lindstr\u00f8m",
+    "quality":0.4196765084
+  },
+  {
+    "player":"Kalvin Phillips",
+    "quality":1.0679945449
+  },
+  {
+    "player":"Lucas Bergvall",
+    "quality":0.7622827571
+  },
+  {
+    "player":"Ben White",
+    "quality":0.4496121871
+  },
+  {
+    "player":"Diogo Jota",
+    "quality":0.8762779283
+  },
+  {
+    "player":"Luke Woolfenden",
+    "quality":0.450700797
+  },
+  {
+    "player":"Jack Clarke",
+    "quality":0.7054944912
+  },
+  {
+    "player":"Omar Marmoush",
+    "quality":0.9168911358
+  },
+  {
+    "player":"Wesley Fofana",
+    "quality":0.6305106136
+  },
+  {
+    "player":"Leny Yoro",
+    "quality":0.1842763196
+  },
+  {
+    "player":"Harry Wilson",
+    "quality":0.6949013481
+  },
+  {
+    "player":"Guido Rodr\u00edguez",
+    "quality":0.8882840726
+  },
+  {
+    "player":"Leon Bailey",
+    "quality":0.2813031452
+  },
+  {
+    "player":"Ian Maatsen",
+    "quality":0.840351363
+  },
+  {
+    "player":"Darwin N\u00fa\u00f1ez",
+    "quality":0.7467490188
+  },
+  {
+    "player":"Oliver Skipp",
+    "quality":0.6542715491
+  },
+  {
+    "player":"Caleb Okoli",
+    "quality":0.6784311345
+  },
+  {
+    "player":"Jakub Kiwior",
+    "quality":0.5650551165
+  },
+  {
+    "player":"Tyrone Mings",
+    "quality":0.6539804202
+  },
+  {
+    "player":"Luke Thomas",
+    "quality":0.831193209
+  },
+  {
+    "player":"Marcos Senesi",
+    "quality":0.9315895848
+  },
+  {
+    "player":"Mads Roerslev",
+    "quality":0.7132788867
+  },
+  {
+    "player":"Simon Adingra",
+    "quality":0.5742016678
+  },
+  {
+    "player":"Joe Willock",
+    "quality":0.5206855309
+  },
+  {
+    "player":"Marshall Munetsi",
+    "quality":0.3975481884
+  },
+  {
+    "player":"James Bree",
+    "quality":0.4762681398
+  },
+  {
+    "player":"Vladim\u00edr Coufal",
+    "quality":0.4414584813
+  },
+  {
+    "player":"Reece James",
+    "quality":0.4946894188
+  },
+  {
+    "player":"Christian Eriksen",
+    "quality":0.8741408963
+  },
+  {
+    "player":"Trevoh Chalobah",
+    "quality":0.9435673568
+  },
+  {
+    "player":"Paul Onuachu",
+    "quality":0.6153546874
+  },
+  {
+    "player":"Michael Keane",
+    "quality":0.6237833616
+  },
+  {
+    "player":"James Ward-Prowse",
+    "quality":0.6059921364
+  },
+  {
+    "player":"Eddie Nketiah",
+    "quality":0.5146875388
+  },
+  {
+    "player":"Mats Wieffer",
+    "quality":1.0798762992
+  },
+  {
+    "player":"Micky van de Ven",
+    "quality":0.351243059
+  },
+  {
+    "player":"Gon\u00e7alo Guedes",
+    "quality":0.7078331617
+  },
+  {
+    "player":"Sammie Szmodics",
+    "quality":0.9876873175
+  },
+  {
+    "player":"Riccardo Calafiori",
+    "quality":0.6702185919
+  },
+  {
+    "player":"Marcus Rashford",
+    "quality":0.6713608384
+  },
+  {
+    "player":"Craig Dawson",
+    "quality":1.1296851011
+  },
+  {
+    "player":"Kyle Walker",
+    "quality":0.2047684724
+  },
+  {
+    "player":"Rodrigo Muniz",
+    "quality":0.5660999786
+  },
+  {
+    "player":"Igor",
+    "quality":0.8787319585
+  },
+  {
+    "player":"David Brooks",
+    "quality":0.423116901
+  },
+  {
+    "player":"\u00c1lex Moreno",
+    "quality":0.6267144838
+  },
+  {
+    "player":"Matt O'Riley",
+    "quality":0.7993536686
+  },
+  {
+    "player":"Wes Burns",
+    "quality":0.2018082635
+  },
+  {
+    "player":"Christopher Nkunku",
+    "quality":0.9892220014
+  },
+  {
+    "player":"Mathys Tel",
+    "quality":0.4872326937
+  },
+  {
+    "player":"Morato",
+    "quality":0.7239624417
+  }
+]
