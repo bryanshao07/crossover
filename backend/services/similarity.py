@@ -37,7 +37,7 @@ def top_matches(name: str, limit: int = 10) -> List[SimilarityMatch]:
 def build_pair_distribution() -> None:
     global _pair_sims_sorted
     names = ds.all_names()
-    sports = {n: ds.get_player(n)["sport"] for n in names}
+    sports = {n: p["sport"] for n in names for p in [ds.get_player(n)] if p is not None}
     vals: List[float] = []
     for n in names:
         row = ds.sim_row(n)

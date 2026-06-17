@@ -20,12 +20,14 @@ def test_top_matches_exclude_self_and_same_sport():
     matches = similarity.top_matches("Amen Thompson", limit=585)
     names = {m.name for m in matches}
     assert "Amen Thompson" not in names
+    assert all(m.sport == "soccer" for m in matches)
 
 
 def test_percentile_monotonic():
     lo = similarity.percentile_for(0.0)
+    mid = similarity.percentile_for(0.85)
     hi = similarity.percentile_for(0.999)
-    assert 0.0 <= lo <= hi <= 100.0
+    assert 0.0 <= lo <= mid <= hi <= 100.0
 
 
 def test_context_label_is_string():
