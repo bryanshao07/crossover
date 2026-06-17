@@ -754,12 +754,6 @@ from main import app
 client = TestClient(app)
 
 
-def test_compare_returns_both_players_and_similarity():
-    r = client.get("/compare/Amen Thompson/Pedri")  # adjust b to any soccer name if needed
-    # If "Pedri" is absent in this dataset, this test should use a known soccer player.
-    assert r.status_code in (200, 404)
-
-
 def test_compare_known_pair_structure():
     # pick player_b as the top soccer match of player_a to guarantee existence
     detail = client.get("/player/Amen Thompson").json()
