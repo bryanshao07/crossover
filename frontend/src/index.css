@@ -4,6 +4,9 @@
 
 @layer base {
   :root { color-scheme: dark; }
+  /* Always reserve space for the vertical scrollbar so the page width stays
+     constant whether or not content overflows (e.g. a single search result). */
+  html { scrollbar-gutter: stable; }
   body { @apply bg-bg text-white font-sans antialiased; }
 }
 

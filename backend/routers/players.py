@@ -37,4 +37,9 @@ def search(
         rows = [r for r in rows if r["sport"] == sport]
     if position:
         rows = [r for r in rows if r["position"] == position]
-    return rows
+    return [_with_attributes(r) for r in rows]
+
+
+def _with_attributes(row: dict) -> dict:
+    vec = ds.vector(row["name"]) or {}
+    return {**row, **{attr: vec.get(attr) for attr in ds.ATTRS}}
