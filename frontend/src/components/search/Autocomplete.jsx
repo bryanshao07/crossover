@@ -28,7 +28,11 @@ export default function Autocomplete({
     if (!q) return [];
     const ql = q.toLowerCase();
     return players
-      .filter((p) => (sportFilter === "all" || p.sport === sportFilter) && p.name.toLowerCase().includes(ql))
+      .filter(
+        (p) =>
+          (sportFilter === "all" || p.sport === sportFilter) &&
+          p.name.toLowerCase().includes(ql),
+      )
       .slice(0, 8);
   }, [q, players, sportFilter]);
 
@@ -41,7 +45,8 @@ export default function Autocomplete({
   useEffect(() => {
     if (!filterOpen) return;
     function onPointerDown(e) {
-      if (filterRef.current && !filterRef.current.contains(e.target)) setFilterOpen(false);
+      if (filterRef.current && !filterRef.current.contains(e.target))
+        setFilterOpen(false);
     }
     document.addEventListener("mousedown", onPointerDown);
     return () => document.removeEventListener("mousedown", onPointerDown);
@@ -51,6 +56,19 @@ export default function Autocomplete({
     setQ("");
     inputRef.current?.focus();
   }
+
+  // Global ⌘K / Ctrl+K shortcut focuses the search input
+  useEffect(() => {
+    if (!kbd) return;
+    function onKey(e) {
+      if ((e.metaKey || e.ctrlKey) && (e.key === "k" || e.key === "K")) {
+        e.preventDefault();
+        inputRef.current?.focus();
+      }
+    }
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [kbd]);
 
   function handleKeyDown(e) {
     if (matches.length === 0) return;
@@ -103,14 +121,16 @@ export default function Autocomplete({
           aria-expanded={matches.length > 0}
           aria-autocomplete="list"
           aria-label="Search players"
-          className={`w-full bg-white/5 border border-white/15 rounded outline-none focus:border-accent font-sans text-white placeholder-white/40 ${
+          className={`w-full bg-black/80 border border-white/40 rounded outline-none focus:border-accent font-sans text-white placeholder-white/40 ${
             lg ? "text-lg py-4" : "py-3"
           } ${leadingIcon ? (lg ? "pl-14" : "pl-10") : lg ? "pl-5" : "px-4"} ${
             canFilter || kbd ? (lg ? "pr-32" : "pr-28") : lg ? "pr-5" : "px-4"
           }`}
         />
 
-        <div className={`absolute top-1/2 -translate-y-1/2 flex items-center gap-2 ${lg ? "right-4" : "right-3"}`}>
+        <div
+          className={`absolute top-1/2 -translate-y-1/2 flex items-center gap-2 ${lg ? "right-4" : "right-3"}`}
+        >
           {canFilter && (
             <div ref={filterRef} className="relative">
               <button
@@ -123,7 +143,11 @@ export default function Autocomplete({
                 {sportFilter !== "all" && (
                   <span
                     className="w-2 h-2 rounded-full"
-                    style={{ backgroundColor: SPORT_OPTIONS.find((s) => s.key === sportFilter)?.color }}
+                    style={{
+                      backgroundColor: SPORT_OPTIONS.find(
+                        (s) => s.key === sportFilter,
+                      )?.color,
+                    }}
                   />
                 )}
                 <svg
@@ -144,13 +168,24 @@ export default function Autocomplete({
                     <li key={s.key}>
                       <button
                         type="button"
-                        onClick={() => { onSportChange(s.key); setFilterOpen(false); inputRef.current?.focus(); }}
+                        onClick={() => {
+                          onSportChange(s.key);
+                          setFilterOpen(false);
+                          inputRef.current?.focus();
+                        }}
                         className="w-full flex items-center gap-2 px-3 py-1.5 text-sm text-left hover:bg-white/10 text-white/70"
-                        style={sportFilter === s.key ? { color: s.color } : undefined}
+                        style={
+                          sportFilter === s.key ? { color: s.color } : undefined
+                        }
                       >
-                        <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: s.color }} />
+                        <span
+                          className="w-2 h-2 rounded-full shrink-0"
+                          style={{ backgroundColor: s.color }}
+                        />
                         {s.label}
-                        {sportFilter === s.key && <span className="ml-auto">✓</span>}
+                        {sportFilter === s.key && (
+                          <span className="ml-auto">✓</span>
+                        )}
                       </button>
                     </li>
                   ))}
@@ -168,28 +203,55 @@ export default function Autocomplete({
               onClick={clearQuery}
               className="p-0.5 text-white/40 hover:text-white/90"
             >
-              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg
+                className="w-4 h-4"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <line x1="18" y1="6" x2="6" y2="18" />
                 <line x1="6" y1="6" x2="18" y2="18" />
               </svg>
             </button>
           ) : kbd ? (
-            <span className="font-mono text-xs text-white/40 border border-white/15 rounded-sm px-2 py-0.5">{kbd}</span>
+            <button
+              type="button"
+              aria-label="Focus search"
+              onClick={() => inputRef.current?.focus()}
+              className="font-mono text-base font-semibold text-accent border border-white/40 hover:bg-accent/10 bg-transparent rounded-sm px-3 py-1"
+            >
+              {kbd}
+            </button>
           ) : null}
         </div>
       </div>
       {matches.length > 0 && (
-        <ul role="listbox" className="absolute left-0 right-0 top-full z-50 mt-2 glass max-h-[calc(90vh-26rem)] overflow-auto">
+        <ul
+          role="listbox"
+          className="absolute left-0 right-0 top-full z-50 mt-2 glass max-h-[calc(90vh-26rem)] overflow-auto"
+        >
           {matches.map((p, index) => (
-            <li key={p.name} role="option" aria-selected={index === highlighted}>
+            <li
+              key={p.name}
+              role="option"
+              aria-selected={index === highlighted}
+            >
               <button
-                onClick={() => { setQ(""); onSelect(p.name); }}
+                onClick={() => {
+                  setQ("");
+                  onSelect(p.name);
+                }}
                 onMouseEnter={() => setHighlighted(index)}
                 className={`w-full flex items-center gap-3 px-4 py-2 hover:bg-white/10 text-left${index === highlighted ? " bg-white/10" : ""}`}
               >
                 <SportBadge sport={p.sport} />
                 <span>{p.name}</span>
-                <span className="ml-auto text-white/40 font-mono text-xs">{p.position}</span>
+                <span className="ml-auto text-white/40 font-mono text-xs">
+                  {p.position}
+                </span>
               </button>
             </li>
           ))}
