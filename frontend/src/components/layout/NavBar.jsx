@@ -14,7 +14,7 @@ export default function NavBar() {
       </Link>
       <div className="ml-auto flex items-center gap-5 text-sm text-white/70">
         <NavLink to="/universe" className={navLinkClass}>Universe</NavLink>
-        <NavLink to="/search" className={navLinkClass}>Compare</NavLink>
+        <NavLink to="/compare" className={navLinkClass}>Compare</NavLink>
         <NavLink to="/search" className={navLinkClass}>Search</NavLink>
       </div>
     </nav>

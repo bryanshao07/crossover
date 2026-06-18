@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { usePlayers } from "../../hooks/usePlayers";
 import SportBadge from "../ui/SportBadge";
 
@@ -21,8 +22,10 @@ export default function Autocomplete({
   const [q, setQ] = useState("");
   const [highlighted, setHighlighted] = useState(-1);
   const [filterOpen, setFilterOpen] = useState(false);
+  const [menuRect, setMenuRect] = useState(null);
   const inputRef = useRef(null);
   const filterRef = useRef(null);
+  const wrapRef = useRef(null);
 
   const matches = useMemo(() => {
     if (!q) return [];
@@ -35,6 +38,26 @@ export default function Autocomplete({
       )
       .slice(0, 8);
   }, [q, players, sportFilter]);
+
+  // Track the input's viewport position so the portaled dropdown can be
+  // positioned with `fixed` — this lets it escape the glass panels' stacking
+  // contexts (backdrop-blur) and render above every other element.
+  useEffect(() => {
+    if (matches.length === 0) return;
+    function update() {
+      const el = wrapRef.current;
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      setMenuRect({ left: r.left, top: r.bottom, width: r.width });
+    }
+    update();
+    window.addEventListener("scroll", update, true);
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update, true);
+      window.removeEventListener("resize", update);
+    };
+  }, [matches.length]);
 
   // Close the sport filter menu when clicking outside of it
   useEffect(() => {
@@ -91,7 +114,10 @@ export default function Autocomplete({
   const canFilter = typeof onSportChange === "function";
 
   return (
-    <div className={`relative w-full ${lg ? "max-w-2xl" : "max-w-xl"}`}>
+    <div
+      ref={wrapRef}
+      className={`relative w-full ${lg ? "max-w-2xl" : "max-w-xl"}`}
+    >
       <div className="relative">
         {leadingIcon && (
           <svg
@@ -172,30 +198,30 @@ export default function Autocomplete({
                 aria-hidden={!filterOpen}
               >
                 {SPORT_OPTIONS.map((s) => (
-                    <li key={s.key}>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          onSportChange(s.key);
-                          setFilterOpen(false);
-                          inputRef.current?.focus();
-                        }}
-                        className="w-full flex items-center gap-2 px-3 py-1.5 text-sm text-left hover:bg-white/10 text-white/70"
-                        style={
-                          sportFilter === s.key ? { color: s.color } : undefined
-                        }
-                      >
-                        <span
-                          className="w-2 h-2 rounded-full shrink-0"
-                          style={{ backgroundColor: s.color }}
-                        />
-                        {s.label}
-                        {sportFilter === s.key && (
-                          <span className="ml-auto">✓</span>
-                        )}
-                      </button>
-                    </li>
-                  ))}
+                  <li key={s.key}>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        onSportChange(s.key);
+                        setFilterOpen(false);
+                        inputRef.current?.focus();
+                      }}
+                      className="w-full flex items-center gap-2 px-3 py-1.5 text-sm text-left hover:bg-white/10 text-white/70"
+                      style={
+                        sportFilter === s.key ? { color: s.color } : undefined
+                      }
+                    >
+                      <span
+                        className="w-2 h-2 rounded-full shrink-0"
+                        style={{ backgroundColor: s.color }}
+                      />
+                      {s.label}
+                      {sportFilter === s.key && (
+                        <span className="ml-auto">✓</span>
+                      )}
+                    </button>
+                  </li>
+                ))}
               </ul>
             </div>
           )}
@@ -234,36 +260,47 @@ export default function Autocomplete({
           ) : null}
         </div>
       </div>
-      {matches.length > 0 && (
-        <ul
-          role="listbox"
-          className="absolute left-0 right-0 top-full z-50 mt-2 glass max-h-[calc(90vh-26rem)] overflow-auto"
-        >
-          {matches.map((p, index) => (
-            <li
-              key={p.name}
-              role="option"
-              aria-selected={index === highlighted}
-            >
-              <button
-                onClick={() => {
-                  setQ("");
-                  setHighlighted(-1);
-                  onSelect(p.name);
-                }}
-                onMouseEnter={() => setHighlighted(index)}
-                className={`w-full flex items-center gap-3 px-4 py-2 hover:bg-white/10 text-left${index === highlighted ? " bg-white/10" : ""}`}
+      {matches.length > 0 &&
+        menuRect &&
+        createPortal(
+          <ul
+            role="listbox"
+            style={{
+              position: "fixed",
+              left: menuRect.left,
+              top: menuRect.top + 8,
+              width: menuRect.width,
+              backgroundColor: "rgba(10, 10, 15, 0.97)",
+              zIndex: 100,
+            }}
+            className="glass max-h-40 overflow-y-auto"
+          >
+            {matches.map((p, index) => (
+              <li
+                key={p.name}
+                role="option"
+                aria-selected={index === highlighted}
               >
-                <SportBadge sport={p.sport} />
-                <span>{p.name}</span>
-                <span className="ml-auto text-white/40 font-mono text-xs">
-                  {p.position}
-                </span>
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
+                <button
+                  onClick={() => {
+                    setQ("");
+                    setHighlighted(-1);
+                    onSelect(p.name);
+                  }}
+                  onMouseEnter={() => setHighlighted(index)}
+                  className={`w-full flex items-center gap-3 px-4 py-2 hover:bg-white/10 text-left${index === highlighted ? " bg-white/10" : ""}`}
+                >
+                  <SportBadge sport={p.sport} />
+                  <span>{p.name}</span>
+                  <span className="ml-auto text-white/40 font-mono text-xs">
+                    {p.position}
+                  </span>
+                </button>
+              </li>
+            ))}
+          </ul>,
+          document.body,
+        )}
     </div>
   );
 }
