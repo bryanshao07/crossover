@@ -10,8 +10,8 @@ export default {
         soccer: "#39d353",
       },
       fontFamily: {
-        sans: ["Inter", "system-ui", "sans-serif"],
-        mono: ["'JetBrains Mono'", "monospace"],
+        sans: ["'JetBrains Mono'", "ui-monospace", "monospace"],
+        mono: ["'JetBrains Mono'", "ui-monospace", "monospace"],
       },
       borderRadius: { DEFAULT: "3px", sm: "2px", md: "4px" },
     },

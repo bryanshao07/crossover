@@ -37,7 +37,7 @@ export default function PlayerProfilePage() {
       <section>
         <h2 className="font-mono text-xs text-white/50 mb-3 uppercase">Top cross-sport matches</h2>
         <div className="grid gap-3">
-          {matches.slice(0, 5).map((m) => <MatchCard key={m.name} match={m} />)}
+          {matches.slice(0, 5).map((m) => <MatchCard key={m.name} match={m} playerA={player.name} />)}
         </div>
       </section>
     </div>

@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s -m 2 http://localhost:8000/players)",
+      "Bash(curl -s -m 2 http://localhost:5173)",
+      "Bash(curl -s -m 2 http://localhost:5174)",
+      "Bash([ -f \"$CHROME\" ])",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --window-size=1680,945 --screenshot=/tmp/crossover_home.png --virtual-time-budget=6000 http://localhost:5173)",
+      "Read(//tmp/**)",
+      "Read(//private/tmp/**)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --window-size=1680,945 --screenshot=/tmp/crossover_home2.png --virtual-time-budget=7000 http://localhost:5174)",
+      "Bash(curl -s -m 3 http://localhost:8000/players)",
+      "Bash(echo \"started pid $!\")",
+      "Bash(curl -s -m 3 http://localhost:5180)"
+    ]
+  }
+}

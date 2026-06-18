@@ -4,9 +4,12 @@ import Avatar from "../ui/Avatar";
 import SportBadge from "../ui/SportBadge";
 import DnaLabel from "../ui/DnaLabel";
 
-export default function MatchCard({ match }) {
+export default function MatchCard({ match, playerA }) {
+  const to = playerA
+    ? `/compare/${encodeURIComponent(playerA)}/${encodeURIComponent(match.name)}`
+    : `/player/${encodeURIComponent(match.name)}`;
   return (
-    <Link to={`/player/${encodeURIComponent(match.name)}`} className="glass p-4 flex items-center gap-3 hover:border-accent/50">
+    <Link to={to} className="glass p-4 flex items-center gap-3 hover:border-accent/50">
       <Avatar sport={match.sport} />
       <div className="min-w-0">
         <div className="flex items-center gap-2">

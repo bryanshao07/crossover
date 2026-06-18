@@ -2,7 +2,14 @@ import { useEffect, useMemo, useState } from "react";
 import { usePlayers } from "../../hooks/usePlayers";
 import SportBadge from "../ui/SportBadge";
 
-export default function Autocomplete({ onSelect, sportFilter = "all", placeholder = "Search a player…" }) {
+export default function Autocomplete({
+  onSelect,
+  sportFilter = "all",
+  placeholder = "Search a player…",
+  size = "md",
+  leadingIcon = false,
+  kbd,
+}) {
   const { data: players = [] } = usePlayers();
   const [q, setQ] = useState("");
   const [highlighted, setHighlighted] = useState(-1);
@@ -39,8 +46,26 @@ export default function Autocomplete({ onSelect, sportFilter = "all", placeholde
     }
   }
 
+  const lg = size === "lg";
+
   return (
-    <div className="relative w-full max-w-xl">
+    <div className={`relative w-full ${lg ? "max-w-2xl" : "max-w-xl"}`}>
+      {leadingIcon && (
+        <svg
+          className={`pointer-events-none absolute top-1/2 -translate-y-1/2 text-white/40 ${
+            lg ? "left-5 w-5 h-5" : "left-3 w-4 h-4"
+          }`}
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <circle cx="11" cy="11" r="7" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </svg>
+      )}
       <input
         value={q}
         onChange={(e) => setQ(e.target.value)}
@@ -50,8 +75,21 @@ export default function Autocomplete({ onSelect, sportFilter = "all", placeholde
         aria-expanded={matches.length > 0}
         aria-autocomplete="list"
         aria-label="Search players"
-        className="w-full bg-white/5 border border-white/15 rounded px-4 py-3 outline-none focus:border-accent font-sans text-white placeholder-white/40"
+        className={`w-full bg-white/5 border border-white/15 rounded outline-none focus:border-accent font-sans text-white placeholder-white/40 ${
+          lg ? "text-lg py-4" : "py-3"
+        } ${leadingIcon ? (lg ? "pl-14" : "pl-10") : lg ? "pl-5" : "px-4"} ${
+          kbd ? (lg ? "pr-20" : "pr-16") : lg ? "pr-5" : "px-4"
+        }`}
       />
+      {kbd && (
+        <span
+          className={`pointer-events-none absolute top-1/2 -translate-y-1/2 font-mono text-xs text-white/40 border border-white/15 rounded-sm px-2 py-0.5 ${
+            lg ? "right-5" : "right-3"
+          }`}
+        >
+          {kbd}
+        </span>
+      )}
       {matches.length > 0 && (
         <ul role="listbox" className="absolute z-50 mt-1 w-full glass max-h-80 overflow-auto">
           {matches.map((p, index) => (
