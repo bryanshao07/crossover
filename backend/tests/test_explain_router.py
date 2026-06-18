@@ -20,3 +20,4 @@ def test_explain_returns_bullets_without_api_key(monkeypatch):
 
 def test_explain_unknown_404():
     assert client.get("/explain/Amen Thompson/Nobody XYZ").status_code == 404
+    assert client.get("/explain/Nobody XYZ/Amen Thompson").status_code == 404
