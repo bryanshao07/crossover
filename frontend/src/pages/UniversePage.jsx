@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUniverse } from "../hooks/useUniverse";
 import UniverseScene from "../components/universe/UniverseScene";
@@ -24,10 +24,15 @@ export default function UniversePage() {
     [data, sport, query]
   );
 
-  const onHover = (p, e) => {
+  const onHover = useCallback((p, e) => {
     setHovered(p);
     if (e) setPos({ x: e.clientX, y: e.clientY });
-  };
+  }, []);
+
+  const onSelect = useCallback(
+    (n) => navigate(`/player/${encodeURIComponent(n)}`),
+    [navigate]
+  );
 
   return (
     <div className="relative h-[calc(100vh-3.5rem)]">
@@ -43,7 +48,7 @@ export default function UniversePage() {
         points={points}
         colorBy={colorBy}
         onHover={onHover}
-        onSelect={(n) => navigate(`/player/${encodeURIComponent(n)}`)}
+        onSelect={onSelect}
       />
       <HoverTooltip hovered={hovered} x={pos.x} y={pos.y} />
     </div>
