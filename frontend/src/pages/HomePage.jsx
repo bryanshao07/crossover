@@ -3,18 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { useQueries } from "@tanstack/react-query";
 import ParticleField from "../components/universe/ParticleField";
 import Autocomplete from "../components/search/Autocomplete";
-import FilterPill from "../components/ui/FilterPill";
 import FeaturedCard from "../components/cards/FeaturedCard";
 import { usePlayers } from "../hooks/usePlayers";
 import { api } from "../api/client";
 
 const FEATURED_NBA = ["Nikola Jokić", "Stephen Curry", "Giannis Antetokounmpo"];
-
-const SPORTS = [
-  { key: "all", label: "All Players", color: "#e8ff47" },
-  { key: "basketball", label: "NBA", color: "#4a7fff" },
-  { key: "soccer", label: "Soccer", color: "#39d353" },
-];
 
 function FeaturedStack() {
   const results = useQueries({
@@ -55,7 +48,7 @@ export default function HomePage() {
   const navigate = useNavigate();
   const [sport, setSport] = useState("all");
   return (
-    <div className="relative min-h-[calc(100vh-4rem)] flex flex-col items-center justify-center px-6">
+    <div className="relative h-[calc(100vh-4rem)] overflow-hidden flex flex-col items-center justify-start pt-[9vh] px-6">
       <ParticleField />
 
       <img src="/logo.png" alt="CrossOver" className="relative z-10 h-24 w-24 mb-3" />
@@ -66,23 +59,16 @@ export default function HomePage() {
         Don&apos;t know soccer? Find your player.
       </p>
 
-      <div className="relative z-10 w-full flex justify-center">
+      <div className="relative z-30 w-full flex justify-center">
         <Autocomplete
-          sportFilter={sport}
           size="lg"
           leadingIcon
           kbd="⌘ K"
+          sportFilter={sport}
+          onSportChange={setSport}
           placeholder="Search any NBA or soccer player..."
           onSelect={(name) => navigate(`/player/${encodeURIComponent(name)}`)}
         />
-      </div>
-
-      <div className="relative z-10 flex gap-2 mt-5">
-        {SPORTS.map((s) => (
-          <FilterPill key={s.key} active={sport === s.key} color={s.color} onClick={() => setSport(s.key)}>
-            {s.label}
-          </FilterPill>
-        ))}
       </div>
 
       <Legend />
