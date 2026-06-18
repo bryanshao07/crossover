@@ -1,2 +1,8 @@
 exports/sim_matrix.csv
 data
+backend/.env
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
