@@ -36,11 +36,6 @@ export default function Autocomplete({
       .slice(0, 8);
   }, [q, players, sportFilter]);
 
-  // Reset highlight whenever query or matches change
-  useEffect(() => {
-    setHighlighted(-1);
-  }, [q, matches]);
-
   // Close the sport filter menu when clicking outside of it
   useEffect(() => {
     if (!filterOpen) return;
@@ -54,6 +49,7 @@ export default function Autocomplete({
 
   function clearQuery() {
     setQ("");
+    setHighlighted(-1);
     inputRef.current?.focus();
   }
 
@@ -82,10 +78,12 @@ export default function Autocomplete({
       if (highlighted >= 0) {
         e.preventDefault();
         setQ("");
+        setHighlighted(-1);
         onSelect(matches[highlighted].name);
       }
     } else if (e.key === "Escape") {
       setQ("");
+      setHighlighted(-1);
     }
   }
 
@@ -114,7 +112,10 @@ export default function Autocomplete({
         <input
           ref={inputRef}
           value={q}
-          onChange={(e) => setQ(e.target.value)}
+          onChange={(e) => {
+            setQ(e.target.value);
+            setHighlighted(-1);
+          }}
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
           role="combobox"
@@ -162,9 +163,15 @@ export default function Autocomplete({
                   <polyline points="6 9 12 15 18 9" />
                 </svg>
               </button>
-              {filterOpen && (
-                <ul className="absolute right-0 top-full z-[60] mt-2 min-w-[10rem] glass py-1">
-                  {SPORT_OPTIONS.map((s) => (
+              <ul
+                className={`absolute right-0 top-full z-[60] mt-2 min-w-[10rem] glass py-1 origin-top-right transition-all duration-150 ease-out ${
+                  filterOpen
+                    ? "opacity-100 scale-100 translate-y-0 pointer-events-auto"
+                    : "opacity-0 scale-95 -translate-y-1 pointer-events-none"
+                }`}
+                aria-hidden={!filterOpen}
+              >
+                {SPORT_OPTIONS.map((s) => (
                     <li key={s.key}>
                       <button
                         type="button"
@@ -189,8 +196,7 @@ export default function Autocomplete({
                       </button>
                     </li>
                   ))}
-                </ul>
-              )}
+              </ul>
             </div>
           )}
 
@@ -242,6 +248,7 @@ export default function Autocomplete({
               <button
                 onClick={() => {
                   setQ("");
+                  setHighlighted(-1);
                   onSelect(p.name);
                 }}
                 onMouseEnter={() => setHighlighted(index)}
