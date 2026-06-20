@@ -15,6 +15,16 @@ class Player(BaseModel):
     versatility: float
     physical_dominance: float
     durability: float
+    # Snapshot fields — populated from nba-stats.csv / soccer-stats.csv
+    age: Optional[str] = None
+    team: Optional[str] = None
+    pos: Optional[str] = None
+    nation: Optional[str] = None
+    pts_per_game: Optional[float] = None
+    ast_per_game: Optional[float] = None
+    trb_per_game: Optional[float] = None
+    goals: Optional[float] = None
+    assists: Optional[float] = None
 
 
 class SimilarityMatch(BaseModel):
