@@ -9,9 +9,9 @@ export default function FeaturedCard({ a, b, similarity }) {
       className="glass px-3 py-3 w-44 flex flex-col items-center text-center hover:border-accent/50 transition-colors"
     >
       <div className="flex items-center justify-center gap-2 w-full">
-        <Avatar sport={a.sport} src={a.headshot_url} size={14} />
+        <Avatar sport={a.sport} src={a.headshot_url} size={24} />
         <span className="text-white/40 text-xs">×</span>
-        <Avatar sport={b.sport} src={b.headshot_url} size={14} />
+        <Avatar sport={b.sport} src={b.headshot_url} size={24} />
       </div>
       <div className="mt-1.5 flex items-start justify-center gap-2 w-full text-xs text-white/80">
         <span className="flex-1 min-w-0 truncate">{a.name}</span>

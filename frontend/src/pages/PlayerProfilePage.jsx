@@ -172,7 +172,7 @@ export default function PlayerProfilePage() {
     <div className="max-w-7xl mx-auto p-6 grid md:grid-cols-[5fr_4fr_5fr] gap-4">
       <section className="glass p-6">
         <div className="flex items-center gap-3 mb-3">
-          <Avatar sport={player.sport} src={player.headshot_url} size={56} />
+          <Avatar sport={player.sport} src={player.headshot_url} size={80} />
           <div>
             <h1 className="text-2xl font-bold">{player.name}</h1>
             <div className="flex items-center gap-2 mt-1">

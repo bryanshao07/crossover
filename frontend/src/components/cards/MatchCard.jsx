@@ -10,7 +10,7 @@ export default function MatchCard({ match, playerA }) {
     : `/player/${encodeURIComponent(match.name)}`;
   return (
     <Link to={to} className="glass p-4 flex items-center gap-3 hover:border-accent/50">
-      <Avatar sport={match.sport} src={match.headshot_url} />
+      <Avatar sport={match.sport} src={match.headshot_url} size={48} />
       <div className="min-w-0">
         <div className="flex items-center gap-2">
           <span className="truncate">{match.name}</span>
