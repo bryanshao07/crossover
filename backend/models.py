@@ -35,6 +35,7 @@ class SimilarityMatch(BaseModel):
     dna: str
     similarity: float
     quality: Optional[float] = None
+    headshot_url: Optional[str] = None
 
 
 class PlayerDetail(BaseModel):

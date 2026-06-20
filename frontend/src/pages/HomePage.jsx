@@ -18,7 +18,7 @@ function FeaturedStack() {
     <div className="hidden lg:flex absolute z-10 bottom-6 right-6 gap-3">
       {ready.map((r) => {
         const a = r.data.player, b = r.data.matches[0];
-        return <FeaturedCard key={a.name} a={a} b={{ name: b.name, sport: b.sport }} similarity={b.similarity} />;
+        return <FeaturedCard key={a.name} a={a} b={{ name: b.name, sport: b.sport, headshot_url: b.headshot_url }} similarity={b.similarity} />;
       })}
     </div>
   );
