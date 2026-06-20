@@ -20,7 +20,7 @@ export default function Avatar({ sport, src, size = 40 }) {
           src={src}
           alt=""
           onError={() => setImgError(true)}
-          className="absolute inset-0 w-full h-full object-cover"
+          className={`absolute inset-0 w-full h-full object-cover ${sport === "soccer" ? "object-top" : ""}`}
         />
       )}
     </div>
