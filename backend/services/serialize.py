@@ -19,6 +19,7 @@ def player_model(name: str) -> Optional[Player]:
 
     extra: dict = {}
     if base["sport"] == "basketball":
+        extra["headshot_url"] = ds.nba_headshot_url(name)
         row = ds.nba_stats(name)
         if row:
             g = _safe_float(row.get("G"))

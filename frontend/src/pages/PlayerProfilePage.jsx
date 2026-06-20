@@ -170,9 +170,9 @@ export default function PlayerProfilePage() {
   const { player, matches } = data;
   return (
     <div className="max-w-7xl mx-auto p-6 grid md:grid-cols-[5fr_4fr_5fr] gap-4">
-      <section className="glass p-6">
+      <section className="glass p-6 min-w-0">
         <div className="flex items-center gap-3 mb-3">
-          <Avatar sport={player.sport} size={56} />
+          <Avatar sport={player.sport} src={player.headshot_url} size={80} />
           <div>
             <h1 className="text-2xl font-bold">{player.name}</h1>
             <div className="flex items-center gap-2 mt-1">
@@ -181,19 +181,25 @@ export default function PlayerProfilePage() {
             </div>
           </div>
         </div>
-        <DnaLabel dna={player.dna} />
+        <div className="min-h-[3.75rem]">
+          <DnaLabel dna={player.dna} />
+        </div>
         <div className="mt-4">
           <RadarChart players={[{ name: player.name, color: SPORT_COLOR[player.sport], values: player }]} />
         </div>
       </section>
-      <div className="flex flex-col gap-4 h-full">
+      <div className="flex flex-col gap-4 h-full min-w-0">
         <AttributeScores player={player} />
         <PlayerSnapshot player={player} className="flex-1" />
       </div>
-      <section>
-        <h2 className="font-mono text-xs text-white/50 mb-3 uppercase">Top cross-sport matches</h2>
-        <div className="grid gap-3">
-          {matches.slice(0, 5).map((m) => <MatchCard key={m.name} match={m} playerA={player.name} />)}
+      <section className="glass p-6 min-w-0 flex flex-col">
+        <h2 className="font-mono text-xs text-white/50 mb-4 uppercase shrink-0">Top cross-sport matches</h2>
+        <div className="flex flex-col flex-1 gap-3">
+          {matches.slice(0, 5).map((m) => (
+            <div key={m.name} className="flex-1 min-h-0">
+              <MatchCard match={m} playerA={player.name} />
+            </div>
+          ))}
         </div>
       </section>
     </div>

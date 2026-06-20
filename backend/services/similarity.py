@@ -29,6 +29,7 @@ def top_matches(name: str, limit: int = 10) -> List[SimilarityMatch]:
             SimilarityMatch(
                 name=p["name"], sport=p["sport"], position=p["position"],
                 dna=p["dna"], similarity=sim, quality=ds.quality(p["name"]),
+                headshot_url=ds.nba_headshot_url(p["name"]) if p["sport"] == "basketball" else None,
             )
         )
     return out

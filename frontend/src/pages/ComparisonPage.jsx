@@ -13,7 +13,7 @@ function Column({ p }) {
   return (
     <div className="glass p-5 flex-1">
       <div className="flex items-center gap-3">
-        <Avatar sport={p.sport} size={48} />
+        <Avatar sport={p.sport} src={p.headshot_url} size={64} />
         <div>
           <div className="font-bold">{p.name}</div>
           <div className="flex items-center gap-2 mt-1">

@@ -25,6 +25,7 @@ _pct: Dict[str, Dict[str, float]] = {}  # sport -> {name -> {col: val}}
 _sim: Optional[pd.DataFrame] = None
 _nba_stats: Dict[str, dict] = {}
 _soccer_stats: Dict[str, dict] = {}
+_nba_id_map: Dict[str, int] = {}
 _loaded = False
 
 
@@ -43,7 +44,7 @@ def _load_pct(filename: str) -> Dict[str, Dict[str, float]]:
 
 
 def load() -> None:
-    global _index, _index_by_name, _vectors, _umap, _quality, _pct, _sim, _nba_stats, _soccer_stats, _loaded
+    global _index, _index_by_name, _vectors, _umap, _quality, _pct, _sim, _nba_stats, _soccer_stats, _nba_id_map, _loaded
     if _loaded:
         return
 
@@ -79,6 +80,8 @@ def load() -> None:
         name = str(row["Player"]).strip()
         if name not in _soccer_stats:
             _soccer_stats[name] = row.to_dict()
+
+    _nba_id_map = _read_json("nba_id_map.json")
 
     _loaded = True
 
@@ -123,3 +126,10 @@ def nba_stats(name: str) -> dict:
 
 def soccer_stats(name: str) -> dict:
     return _soccer_stats.get(name, {})
+
+
+def nba_headshot_url(name: str) -> Optional[str]:
+    nba_id = _nba_id_map.get(name)
+    if nba_id is None:
+        return None
+    return f"https://cdn.nba.com/headshots/nba/latest/260x190/{nba_id}.png"

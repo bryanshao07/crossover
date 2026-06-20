@@ -9,17 +9,11 @@ import {
 } from "recharts";
 import { ATTRIBUTES } from "../../lib/attributes";
 
-// Values are min-max scaled 0-1. A power < 1 expands the low/center range
-// outward so the filled area reads larger without distorting the true rating.
-const SCALE_EXP = 0.5;
-
 function makeTick(players, byLabel, showNumbers) {
   return function AxisTick({ x, y, cx, cy, payload }) {
     const row = byLabel[payload.value] || {};
-    // push the text block well away from the center so it clears the polygon,
-    // and center each block horizontally on its axis point
-    const ox = x + (x - cx) * 0.16;
-    const oy = y + (y - cy) * 0.16;
+    const ox = x + (x - cx) * 0.3;
+    const oy = y + (y - cy) * 0.3;
     return (
       <g>
         <text
@@ -92,8 +86,8 @@ export default function RadarChart({ players }) {
     const row = { attr: label };
     players.forEach((p, i) => {
       const raw = p.values[key] ?? 0;
-      row[`v${i}`] = Math.pow(raw, SCALE_EXP); // plotted (expanded) value
-      row[`raw${i}`] = raw; // true rating
+      row[`v${i}`] = raw;
+      row[`raw${i}`] = raw;
     });
     byLabel[label] = row;
     return row;

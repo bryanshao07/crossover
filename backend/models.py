@@ -25,6 +25,7 @@ class Player(BaseModel):
     trb_per_game: Optional[float] = None
     goals: Optional[float] = None
     assists: Optional[float] = None
+    headshot_url: Optional[str] = None
 
 
 class SimilarityMatch(BaseModel):
@@ -34,6 +35,7 @@ class SimilarityMatch(BaseModel):
     dna: str
     similarity: float
     quality: Optional[float] = None
+    headshot_url: Optional[str] = None
 
 
 class PlayerDetail(BaseModel):
