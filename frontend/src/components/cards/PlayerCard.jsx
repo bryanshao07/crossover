@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Avatar from "../ui/Avatar";
 import SportBadge from "../ui/SportBadge";
 import DnaLabel from "../ui/DnaLabel";
 import { SPORT_COLOR } from "../../lib/attributes";
@@ -18,6 +19,7 @@ export default function PlayerCard({ player }) {
   return (
     <div className="glass flex flex-col overflow-hidden p-4 transition-colors hover:border-accent/50">
       <div className="flex gap-4">
+        <Avatar sport={player.sport} src={player.headshot_url} size={36} />
         <div className="min-w-0 flex-1">
           <div className="truncate text-lg font-bold">{player.name}</div>
           <div className="mt-1 flex items-center gap-2">
