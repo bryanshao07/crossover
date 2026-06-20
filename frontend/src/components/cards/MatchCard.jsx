@@ -9,17 +9,17 @@ export default function MatchCard({ match, playerA }) {
     ? `/compare/${encodeURIComponent(playerA)}/${encodeURIComponent(match.name)}`
     : `/player/${encodeURIComponent(match.name)}`;
   return (
-    <Link to={to} className="glass p-4 flex items-center gap-3 hover:border-accent/50">
+    <Link to={to} className="glass p-4 flex items-center gap-3 hover:border-accent/50 overflow-hidden h-full">
       <Avatar sport={match.sport} src={match.headshot_url} size={48} />
-      <div className="min-w-0">
-        <div className="flex items-center gap-2">
-          <span className="truncate">{match.name}</span>
-          <SportBadge sport={match.sport} />
-          <span className="text-white/40 font-mono text-xs">{match.position}</span>
+      <div className="min-w-0 flex-1 overflow-hidden">
+        <div className="flex items-center gap-2 min-w-0">
+          <span className="truncate font-medium">{match.name}</span>
+          <SportBadge sport={match.sport} className="shrink-0" />
+          <span className="text-white/40 font-mono text-xs shrink-0">{match.position}</span>
         </div>
-        <DnaLabel dna={match.dna} className="text-xs" />
+        <DnaLabel dna={match.dna} className="text-xs truncate block" />
       </div>
-      <span className="ml-auto font-mono text-accent text-lg">{pct(match.similarity)}</span>
+      <span className="shrink-0 font-mono text-accent text-lg">{pct(match.similarity)}</span>
     </Link>
   );
 }

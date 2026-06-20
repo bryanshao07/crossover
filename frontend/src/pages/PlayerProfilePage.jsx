@@ -192,10 +192,14 @@ export default function PlayerProfilePage() {
         <AttributeScores player={player} />
         <PlayerSnapshot player={player} className="flex-1" />
       </div>
-      <section className="glass p-6 min-w-0">
-        <h2 className="font-mono text-xs text-white/50 mb-3 uppercase">Top cross-sport matches</h2>
-        <div className="grid gap-3">
-          {matches.slice(0, 5).map((m) => <MatchCard key={m.name} match={m} playerA={player.name} />)}
+      <section className="glass p-6 min-w-0 flex flex-col">
+        <h2 className="font-mono text-xs text-white/50 mb-4 uppercase shrink-0">Top cross-sport matches</h2>
+        <div className="flex flex-col flex-1 gap-3">
+          {matches.slice(0, 5).map((m) => (
+            <div key={m.name} className="flex-1 min-h-0">
+              <MatchCard match={m} playerA={player.name} />
+            </div>
+          ))}
         </div>
       </section>
     </div>
