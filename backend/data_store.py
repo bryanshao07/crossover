@@ -23,6 +23,8 @@ _umap: List[dict] = []
 _quality: Dict[str, float] = {}
 _pct: Dict[str, Dict[str, float]] = {}  # sport -> {name -> {col: val}}
 _sim: Optional[pd.DataFrame] = None
+_nba_stats: Dict[str, dict] = {}
+_soccer_stats: Dict[str, dict] = {}
 _loaded = False
 
 
@@ -41,7 +43,7 @@ def _load_pct(filename: str) -> Dict[str, Dict[str, float]]:
 
 
 def load() -> None:
-    global _index, _index_by_name, _vectors, _umap, _quality, _pct, _sim, _loaded
+    global _index, _index_by_name, _vectors, _umap, _quality, _pct, _sim, _nba_stats, _soccer_stats, _loaded
     if _loaded:
         return
 
@@ -65,6 +67,18 @@ def load() -> None:
     }
 
     _sim = pd.read_csv(Path(settings.exports_dir) / "sim_matrix.csv", index_col=0)
+
+    nba_df = pd.read_csv(Path(settings.exports_dir) / "nba-stats.csv")
+    for _, row in nba_df.iterrows():
+        name = str(row["Player"]).strip()
+        if name not in _nba_stats:
+            _nba_stats[name] = row.to_dict()
+
+    soccer_df = pd.read_csv(Path(settings.exports_dir) / "soccer-stats.csv")
+    for _, row in soccer_df.iterrows():
+        name = str(row["Player"]).strip()
+        if name not in _soccer_stats:
+            _soccer_stats[name] = row.to_dict()
 
     _loaded = True
 
@@ -101,3 +115,11 @@ def sim_row(name: str) -> Optional["pd.Series"]:
     if _sim is None or name not in _sim.index:
         return None
     return _sim.loc[name]
+
+
+def nba_stats(name: str) -> dict:
+    return _nba_stats.get(name, {})
+
+
+def soccer_stats(name: str) -> dict:
+    return _soccer_stats.get(name, {})
