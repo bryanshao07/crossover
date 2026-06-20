@@ -26,6 +26,7 @@ _sim: Optional[pd.DataFrame] = None
 _nba_stats: Dict[str, dict] = {}
 _soccer_stats: Dict[str, dict] = {}
 _nba_id_map: Dict[str, int] = {}
+_pl_id_map: Dict[str, int] = {}
 _loaded = False
 
 
@@ -44,7 +45,7 @@ def _load_pct(filename: str) -> Dict[str, Dict[str, float]]:
 
 
 def load() -> None:
-    global _index, _index_by_name, _vectors, _umap, _quality, _pct, _sim, _nba_stats, _soccer_stats, _nba_id_map, _loaded
+    global _index, _index_by_name, _vectors, _umap, _quality, _pct, _sim, _nba_stats, _soccer_stats, _nba_id_map, _pl_id_map, _loaded
     if _loaded:
         return
 
@@ -82,6 +83,7 @@ def load() -> None:
             _soccer_stats[name] = row.to_dict()
 
     _nba_id_map = _read_json("nba_id_map.json")
+    _pl_id_map = _read_json("pl_id_map.json")
 
     _loaded = True
 
@@ -133,3 +135,10 @@ def nba_headshot_url(name: str) -> Optional[str]:
     if nba_id is None:
         return None
     return f"https://cdn.nba.com/headshots/nba/latest/260x190/{nba_id}.png"
+
+
+def pl_headshot_url(name: str) -> Optional[str]:
+    code = _pl_id_map.get(name)
+    if code is None:
+        return None
+    return f"https://resources.premierleague.com/premierleague/photos/players/110x140/p{code}.png"

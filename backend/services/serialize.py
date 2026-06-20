@@ -36,6 +36,7 @@ def player_model(name: str) -> Optional[Player]:
                 extra["ast_per_game"] = round(ast * mpg / 36, 1) if ast is not None and mpg is not None else None
                 extra["trb_per_game"] = round(trb * mpg / 36, 1) if trb is not None and mpg is not None else None
     else:
+        extra["headshot_url"] = ds.pl_headshot_url(name)
         row = ds.soccer_stats(name)
         if row:
             extra["age"] = str(row.get("Age", "")) or None

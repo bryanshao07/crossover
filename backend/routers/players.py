@@ -42,5 +42,8 @@ def search(
 
 def _with_attributes(row: dict) -> dict:
     vec = ds.vector(row["name"]) or {}
-    headshot = {"headshot_url": ds.nba_headshot_url(row["name"])} if row.get("sport") == "basketball" else {}
+    if row.get("sport") == "basketball":
+        headshot = {"headshot_url": ds.nba_headshot_url(row["name"])}
+    else:
+        headshot = {"headshot_url": ds.pl_headshot_url(row["name"])}
     return {**row, **{attr: vec.get(attr) for attr in ds.ATTRS}, **headshot}
