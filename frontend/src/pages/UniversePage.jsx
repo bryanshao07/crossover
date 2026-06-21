@@ -31,7 +31,7 @@ export default function UniversePage() {
             (sport === "all" || p.sport === sport) &&
             (!query || p.name.toLowerCase().includes(query.toLowerCase()))
         )
-        .map((p) => ({ ...p, x: p.x - centroid.x, y: p.y - centroid.y, z: p.z - centroid.z })),
+        .map((p) => ({ ...p, x: (p.x - centroid.x) * 2.2, y: (p.y - centroid.y) * 2.2, z: (p.z - centroid.z) * 2.2 })),
     [data, sport, query, centroid]
   );
 
