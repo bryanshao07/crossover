@@ -1,18 +1,18 @@
 import { useCallback, useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useUniverse } from "../hooks/useUniverse";
 import UniverseScene from "../components/universe/UniverseScene";
 import ControlPanel from "../components/universe/ControlPanel";
 import HoverTooltip from "../components/universe/HoverTooltip";
+import PlayerPopup from "../components/universe/PlayerPopup";
 
 export default function UniversePage() {
   const { data = [] } = useUniverse();
-  const navigate = useNavigate();
   const [query, setQuery] = useState("");
   const [sport, setSport] = useState("all");
   const [colorBy, setColorBy] = useState("sport");
   const [hovered, setHovered] = useState(null);
   const [pos, setPos] = useState({ x: 0, y: 0 });
+  const [selectedPlayer, setSelectedPlayer] = useState(null);
 
   const centroid = useMemo(() => {
     if (!data.length) return { x: 0, y: 0, z: 0 };
@@ -40,10 +40,7 @@ export default function UniversePage() {
     if (e) setPos({ x: e.clientX, y: e.clientY });
   }, []);
 
-  const onSelect = useCallback(
-    (n) => navigate(`/player/${encodeURIComponent(n)}`),
-    [navigate]
-  );
+  const onSelect = useCallback((n) => setSelectedPlayer(n), []);
 
   return (
     <div className="relative h-[calc(100vh-3.5rem)]">
@@ -66,6 +63,9 @@ export default function UniversePage() {
         onSelect={onSelect}
       />
       <HoverTooltip hovered={hovered} x={pos.x} y={pos.y} />
+      {selectedPlayer && (
+        <PlayerPopup playerName={selectedPlayer} onClose={() => setSelectedPlayer(null)} />
+      )}
     </div>
   );
 }

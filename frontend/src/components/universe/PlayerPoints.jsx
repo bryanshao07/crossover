@@ -101,6 +101,7 @@ function HighlightedPoint({ player, colorBy, glowTexture, onHover, onSelect }) {
       <Html
         position={[dotScale * 0.8, dotScale * 0.4, 0]}
         occlude={false}
+        zIndexRange={[40, 0]}
       >
         <div
           onClick={() => onSelect(player.name)}
