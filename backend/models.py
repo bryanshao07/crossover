@@ -52,6 +52,7 @@ class UMAPPlayer(BaseModel):
     z: float
     dominant_attr: Optional[str] = None
     dna: str
+    quality: Optional[float] = None
 
 
 class CompareResult(BaseModel):

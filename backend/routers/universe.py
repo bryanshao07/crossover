@@ -10,4 +10,4 @@ router = APIRouter()
 
 @router.get("/universe", response_model=List[UMAPPlayer])
 def universe() -> List[UMAPPlayer]:
-    return [UMAPPlayer(**row) for row in ds.umap()]
+    return [UMAPPlayer(**row, quality=ds.quality(row["name"])) for row in ds.umap()]

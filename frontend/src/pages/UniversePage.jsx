@@ -14,14 +14,25 @@ export default function UniversePage() {
   const [hovered, setHovered] = useState(null);
   const [pos, setPos] = useState({ x: 0, y: 0 });
 
+  const centroid = useMemo(() => {
+    if (!data.length) return { x: 0, y: 0, z: 0 };
+    const sum = data.reduce(
+      (acc, p) => ({ x: acc.x + p.x, y: acc.y + p.y, z: acc.z + p.z }),
+      { x: 0, y: 0, z: 0 }
+    );
+    return { x: sum.x / data.length, y: sum.y / data.length, z: sum.z / data.length };
+  }, [data]);
+
   const points = useMemo(
     () =>
-      data.filter(
-        (p) =>
-          (sport === "all" || p.sport === sport) &&
-          (!query || p.name.toLowerCase().includes(query.toLowerCase()))
-      ),
-    [data, sport, query]
+      data
+        .filter(
+          (p) =>
+            (sport === "all" || p.sport === sport) &&
+            (!query || p.name.toLowerCase().includes(query.toLowerCase()))
+        )
+        .map((p) => ({ ...p, x: p.x - centroid.x, y: p.y - centroid.y, z: p.z - centroid.z })),
+    [data, sport, query, centroid]
   );
 
   const onHover = useCallback((p, e) => {
@@ -36,6 +47,10 @@ export default function UniversePage() {
 
   return (
     <div className="relative h-[calc(100vh-3.5rem)]">
+      <div
+        className="absolute inset-0 pointer-events-none z-0"
+        style={{ background: "radial-gradient(ellipse 65% 65% at 50% 50%, rgba(255,255,255,0.055) 0%, transparent 100%)" }}
+      />
       <ControlPanel
         query={query}
         setQuery={setQuery}
