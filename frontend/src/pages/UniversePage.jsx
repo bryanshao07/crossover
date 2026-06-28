@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useState } from "react";
 import { useUniverse } from "../hooks/useUniverse";
+import { usePlayer } from "../hooks/usePlayer";
 import UniverseScene from "../components/universe/UniverseScene";
 import ControlPanel from "../components/universe/ControlPanel";
 import HoverTooltip from "../components/universe/HoverTooltip";
@@ -40,7 +41,23 @@ export default function UniversePage() {
     if (e) setPos({ x: e.clientX, y: e.clientY });
   }, []);
 
-  const onSelect = useCallback((n) => setSelectedPlayer(n), []);
+  const onSelect = useCallback((p) => setSelectedPlayer(p), []);
+
+  const { data: playerData } = usePlayer(selectedPlayer?.name);
+
+  const matchConnections = useMemo(() => {
+    if (!playerData || !selectedPlayer || !data.length) return [];
+    const allPoints = data.map((p) => ({
+      ...p,
+      x: (p.x - centroid.x) * 2.2,
+      y: (p.y - centroid.y) * 2.2,
+      z: (p.z - centroid.z) * 2.2,
+    }));
+    return (playerData.matches ?? []).slice(0, 5).flatMap((m) => {
+      const pt = allPoints.find((p) => p.name === m.name);
+      return pt ? [{ name: m.name, to: pt, similarity: m.similarity }] : [];
+    });
+  }, [playerData, selectedPlayer, data, centroid]);
 
   return (
     <div className="relative h-[calc(100vh-3.5rem)]">
@@ -61,10 +78,12 @@ export default function UniversePage() {
         colorBy={colorBy}
         onHover={onHover}
         onSelect={onSelect}
+        selectedPlayer={selectedPlayer}
+        matchConnections={matchConnections}
       />
       <HoverTooltip hovered={hovered} x={pos.x} y={pos.y} />
       {selectedPlayer && (
-        <PlayerPopup playerName={selectedPlayer} onClose={() => setSelectedPlayer(null)} />
+        <PlayerPopup playerName={selectedPlayer.name} onClose={() => setSelectedPlayer(null)} />
       )}
     </div>
   );

@@ -45,7 +45,7 @@ function qualityToScale(quality) {
   return 0.30 + t * 0.22;
 }
 
-function GlowPoint({ player, colorBy, glowTexture, onHover, onSelect }) {
+function GlowPoint({ player, colorBy, glowTexture, onHover, onSelect, isSelected }) {
   const spriteRef = useRef();
   const hoveredRef = useRef(false);
   const baseScale = useMemo(() => qualityToScale(player.quality), [player.quality]);
@@ -55,13 +55,16 @@ function GlowPoint({ player, colorBy, glowTexture, onHover, onSelect }) {
 
   useFrame((state) => {
     if (!spriteRef.current) return;
-    if (hoveredRef.current) {
+    if (isSelected) {
+      const pulse = 1 + Math.sin(state.clock.elapsedTime * 4) * 0.12;
+      const s = baseScale * 3.2 * pulse;
+      spriteRef.current.scale.set(s, s, s);
+    } else if (hoveredRef.current) {
       const pulse = 1 + Math.sin(state.clock.elapsedTime * 6) * 0.15;
       const s = baseScale * 1.8 * pulse;
       spriteRef.current.scale.set(s, s, s);
     } else {
-      const s = baseScale;
-      spriteRef.current.scale.set(s, s, s);
+      spriteRef.current.scale.set(baseScale, baseScale, baseScale);
     }
   });
 
@@ -72,7 +75,7 @@ function GlowPoint({ player, colorBy, glowTexture, onHover, onSelect }) {
       scale={[baseScale, baseScale, baseScale]}
       onPointerOver={(e) => { e.stopPropagation(); hoveredRef.current = true; onHover(player, e); }}
       onPointerOut={(e) => { e.stopPropagation(); hoveredRef.current = false; onHover(null); }}
-      onClick={(e) => { e.stopPropagation(); onSelect(player.name); }}
+      onClick={(e) => { e.stopPropagation(); onSelect(player); }}
     >
       <spriteMaterial
         map={glowTexture}
@@ -85,7 +88,7 @@ function GlowPoint({ player, colorBy, glowTexture, onHover, onSelect }) {
   );
 }
 
-function HighlightedPoint({ player, colorBy, glowTexture, onHover, onSelect }) {
+function HighlightedPoint({ player, colorBy, glowTexture, onHover, onSelect, isSelected }) {
   const dotScale = useMemo(() => qualityToScale(player.quality), [player.quality]);
   const [labelHovered, setLabelHovered] = useState(false);
 
@@ -97,6 +100,7 @@ function HighlightedPoint({ player, colorBy, glowTexture, onHover, onSelect }) {
         glowTexture={glowTexture}
         onHover={onHover}
         onSelect={onSelect}
+        isSelected={isSelected}
       />
       <Html
         position={[dotScale * 0.8, dotScale * 0.4, 0]}
@@ -129,7 +133,7 @@ function HighlightedPoint({ player, colorBy, glowTexture, onHover, onSelect }) {
   );
 }
 
-export default function PlayerPoints({ points, colorBy, onHover, onSelect }) {
+export default function PlayerPoints({ points, colorBy, onHover, onSelect, selectedPlayerName }) {
   const glowTexture = useMemo(() => createGlowTexture(), []);
 
   return (
@@ -143,6 +147,7 @@ export default function PlayerPoints({ points, colorBy, onHover, onSelect }) {
             glowTexture={glowTexture}
             onHover={onHover}
             onSelect={onSelect}
+            isSelected={p.name === selectedPlayerName}
           />
         ) : (
           <GlowPoint
@@ -152,6 +157,7 @@ export default function PlayerPoints({ points, colorBy, onHover, onSelect }) {
             glowTexture={glowTexture}
             onHover={onHover}
             onSelect={onSelect}
+            isSelected={p.name === selectedPlayerName}
           />
         )
       )}
