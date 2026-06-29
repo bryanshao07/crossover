@@ -4,39 +4,73 @@ import { Canvas, useThree, useFrame } from "@react-three/fiber";
 import { OrbitControls, Line, Html, GizmoHelper } from "@react-three/drei";
 import PlayerPoints from "./PlayerPoints";
 
-const DEFAULT_TARGET = new THREE.Vector3(0, -2, 0);
-const DEFAULT_CAMERA = new THREE.Vector3(9, 8, 15.59);
+const DEFAULT_TARGET = new THREE.Vector3(0, 0, 0);
+const DEFAULT_CAMERA = new THREE.Vector3(8.1, 7, 14.0);
 
-// Far-back camera for background (homepage) mode
+// Background (homepage) mode
 const BG_TARGET = new THREE.Vector3(0, 0, 0);
-const BG_CAMERA = new THREE.Vector3(0, 10, 28);
+const BG_CAMERA = new THREE.Vector3(9, 8, 15.59);
 
 const CONN_COLORS = ["#ff6b9d", "#4af0c8", "#ffd44f", "#6bb5ff", "#ff9f43"];
 const SPORT_PILL_COLORS = { basketball: "#4a7fff", soccer: "#39d353" };
-function sportColor(sport) { return SPORT_PILL_COLORS[sport] ?? "#4a7fff"; }
+function sportColor(sport) {
+  return SPORT_PILL_COLORS[sport] ?? "#4a7fff";
+}
 
 function PlayerTooltip({ player, color }) {
   const sportLabel = player.sport === "basketball" ? "NBA" : "SOC";
   return (
-    <div style={{
-      position: "absolute", bottom: "calc(100% + 6px)", left: "50%",
-      transform: "translateX(-50%)", pointerEvents: "none", zIndex: 99999,
-      padding: "7px 10px", background: "rgba(10,10,15,0.95)",
-      border: `1px solid ${color}`, backdropFilter: "blur(8px)",
-      minWidth: 150, whiteSpace: "nowrap",
-    }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 6, fontFamily: "Inter, sans-serif", fontSize: 12, fontWeight: 600, color: "#fff" }}>
+    <div
+      style={{
+        position: "absolute",
+        bottom: "calc(100% + 6px)",
+        left: "50%",
+        transform: "translateX(-50%)",
+        pointerEvents: "none",
+        zIndex: 99999,
+        padding: "7px 10px",
+        background: "rgba(10,10,15,0.95)",
+        border: `1px solid ${color}`,
+        backdropFilter: "blur(8px)",
+        minWidth: 150,
+        whiteSpace: "nowrap",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: 6,
+          fontFamily: "Inter, sans-serif",
+          fontSize: 12,
+          fontWeight: 600,
+          color: "#fff",
+        }}
+      >
         {player.name}
-        <span style={{
-          fontFamily: "JetBrains Mono, monospace", fontSize: 10, fontWeight: 700,
-          color, border: `1px solid ${color}`, padding: "0 5px",
-          background: `${color}1a`,
-        }}>
+        <span
+          style={{
+            fontFamily: "JetBrains Mono, monospace",
+            fontSize: 10,
+            fontWeight: 700,
+            color,
+            border: `1px solid ${color}`,
+            padding: "0 5px",
+            background: `${color}1a`,
+          }}
+        >
           {sportLabel}
         </span>
       </div>
       {player.dna && (
-        <div style={{ fontFamily: "JetBrains Mono, monospace", fontSize: 10, color: "#e8ff47", marginTop: 4 }}>
+        <div
+          style={{
+            fontFamily: "JetBrains Mono, monospace",
+            fontSize: 10,
+            color: "#e8ff47",
+            marginTop: 4,
+          }}
+        >
           {player.dna}
         </div>
       )}
@@ -54,17 +88,32 @@ function ConnectionPill({ conn, onMatchClick }) {
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         style={{
-          display: "flex", alignItems: "center", gap: "5px",
-          fontFamily: "JetBrains Mono, monospace", fontSize: "10px", fontWeight: 600,
+          display: "flex",
+          alignItems: "center",
+          gap: "5px",
+          fontFamily: "JetBrains Mono, monospace",
+          fontSize: "10px",
+          fontWeight: 600,
           color: hovered ? "#0a0a0f" : color,
-          whiteSpace: "nowrap", padding: "2px 7px 2px 5px",
+          whiteSpace: "nowrap",
+          padding: "2px 7px 2px 5px",
           border: `1px solid ${color}88`,
           background: hovered ? color : "rgba(10,10,15,0.82)",
-          letterSpacing: "0.03em", userSelect: "none", cursor: "pointer",
+          letterSpacing: "0.03em",
+          userSelect: "none",
+          cursor: "pointer",
           transition: "background 0.12s, color 0.12s",
         }}
       >
-        <span style={{ width: 6, height: 6, borderRadius: "50%", background: hovered ? "#0a0a0f" : color, flexShrink: 0 }} />
+        <span
+          style={{
+            width: 6,
+            height: 6,
+            borderRadius: "50%",
+            background: hovered ? "#0a0a0f" : color,
+            flexShrink: 0,
+          }}
+        />
         {conn.name}
       </div>
       {hovered && <PlayerTooltip player={conn.to} color={color} />}
@@ -78,31 +127,100 @@ function BlenderGizmo({ hovered }) {
   const ARM_END = 42;
 
   const axes = [
-    { end: [0, 0, ARM_END], color: hovered ? "#b03030" : "#7a2020", lineColor: hovered ? "#7a2525" : "#3d1010", label: "Y" },
-    { end: [0, ARM_END, 0], color: hovered ? "#309030" : "#206620", lineColor: hovered ? "#1e6e1e" : "#103310", label: "Z" },
-    { end: [ARM_END, 0, 0], color: hovered ? "#3060c0" : "#203d80", lineColor: hovered ? "#1e3d80" : "#101e40", label: "X" },
+    {
+      end: [0, 0, ARM_END],
+      color: hovered ? "#b03030" : "#7a2020",
+      lineColor: hovered ? "#7a2525" : "#3d1010",
+      label: "Y",
+    },
+    {
+      end: [0, ARM_END, 0],
+      color: hovered ? "#309030" : "#206620",
+      lineColor: hovered ? "#1e6e1e" : "#103310",
+      label: "Z",
+    },
+    {
+      end: [ARM_END, 0, 0],
+      color: hovered ? "#3060c0" : "#203d80",
+      lineColor: hovered ? "#1e3d80" : "#101e40",
+      label: "X",
+    },
   ];
 
   const h = CUBE / 2;
   const boxEdges = [
-    [-h,-h,-h], [h,-h,-h],  [h,-h,-h], [h,-h,h],  [h,-h,h], [-h,-h,h],  [-h,-h,h], [-h,-h,-h],
-    [-h, h,-h], [h, h,-h],  [h, h,-h], [h, h, h],  [h, h, h], [-h, h, h],  [-h, h, h], [-h, h,-h],
-    [-h,-h,-h], [-h, h,-h],  [h,-h,-h], [h, h,-h],  [h,-h, h], [h, h, h],  [-h,-h, h], [-h, h, h],
+    [-h, -h, -h],
+    [h, -h, -h],
+    [h, -h, -h],
+    [h, -h, h],
+    [h, -h, h],
+    [-h, -h, h],
+    [-h, -h, h],
+    [-h, -h, -h],
+    [-h, h, -h],
+    [h, h, -h],
+    [h, h, -h],
+    [h, h, h],
+    [h, h, h],
+    [-h, h, h],
+    [-h, h, h],
+    [-h, h, -h],
+    [-h, -h, -h],
+    [-h, h, -h],
+    [h, -h, -h],
+    [h, h, -h],
+    [h, -h, h],
+    [h, h, h],
+    [-h, -h, h],
+    [-h, h, h],
   ];
 
   return (
     <group>
-      <Line points={boxEdges} color="#ffffff" transparent opacity={hovered ? 0.4 : 0.25} lineWidth={hovered ? 4 : 1} segments />
+      <Line
+        points={boxEdges}
+        color="#ffffff"
+        transparent
+        opacity={hovered ? 0.4 : 0.25}
+        lineWidth={hovered ? 4 : 1}
+        segments
+      />
       {axes.map(({ end, color, lineColor, label }) => (
         <group key={label}>
-          <Line points={[[0, 0, 0], end]} color={lineColor} lineWidth={hovered ? 3 : 0.8} />
+          <Line
+            points={[[0, 0, 0], end]}
+            color={lineColor}
+            lineWidth={hovered ? 3 : 0.8}
+          />
           <mesh position={end}>
             <sphereGeometry args={[SPHERE_R, 16, 16]} />
             <meshBasicMaterial color={color} />
           </mesh>
-          <Html position={end} center zIndexRange={[99, 0]} style={{ pointerEvents: "none" }}>
-            <div style={{ width: 16, height: 16, display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <span style={{ fontFamily: "Inter, sans-serif", fontSize: 10, fontWeight: 800, color: "#fff", userSelect: "none", lineHeight: 1 }}>
+          <Html
+            position={end}
+            center
+            zIndexRange={[99, 0]}
+            style={{ pointerEvents: "none" }}
+          >
+            <div
+              style={{
+                width: 16,
+                height: 16,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: "Inter, sans-serif",
+                  fontSize: 10,
+                  fontWeight: 800,
+                  color: "#fff",
+                  userSelect: "none",
+                  lineHeight: 1,
+                }}
+              >
                 {label}
               </span>
             </div>
@@ -168,7 +286,7 @@ function CameraRig({ selectedPlayer, resetZoomRef, mode }) {
         isAnimating.current = true;
       }
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mode]);
 
   // Zoom to selected player (active mode only)
@@ -180,7 +298,10 @@ function CameraRig({ selectedPlayer, resetZoomRef, mode }) {
       const pz = selectedPlayer.z;
       animTarget.current.set(px, py, pz);
       const dir = new THREE.Vector3()
-        .subVectors(camera.position, controlsRef.current?.target ?? DEFAULT_TARGET)
+        .subVectors(
+          camera.position,
+          controlsRef.current?.target ?? DEFAULT_TARGET,
+        )
         .normalize();
       animCamera.current.set(px, py, pz).addScaledVector(dir, ZOOM_DISTANCE);
     } else {
@@ -192,6 +313,9 @@ function CameraRig({ selectedPlayer, resetZoomRef, mode }) {
 
   useFrame(() => {
     if (!controlsRef.current) return;
+    // Slowly rotate in background mode; pause during lerp so they don't fight
+    controlsRef.current.autoRotate = mode === "background" && !isAnimating.current;
+    controlsRef.current.autoRotateSpeed = 0.4;
     if (isAnimating.current) {
       controlsRef.current.target.lerp(animTarget.current, 0.06);
       camera.position.lerp(animCamera.current, 0.06);
@@ -210,7 +334,7 @@ function CameraRig({ selectedPlayer, resetZoomRef, mode }) {
       ref={controlsRef}
       enableDamping
       enabled={mode === "active"}
-      target={[0, -2, 0]}
+      target={[0, 2, 0]}
     />
   );
 }
@@ -233,20 +357,28 @@ function EdgeProjector({ selectedPlayer, matchConnections, onEdgeUpdate }) {
     const margin = 52;
 
     const results = matchConnections.flatMap((conn) => {
-      const ndc = new THREE.Vector3(conn.to.x, conn.to.y, conn.to.z).project(camera);
+      const ndc = new THREE.Vector3(conn.to.x, conn.to.y, conn.to.z).project(
+        camera,
+      );
       const behindCamera = ndc.z > 1;
-      const rawX = (ndc.x + 1) / 2 * size.width;
-      const rawY = (-ndc.y + 1) / 2 * size.height;
+      const rawX = ((ndc.x + 1) / 2) * size.width;
+      const rawY = ((-ndc.y + 1) / 2) * size.height;
 
-      const onScreen = !behindCamera &&
-        rawX >= margin && rawX <= size.width - margin &&
-        rawY >= margin && rawY <= size.height - margin;
+      const onScreen =
+        !behindCamera &&
+        rawX >= margin &&
+        rawX <= size.width - margin &&
+        rawY >= margin &&
+        rawY <= size.height - margin;
 
       if (onScreen) return [];
 
       let dx = rawX - cx;
       let dy = rawY - cy;
-      if (behindCamera) { dx = -dx; dy = -dy; }
+      if (behindCamera) {
+        dx = -dx;
+        dy = -dy;
+      }
 
       const scale = Math.min(
         (cx - margin) / (Math.abs(dx) || 0.01),
@@ -254,17 +386,21 @@ function EdgeProjector({ selectedPlayer, matchConnections, onEdgeUpdate }) {
         1,
       );
 
-      return [{
-        name: conn.name,
-        x: cx + dx * scale,
-        y: cy + dy * scale,
-        sport: conn.to.sport,
-        dna: conn.to.dna,
-        similarity: conn.similarity,
-      }];
+      return [
+        {
+          name: conn.name,
+          x: cx + dx * scale,
+          y: cy + dy * scale,
+          sport: conn.to.sport,
+          dna: conn.to.dna,
+          similarity: conn.similarity,
+        },
+      ];
     });
 
-    const key = results.map(r => `${r.name}:${Math.round(r.x)}:${Math.round(r.y)}`).join("|");
+    const key = results
+      .map((r) => `${r.name}:${Math.round(r.x)}:${Math.round(r.y)}`)
+      .join("|");
     if (key !== prevKeyRef.current) {
       prevKeyRef.current = key;
       onEdgeUpdate(results);
@@ -285,7 +421,13 @@ function Connections({ selectedPlayer, matchConnections, onMatchClick }) {
         const to = [conn.to.x, conn.to.y, conn.to.z];
         return (
           <group key={conn.name}>
-            <Line points={[from, to]} color={lineColor} lineWidth={1.2} transparent opacity={0.55} />
+            <Line
+              points={[from, to]}
+              color={lineColor}
+              lineWidth={1.2}
+              transparent
+              opacity={0.55}
+            />
             <Html position={to} occlude={false} zIndexRange={[99, 0]}>
               <ConnectionPill conn={conn} onMatchClick={onMatchClick} />
             </Html>
@@ -311,7 +453,11 @@ export default function UniverseScene({
   return (
     <Canvas camera={{ position: [0, 10, 28], fov: 60 }}>
       <ambientLight />
-      <CameraRig selectedPlayer={selectedPlayer} resetZoomRef={resetZoomRef} mode={mode} />
+      <CameraRig
+        selectedPlayer={selectedPlayer}
+        resetZoomRef={resetZoomRef}
+        mode={mode}
+      />
       <Connections
         selectedPlayer={selectedPlayer}
         matchConnections={matchConnections ?? []}

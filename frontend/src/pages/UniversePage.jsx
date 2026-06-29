@@ -15,7 +15,7 @@ function EdgePill({ ind, onClick }) {
   const color = SPORT_PILL_COLORS[ind.sport] ?? "#4a7fff";
   const sportLabel = ind.sport === "basketball" ? "NBA" : "SOC";
   return (
-    <div className="absolute z-[9999]" style={{ left: ind.x, top: ind.y, transform: "translate(-50%, -50%)" }}>
+    <div className="absolute z-[9999] pointer-events-auto" style={{ left: ind.x, top: ind.y, transform: "translate(-50%, -50%)" }}>
       {hovered && (
         <div style={{
           position: "absolute", bottom: "calc(100% + 6px)", left: "50%",
@@ -84,7 +84,7 @@ export default function UniversePage() {
   }, [setUniverseMode]);
 
   return (
-    <div className="relative h-[calc(100vh-3.5rem)]">
+    <div className="relative h-[calc(100vh-3.5rem)] pointer-events-none">
       <div
         className="absolute inset-0 pointer-events-none z-0"
         style={{ background: "radial-gradient(ellipse 65% 65% at 50% 50%, rgba(255,255,255,0.055) 0%, transparent 100%)" }}
@@ -92,6 +92,7 @@ export default function UniversePage() {
 
       {/* Phase 4: ControlPanel drifts up into position */}
       <motion.div
+        className="pointer-events-auto"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.35, delay: 0.3, ease: EASE }}
@@ -115,7 +116,9 @@ export default function UniversePage() {
       <HoverTooltip hovered={hovered} x={pos.x} y={pos.y} />
 
       {selectedPlayer && (
-        <PlayerPopup playerName={selectedPlayer.name} onClose={() => setSelectedPlayer(null)} />
+        <div className="pointer-events-auto">
+          <PlayerPopup playerName={selectedPlayer.name} onClose={() => setSelectedPlayer(null)} />
+        </div>
       )}
     </div>
   );

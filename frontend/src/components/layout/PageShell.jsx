@@ -1,3 +1,4 @@
+import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import NavBar from "./NavBar";
 import UniverseScene from "../universe/UniverseScene";
@@ -46,7 +47,7 @@ function PersistentUniverse() {
       <motion.div
         className="absolute inset-0 pointer-events-none"
         style={{ background: "#0a0a0f" }}
-        animate={{ opacity: isActive ? 0 : 0.78 }}
+        animate={{ opacity: isActive ? 0 : 0.2 }}
         transition={{ duration: 0.6, ease: EASE }}
       />
     </div>
@@ -54,11 +55,21 @@ function PersistentUniverse() {
 }
 
 export default function PageShell({ children }) {
+  const { universeMode } = useTransition();
+  const { pathname } = useLocation();
+  const isActive = universeMode === "active";
+  const showUniverse = pathname === "/" || pathname === "/universe";
+
   return (
-    <div className="min-h-screen text-white" style={{ background: "transparent" }}>
-      <PersistentUniverse />
-      <div className="relative z-10 flex flex-col min-h-screen" style={{ background: "transparent" }}>
-        <NavBar />
+    <div className="min-h-screen text-white" style={{ background: "#0a0a0f" }}>
+      {showUniverse && <PersistentUniverse />}
+      <div
+        className="relative z-10 flex flex-col min-h-screen"
+        style={{ background: "transparent", pointerEvents: isActive ? "none" : "auto" }}
+      >
+        <div style={{ pointerEvents: "auto" }}>
+          <NavBar />
+        </div>
         <main className="flex-1">{children}</main>
       </div>
     </div>
