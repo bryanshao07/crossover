@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUniverse } from "../hooks/useUniverse";
 import { usePlayer } from "../hooks/usePlayer";
@@ -71,6 +71,7 @@ export default function UniversePage() {
   const [pos, setPos] = useState({ x: 0, y: 0 });
   const [selectedPlayer, setSelectedPlayer] = useState(null);
   const [edgeIndicators, setEdgeIndicators] = useState([]);
+  const resetZoomRef = useRef(null);
 
   const centroid = useMemo(() => {
     if (!data.length) return { x: 0, y: 0, z: 0 };
@@ -134,6 +135,8 @@ export default function UniversePage() {
         setSport={setSport}
         colorBy={colorBy}
         setColorBy={setColorBy}
+        onResetZoom={() => resetZoomRef.current?.()}
+        data={data}
       />
       <UniverseScene
         points={points}
@@ -144,6 +147,7 @@ export default function UniversePage() {
         matchConnections={matchConnections}
         onEdgeUpdate={setEdgeIndicators}
         onMatchClick={onMatchClick}
+        resetZoomRef={resetZoomRef}
       />
       {selectedPlayer && edgeIndicators.map((ind) => (
         <EdgePill key={ind.name} ind={ind} onClick={() => onMatchClick(ind.name)} />

@@ -74,9 +74,9 @@ function BlenderGizmo({ hovered }) {
   const ARM_END = 42;
 
   const axes = [
-    { end: [0, 0, ARM_END], color: "#ff4040", lineColor: "#7a2020", label: "Y" },
-    { end: [0, ARM_END, 0], color: "#40cc40", lineColor: "#206620", label: "Z" },
-    { end: [ARM_END, 0, 0], color: "#4080ff", lineColor: "#203d80", label: "X" },
+    { end: [0, 0, ARM_END], color: hovered ? "#b03030" : "#7a2020", lineColor: hovered ? "#7a2525" : "#3d1010", label: "Y" },
+    { end: [0, ARM_END, 0], color: hovered ? "#309030" : "#206620", lineColor: hovered ? "#1e6e1e" : "#103310", label: "Z" },
+    { end: [ARM_END, 0, 0], color: hovered ? "#3060c0" : "#203d80", lineColor: hovered ? "#1e3d80" : "#101e40", label: "X" },
   ];
 
   const h = CUBE / 2;
@@ -88,15 +88,15 @@ function BlenderGizmo({ hovered }) {
 
   return (
     <group>
-      <Line points={boxEdges} color="#ffffff" transparent opacity={0.6} lineWidth={hovered ? 4 : 2.5} segments />
+      <Line points={boxEdges} color="#ffffff" transparent opacity={hovered ? 0.4 : 0.25} lineWidth={hovered ? 4 : 1} segments />
       {axes.map(({ end, color, lineColor, label }) => (
         <group key={label}>
-          <Line points={[[0, 0, 0], end]} color={lineColor} lineWidth={hovered ? 3 : 1.5} />
+          <Line points={[[0, 0, 0], end]} color={lineColor} lineWidth={hovered ? 3 : 0.8} />
           <mesh position={end}>
             <sphereGeometry args={[SPHERE_R, 16, 16]} />
             <meshBasicMaterial color={color} />
           </mesh>
-          <Html position={end} center style={{ pointerEvents: "none" }}>
+          <Html position={end} center zIndexRange={[99, 0]} style={{ pointerEvents: "none" }}>
             <div style={{
               width: 16, height: 16,
               display: "flex", alignItems: "center", justifyContent: "center",
@@ -147,12 +147,22 @@ function GizmoOverlay() {
 
 const ZOOM_DISTANCE = 5;
 
-function CameraRig({ selectedPlayer }) {
+function CameraRig({ selectedPlayer, resetZoomRef }) {
   const { camera } = useThree();
   const controlsRef = useRef();
   const animTarget = useRef(DEFAULT_TARGET.clone());
   const animCamera = useRef(DEFAULT_CAMERA.clone());
   const isAnimating = useRef(false);
+
+  useEffect(() => {
+    if (resetZoomRef) {
+      resetZoomRef.current = () => {
+        animTarget.current.copy(DEFAULT_TARGET);
+        animCamera.current.copy(DEFAULT_CAMERA);
+        isAnimating.current = true;
+      };
+    }
+  }, [resetZoomRef]);
 
   useEffect(() => {
     if (selectedPlayer) {
@@ -266,7 +276,7 @@ function Connections({ selectedPlayer, matchConnections, onMatchClick }) {
         return (
           <group key={conn.name}>
             <Line points={[from, to]} color={lineColor} lineWidth={1.2} transparent opacity={0.55} />
-            <Html position={to} occlude={false} zIndexRange={[9999, 0]}>
+            <Html position={to} occlude={false} zIndexRange={[99, 0]}>
               <ConnectionPill conn={conn} onMatchClick={onMatchClick} />
             </Html>
           </group>
@@ -285,11 +295,12 @@ export default function UniverseScene({
   matchConnections,
   onEdgeUpdate,
   onMatchClick,
+  resetZoomRef,
 }) {
   return (
     <Canvas camera={{ position: [9, -2, 15.59], fov: 60 }}>
       <ambientLight />
-      <CameraRig selectedPlayer={selectedPlayer} />
+      <CameraRig selectedPlayer={selectedPlayer} resetZoomRef={resetZoomRef} />
       <Connections
         selectedPlayer={selectedPlayer}
         matchConnections={matchConnections ?? []}
