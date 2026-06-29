@@ -1,11 +1,11 @@
 import { useRef, useEffect, useState } from "react";
 import * as THREE from "three";
 import { Canvas, useThree, useFrame } from "@react-three/fiber";
-import { OrbitControls, Line, Html } from "@react-three/drei";
+import { OrbitControls, Line, Html, GizmoHelper } from "@react-three/drei";
 import PlayerPoints from "./PlayerPoints";
 
 const DEFAULT_TARGET = new THREE.Vector3(0, -2, 0);
-const DEFAULT_CAMERA = new THREE.Vector3(9, -2, 15.59);
+const DEFAULT_CAMERA = new THREE.Vector3(9, 8, 15.59);
 
 const CONN_COLORS = ["#ff6b9d", "#4af0c8", "#ffd44f", "#6bb5ff", "#ff9f43"];
 const SPORT_PILL_COLORS = { basketball: "#4a7fff", soccer: "#39d353" };
@@ -65,6 +65,83 @@ function ConnectionPill({ conn, onMatchClick }) {
       </div>
       {hovered && <PlayerTooltip player={conn.to} color={color} />}
     </div>
+  );
+}
+
+function BlenderGizmo({ hovered }) {
+  const SPHERE_R = 8;
+  const CUBE = 26;
+  const ARM_END = 42;
+
+  const axes = [
+    { end: [0, 0, ARM_END], color: "#ff4040", lineColor: "#7a2020", label: "Y" },
+    { end: [0, ARM_END, 0], color: "#40cc40", lineColor: "#206620", label: "Z" },
+    { end: [ARM_END, 0, 0], color: "#4080ff", lineColor: "#203d80", label: "X" },
+  ];
+
+  const h = CUBE / 2;
+  const boxEdges = [
+    [-h,-h,-h], [h,-h,-h],  [h,-h,-h], [h,-h,h],  [h,-h,h], [-h,-h,h],  [-h,-h,h], [-h,-h,-h],
+    [-h, h,-h], [h, h,-h],  [h, h,-h], [h, h, h],  [h, h, h], [-h, h, h],  [-h, h, h], [-h, h,-h],
+    [-h,-h,-h], [-h, h,-h],  [h,-h,-h], [h, h,-h],  [h,-h, h], [h, h, h],  [-h,-h, h], [-h, h, h],
+  ];
+
+  return (
+    <group>
+      <Line points={boxEdges} color="#ffffff" transparent opacity={0.6} lineWidth={hovered ? 4 : 2.5} segments />
+      {axes.map(({ end, color, lineColor, label }) => (
+        <group key={label}>
+          <Line points={[[0, 0, 0], end]} color={lineColor} lineWidth={hovered ? 3 : 1.5} />
+          <mesh position={end}>
+            <sphereGeometry args={[SPHERE_R, 16, 16]} />
+            <meshBasicMaterial color={color} />
+          </mesh>
+          <Html position={end} center style={{ pointerEvents: "none" }}>
+            <div style={{
+              width: 16, height: 16,
+              display: "flex", alignItems: "center", justifyContent: "center",
+            }}>
+              <span style={{
+                fontFamily: "Inter, sans-serif",
+                fontSize: 10,
+                fontWeight: 800,
+                color: "#fff",
+                userSelect: "none",
+                lineHeight: 1,
+              }}>
+                {label}
+              </span>
+            </div>
+          </Html>
+        </group>
+      ))}
+    </group>
+  );
+}
+
+function GizmoHoverDisc({ onHoverChange }) {
+  const set = (v) => onHoverChange(v);
+  return (
+    <group>
+      {/* Invisible hit area */}
+      <mesh
+        onPointerEnter={() => set(true)}
+        onPointerLeave={() => set(false)}
+      >
+        <circleGeometry args={[55, 32]} />
+        <meshBasicMaterial transparent opacity={0} depthWrite={false} />
+      </mesh>
+    </group>
+  );
+}
+
+function GizmoOverlay() {
+  const [hovered, setHovered] = useState(false);
+  return (
+    <>
+      <GizmoHoverDisc onHoverChange={setHovered} />
+      <BlenderGizmo hovered={hovered} />
+    </>
   );
 }
 
@@ -230,6 +307,9 @@ export default function UniverseScene({
         onSelect={onSelect}
         selectedPlayerName={selectedPlayer?.name}
       />
+      <GizmoHelper alignment="bottom-right" margin={[90, 90]}>
+        <GizmoOverlay />
+      </GizmoHelper>
     </Canvas>
   );
 }

@@ -91,8 +91,9 @@ export default function PlayerPopup({ playerName, onClose }) {
 
   return (
     <div
-      className="absolute right-20 top-8 z-50 w-80 pointer-events-auto overflow-hidden"
+      className="absolute right-20 top-8 w-80 pointer-events-auto overflow-hidden"
       style={{
+        zIndex: 100000,
         background: "rgba(10,10,15,0.92)",
         border: "1px solid rgba(255,255,255,0.1)",
         backdropFilter: "blur(16px)",
