@@ -1,12 +1,13 @@
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useUniverse } from "../hooks/useUniverse";
-import { usePlayer } from "../hooks/usePlayer";
-import UniverseScene from "../components/universe/UniverseScene";
+import { motion } from "framer-motion";
 import ControlPanel from "../components/universe/ControlPanel";
 import HoverTooltip from "../components/universe/HoverTooltip";
 import PlayerPopup from "../components/universe/PlayerPopup";
+import { useTransition } from "../context/TransitionContext";
+import { useUniverseContext } from "../context/UniverseContext";
 
+const EASE = [0.4, 0, 0.2, 1];
 const SPORT_PILL_COLORS = { basketball: "#4a7fff", soccer: "#39d353" };
 
 function EdgePill({ ind, onClick }) {
@@ -62,65 +63,25 @@ function EdgePill({ ind, onClick }) {
 }
 
 export default function UniversePage() {
-  const navigate = useNavigate();
-  const { data = [] } = useUniverse();
-  const [query, setQuery] = useState("");
-  const [sport, setSport] = useState("all");
-  const [colorBy, setColorBy] = useState("sport");
-  const [hovered, setHovered] = useState(null);
-  const [pos, setPos] = useState({ x: 0, y: 0 });
-  const [selectedPlayer, setSelectedPlayer] = useState(null);
-  const [edgeIndicators, setEdgeIndicators] = useState([]);
-  const resetZoomRef = useRef(null);
+  const { setUniverseMode } = useTransition();
+  const {
+    rawData,
+    query, setQuery,
+    sport, setSport,
+    colorBy, setColorBy,
+    selectedPlayer, setSelectedPlayer,
+    edgeIndicators,
+    hovered,
+    pos,
+    onMatchClick,
+    resetZoomRef,
+  } = useUniverseContext();
 
-  const centroid = useMemo(() => {
-    if (!data.length) return { x: 0, y: 0, z: 0 };
-    const sum = data.reduce(
-      (acc, p) => ({ x: acc.x + p.x, y: acc.y + p.y, z: acc.z + p.z }),
-      { x: 0, y: 0, z: 0 }
-    );
-    return { x: sum.x / data.length, y: sum.y / data.length, z: sum.z / data.length };
-  }, [data]);
-
-  const points = useMemo(
-    () =>
-      data
-        .filter(
-          (p) =>
-            (sport === "all" || p.sport === sport) &&
-            (!query || p.name.toLowerCase().includes(query.toLowerCase()))
-        )
-        .map((p) => ({ ...p, x: (p.x - centroid.x) * 2.2, y: (p.y - centroid.y) * 2.2, z: (p.z - centroid.z) * 2.2 })),
-    [data, sport, query, centroid]
-  );
-
-  const onHover = useCallback((p, e) => {
-    setHovered(p);
-    if (e) setPos({ x: e.clientX, y: e.clientY });
-  }, []);
-
-  const onSelect = useCallback((p) => setSelectedPlayer(p), []);
-
-  const onMatchClick = useCallback((matchName) => {
-    if (!selectedPlayer) return;
-    navigate(`/compare/${encodeURIComponent(selectedPlayer.name)}/${encodeURIComponent(matchName)}`);
-  }, [navigate, selectedPlayer]);
-
-  const { data: playerData } = usePlayer(selectedPlayer?.name);
-
-  const matchConnections = useMemo(() => {
-    if (!playerData || !selectedPlayer || !data.length) return [];
-    const allPoints = data.map((p) => ({
-      ...p,
-      x: (p.x - centroid.x) * 2.2,
-      y: (p.y - centroid.y) * 2.2,
-      z: (p.z - centroid.z) * 2.2,
-    }));
-    return (playerData.matches ?? []).slice(0, 5).flatMap((m) => {
-      const pt = allPoints.find((p) => p.name === m.name);
-      return pt ? [{ name: m.name, to: pt, similarity: m.similarity }] : [];
-    });
-  }, [playerData, selectedPlayer, data, centroid]);
+  // Activate the canvas on mount; restore background mode on unmount
+  useEffect(() => {
+    setUniverseMode("active");
+    return () => setUniverseMode("background");
+  }, [setUniverseMode]);
 
   return (
     <div className="relative h-[calc(100vh-3.5rem)]">
@@ -128,31 +89,31 @@ export default function UniversePage() {
         className="absolute inset-0 pointer-events-none z-0"
         style={{ background: "radial-gradient(ellipse 65% 65% at 50% 50%, rgba(255,255,255,0.055) 0%, transparent 100%)" }}
       />
-      <ControlPanel
-        query={query}
-        setQuery={setQuery}
-        sport={sport}
-        setSport={setSport}
-        colorBy={colorBy}
-        setColorBy={setColorBy}
-        onResetZoom={() => resetZoomRef.current?.()}
-        data={data}
-      />
-      <UniverseScene
-        points={points}
-        colorBy={colorBy}
-        onHover={onHover}
-        onSelect={onSelect}
-        selectedPlayer={selectedPlayer}
-        matchConnections={matchConnections}
-        onEdgeUpdate={setEdgeIndicators}
-        onMatchClick={onMatchClick}
-        resetZoomRef={resetZoomRef}
-      />
+
+      {/* Phase 4: ControlPanel drifts up into position */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.35, delay: 0.3, ease: EASE }}
+      >
+        <ControlPanel
+          query={query}
+          setQuery={setQuery}
+          sport={sport}
+          setSport={setSport}
+          colorBy={colorBy}
+          setColorBy={setColorBy}
+          onResetZoom={() => resetZoomRef.current?.()}
+          data={rawData}
+        />
+      </motion.div>
+
       {selectedPlayer && edgeIndicators.map((ind) => (
         <EdgePill key={ind.name} ind={ind} onClick={() => onMatchClick(ind.name)} />
       ))}
+
       <HoverTooltip hovered={hovered} x={pos.x} y={pos.y} />
+
       {selectedPlayer && (
         <PlayerPopup playerName={selectedPlayer.name} onClose={() => setSelectedPlayer(null)} />
       )}

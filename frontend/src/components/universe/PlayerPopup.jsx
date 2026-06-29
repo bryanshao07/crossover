@@ -95,7 +95,8 @@ export default function PlayerPopup({ playerName, onClose }) {
       style={{
         zIndex: 100000,
         background: "rgba(10,10,15,0.92)",
-        border: "1px solid rgba(255,255,255,0.1)",
+        border: `1px solid ${sportColor}55`,
+        boxShadow: `0 0 12px 1px ${sportColor}28, inset 0 0 8px 0px ${sportColor}0d`,
         backdropFilter: "blur(16px)",
         WebkitBackdropFilter: "blur(16px)",
         maxHeight: "calc(100% - 2.5rem)",

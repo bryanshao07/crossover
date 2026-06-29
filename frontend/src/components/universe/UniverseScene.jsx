@@ -7,6 +7,10 @@ import PlayerPoints from "./PlayerPoints";
 const DEFAULT_TARGET = new THREE.Vector3(0, -2, 0);
 const DEFAULT_CAMERA = new THREE.Vector3(9, 8, 15.59);
 
+// Far-back camera for background (homepage) mode
+const BG_TARGET = new THREE.Vector3(0, 0, 0);
+const BG_CAMERA = new THREE.Vector3(0, 10, 28);
+
 const CONN_COLORS = ["#ff6b9d", "#4af0c8", "#ffd44f", "#6bb5ff", "#ff9f43"];
 const SPORT_PILL_COLORS = { basketball: "#4a7fff", soccer: "#39d353" };
 function sportColor(sport) { return SPORT_PILL_COLORS[sport] ?? "#4a7fff"; }
@@ -97,18 +101,8 @@ function BlenderGizmo({ hovered }) {
             <meshBasicMaterial color={color} />
           </mesh>
           <Html position={end} center zIndexRange={[99, 0]} style={{ pointerEvents: "none" }}>
-            <div style={{
-              width: 16, height: 16,
-              display: "flex", alignItems: "center", justifyContent: "center",
-            }}>
-              <span style={{
-                fontFamily: "Inter, sans-serif",
-                fontSize: 10,
-                fontWeight: 800,
-                color: "#fff",
-                userSelect: "none",
-                lineHeight: 1,
-              }}>
+            <div style={{ width: 16, height: 16, display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <span style={{ fontFamily: "Inter, sans-serif", fontSize: 10, fontWeight: 800, color: "#fff", userSelect: "none", lineHeight: 1 }}>
                 {label}
               </span>
             </div>
@@ -123,11 +117,7 @@ function GizmoHoverDisc({ onHoverChange }) {
   const set = (v) => onHoverChange(v);
   return (
     <group>
-      {/* Invisible hit area */}
-      <mesh
-        onPointerEnter={() => set(true)}
-        onPointerLeave={() => set(false)}
-      >
+      <mesh onPointerEnter={() => set(true)} onPointerLeave={() => set(false)}>
         <circleGeometry args={[55, 32]} />
         <meshBasicMaterial transparent opacity={0} depthWrite={false} />
       </mesh>
@@ -147,11 +137,11 @@ function GizmoOverlay() {
 
 const ZOOM_DISTANCE = 5;
 
-function CameraRig({ selectedPlayer, resetZoomRef }) {
+function CameraRig({ selectedPlayer, resetZoomRef, mode }) {
   const { camera } = useThree();
   const controlsRef = useRef();
-  const animTarget = useRef(DEFAULT_TARGET.clone());
-  const animCamera = useRef(DEFAULT_CAMERA.clone());
+  const animTarget = useRef(BG_TARGET.clone());
+  const animCamera = useRef(BG_CAMERA.clone());
   const isAnimating = useRef(false);
 
   useEffect(() => {
@@ -164,17 +154,33 @@ function CameraRig({ selectedPlayer, resetZoomRef }) {
     }
   }, [resetZoomRef]);
 
+  // Animate camera when mode changes
   useEffect(() => {
+    if (mode === "background") {
+      animTarget.current.copy(BG_TARGET);
+      animCamera.current.copy(BG_CAMERA);
+      isAnimating.current = true;
+    } else {
+      // Only reset to default if no player is focused
+      if (!selectedPlayer) {
+        animTarget.current.copy(DEFAULT_TARGET);
+        animCamera.current.copy(DEFAULT_CAMERA);
+        isAnimating.current = true;
+      }
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mode]);
+
+  // Zoom to selected player (active mode only)
+  useEffect(() => {
+    if (mode !== "active") return;
     if (selectedPlayer) {
       const px = selectedPlayer.x;
       const py = selectedPlayer.y;
       const pz = selectedPlayer.z;
       animTarget.current.set(px, py, pz);
       const dir = new THREE.Vector3()
-        .subVectors(
-          camera.position,
-          controlsRef.current?.target ?? DEFAULT_TARGET,
-        )
+        .subVectors(camera.position, controlsRef.current?.target ?? DEFAULT_TARGET)
         .normalize();
       animCamera.current.set(px, py, pz).addScaledVector(dir, ZOOM_DISTANCE);
     } else {
@@ -182,7 +188,7 @@ function CameraRig({ selectedPlayer, resetZoomRef }) {
       animCamera.current.copy(DEFAULT_CAMERA);
     }
     isAnimating.current = true;
-  }, [selectedPlayer, camera]);
+  }, [selectedPlayer, camera, mode]);
 
   useFrame(() => {
     if (!controlsRef.current) return;
@@ -199,7 +205,14 @@ function CameraRig({ selectedPlayer, resetZoomRef }) {
     controlsRef.current.update();
   });
 
-  return <OrbitControls ref={controlsRef} enableDamping target={[0, -2, 0]} />;
+  return (
+    <OrbitControls
+      ref={controlsRef}
+      enableDamping
+      enabled={mode === "active"}
+      target={[0, -2, 0]}
+    />
+  );
 }
 
 function EdgeProjector({ selectedPlayer, matchConnections, onEdgeUpdate }) {
@@ -231,12 +244,10 @@ function EdgeProjector({ selectedPlayer, matchConnections, onEdgeUpdate }) {
 
       if (onScreen) return [];
 
-      // Direction from screen center to projected point; flip if behind camera
       let dx = rawX - cx;
       let dy = rawY - cy;
       if (behindCamera) { dx = -dx; dy = -dy; }
 
-      // Scale direction to touch the margin boundary
       const scale = Math.min(
         (cx - margin) / (Math.abs(dx) || 0.01),
         (cy - margin) / (Math.abs(dy) || 0.01),
@@ -253,7 +264,6 @@ function EdgeProjector({ selectedPlayer, matchConnections, onEdgeUpdate }) {
       }];
     });
 
-    // Only call setState when something actually moved (1px threshold)
     const key = results.map(r => `${r.name}:${Math.round(r.x)}:${Math.round(r.y)}`).join("|");
     if (key !== prevKeyRef.current) {
       prevKeyRef.current = key;
@@ -287,6 +297,7 @@ function Connections({ selectedPlayer, matchConnections, onMatchClick }) {
 }
 
 export default function UniverseScene({
+  mode = "active",
   points,
   colorBy,
   onHover,
@@ -298,9 +309,9 @@ export default function UniverseScene({
   resetZoomRef,
 }) {
   return (
-    <Canvas camera={{ position: [9, -2, 15.59], fov: 60 }}>
+    <Canvas camera={{ position: [0, 10, 28], fov: 60 }}>
       <ambientLight />
-      <CameraRig selectedPlayer={selectedPlayer} resetZoomRef={resetZoomRef} />
+      <CameraRig selectedPlayer={selectedPlayer} resetZoomRef={resetZoomRef} mode={mode} />
       <Connections
         selectedPlayer={selectedPlayer}
         matchConnections={matchConnections ?? []}
@@ -317,10 +328,13 @@ export default function UniverseScene({
         onHover={onHover}
         onSelect={onSelect}
         selectedPlayerName={selectedPlayer?.name}
+        mode={mode}
       />
-      <GizmoHelper alignment="bottom-right" margin={[90, 90]}>
-        <GizmoOverlay />
-      </GizmoHelper>
+      {mode === "active" && (
+        <GizmoHelper alignment="bottom-right" margin={[90, 90]}>
+          <GizmoOverlay />
+        </GizmoHelper>
+      )}
     </Canvas>
   );
 }

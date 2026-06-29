@@ -165,14 +165,14 @@ function HighlightedPoint({ player, colorBy, glowTexture, solidTexture, onHover,
   );
 }
 
-export default function PlayerPoints({ points, colorBy, onHover, onSelect, selectedPlayerName }) {
+export default function PlayerPoints({ points, colorBy, onHover, onSelect, selectedPlayerName, mode = "active" }) {
   const glowTexture = useMemo(() => createGlowTexture(), []);
   const solidTexture = useMemo(() => createSolidTexture(), []);
 
   return (
     <group>
       {points.map((p) =>
-        isHighlighted(p.name) ? (
+        mode === "active" && isHighlighted(p.name) ? (
           <HighlightedPoint
             key={p.name}
             player={p}
