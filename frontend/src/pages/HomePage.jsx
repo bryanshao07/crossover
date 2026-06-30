@@ -50,14 +50,15 @@ function Legend() {
 export default function HomePage() {
   const navigate = useNavigate();
   const [sport, setSport] = useState("all");
-  const { isTransitioning, startUniverseTransition } = useTransition();
+  const { universeMode, startUniverseTransition } = useTransition();
+  const leaving = universeMode === "active";
 
   return (
     <div className="relative h-[calc(100vh-4rem)] overflow-hidden flex flex-col items-center justify-start pt-[9vh] px-6">
       {/* Foreground content — fades out and drifts up during Phase 1 */}
       <motion.div
         className="relative z-10 flex flex-col items-center"
-        animate={isTransitioning ? { opacity: 0, y: -20 } : { opacity: 1, y: 0 }}
+        animate={leaving ? { opacity: 0, y: -20 } : { opacity: 1, y: 0 }}
         transition={{ duration: 0.3, delay: 0, ease: EASE }}
       >
         <img src="/logo.png" alt="CrossOver" className="h-24 w-24 mb-3" />
@@ -99,7 +100,7 @@ export default function HomePage() {
 
       {/* Absolute UI elements — fade out independently */}
       <motion.div
-        animate={isTransitioning ? { opacity: 0, y: -20 } : { opacity: 1, y: 0 }}
+        animate={leaving ? { opacity: 0, y: -20 } : { opacity: 1, y: 0 }}
         transition={{ duration: 0.3, delay: 0, ease: EASE }}
       >
         <Legend />
