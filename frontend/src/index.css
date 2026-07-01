@@ -15,3 +15,14 @@
     @apply border border-white/10 bg-white/5 backdrop-blur-md rounded;
   }
 }
+
+@keyframes rotateBorder {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+/* CCW mirror: starts at 43.2° so the bright-spot peak (338.4° into the
+   gradient) lands at 381.6° = 21.6°, the exact mirror of 338.4°. */
+@keyframes rotateBorderCCW {
+  from { transform: translate(-50%, -50%) rotate(43.2deg); }
+  to   { transform: translate(-50%, -50%) rotate(-316.8deg); }
+}

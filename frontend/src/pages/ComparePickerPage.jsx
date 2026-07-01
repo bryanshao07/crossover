@@ -21,61 +21,98 @@ function PickerPanel({
   selected,
   onSelect,
   onClear,
+  reverse,
 }) {
+  // A brighter tint of each sport color for the rotating highlight peak
+  const brightColor = color === "#4a7fff" ? "#a8c8ff" : "#7ff09a";
+
   return (
     <div
-      className="glass flex-1 p-5"
-      style={{ borderColor: color }}
+      className="flex-1 relative rounded flex flex-col"
+      style={{ padding: "1px" }}
     >
-      <div
-        className="font-mono text-xs font-semibold tracking-wider mb-3"
-        style={{ color }}
-      >
-        {label}
+      {/* Rotating border highlight — overflow:hidden clips the spinning gradient
+          to the panel's bounding box; the inner panel's solid bg masks the
+          interior, leaving only the 1px edge gap as the visible "border". */}
+      <div className="absolute inset-0 rounded overflow-hidden">
+        <div
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            width: "300%",
+            height: "300%",
+            background: `conic-gradient(
+              from 0deg,
+              ${color}30 0%,
+              ${color}30 78%,
+              ${color}80 85%,
+              ${brightColor} 91%,
+              #ffffffaa 94%,
+              ${brightColor} 97%,
+              ${color}80 99%,
+              ${color}30 100%
+            )`,
+            animation: `${reverse ? "rotateBorderCCW" : "rotateBorder"} 4s linear infinite`,
+          }}
+        />
       </div>
 
-      {selected ? (
-        <div
-          className="flex items-center gap-3 bg-black/80 border rounded px-4 py-3"
-          style={{ borderColor: color }}
-        >
-          <span className="font-sans text-white truncate">{selected}</span>
-          <button
-            type="button"
-            aria-label={`Clear ${label} selection`}
-            onClick={onClear}
-            className="ml-auto p-0.5 text-white/40 hover:text-white/90"
-          >
-            <svg
-              className="w-4 h-4"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <line x1="18" y1="6" x2="6" y2="18" />
-              <line x1="6" y1="6" x2="18" y2="18" />
-            </svg>
-          </button>
-        </div>
-      ) : (
-        <Autocomplete
-          sportFilter={sport}
-          placeholder={placeholder}
-          leadingIcon
-          onSelect={onSelect}
-        />
-      )}
-
-      <Link
-        to={browseTo}
-        className="inline-flex items-center gap-1.5 font-mono text-sm mt-4 hover:opacity-80"
-        style={{ color }}
+      {/* Inner panel — solid bg hides the gradient interior */}
+      <div
+        className="relative flex-1 p-5"
+        style={{ background: "#0c0c13", borderRadius: "3px" }}
       >
-        Browse players →
-      </Link>
+        <div
+          className="font-mono text-xs font-semibold tracking-wider mb-3"
+          style={{ color }}
+        >
+          {label}
+        </div>
+
+        {selected ? (
+          <div
+            className="flex items-center gap-3 bg-black/80 border rounded px-4 py-3"
+            style={{ borderColor: color }}
+          >
+            <span className="font-sans text-white truncate">{selected}</span>
+            <button
+              type="button"
+              aria-label={`Clear ${label} selection`}
+              onClick={onClear}
+              className="ml-auto p-0.5 text-white/40 hover:text-white/90"
+            >
+              <svg
+                className="w-4 h-4"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
+            </button>
+          </div>
+        ) : (
+          <Autocomplete
+            sportFilter={sport}
+            placeholder={placeholder}
+            leadingIcon
+            onSelect={onSelect}
+          />
+        )}
+
+        <Link
+          to={browseTo}
+          className="inline-flex items-center gap-1.5 font-mono text-sm mt-4 hover:opacity-80"
+          style={{ color }}
+        >
+          Browse players →
+        </Link>
+      </div>
     </div>
   );
 }
@@ -208,6 +245,7 @@ export default function ComparePickerPage() {
           selected={soccer}
           onSelect={setSoccer}
           onClear={() => setSoccer(null)}
+          reverse
         />
       </div>
 
