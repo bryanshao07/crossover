@@ -1,8 +1,9 @@
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useQueries } from "@tanstack/react-query";
 import Autocomplete from "../components/search/Autocomplete";
 import Skeleton from "../components/ui/Skeleton";
+import { BorderBeam } from "../components/ui/border-beam";
 import { api } from "../api/client";
 import { enc, pct } from "../lib/format";
 
@@ -23,14 +24,9 @@ function PickerPanel({
 }) {
   return (
     <div
-      className="flex-1 relative rounded flex flex-col"
-      style={{ padding: "1px" }}
+      className="h-full p-5"
+      style={{ background: "#0c0c13" }}
     >
-      {/* Inner panel — solid bg hides the gradient interior */}
-      <div
-        className="relative flex-1 p-5"
-        style={{ background: "#0c0c13", borderRadius: "3px" }}
-      >
         <div
           className="font-mono text-xs font-semibold tracking-wider mb-3"
           style={{ color }}
@@ -80,7 +76,6 @@ function PickerPanel({
         >
           Browse players →
         </Link>
-      </div>
     </div>
   );
 }
@@ -152,97 +147,6 @@ export default function ComparePickerPage() {
   const [soccer, setSoccer] = useState(null);
   const ready = Boolean(nba && soccer);
 
-  const containerRef = useRef(null);
-  const leftRef = useRef(null);
-  const rightRef = useRef(null);
-  const [pathD, setPathD] = useState("");
-  const geomRef = useRef({});
-  const [vsOffset, setVsOffset] = useState(null);
-
-  const recalcPath = useCallback(() => {
-    const container = containerRef.current;
-    const left = leftRef.current;
-    const right = rightRef.current;
-    if (!container || !left || !right) return;
-
-    const cb = container.getBoundingClientRect();
-    const lb = left.getBoundingClientRect();
-    const rb = right.getBoundingClientRect();
-
-    const lx = lb.left - cb.left;
-    const ly = lb.top - cb.top;
-    const lw = lb.width;
-    const lh = lb.height;
-    const rx = rb.left - cb.left;
-    const ry = rb.top - cb.top;
-    const rw = rb.width;
-    const rh = rb.height;
-
-    // Connector attachment points: horizontal center of each panel's inner edge.
-    const lrx = lx + lw; // NBA right edge x
-    const lcy = ly + lh / 2; // NBA right-center y
-    const rlx = rx; // Soccer left edge x
-    const rcy = ry + rh / 2; // Soccer left-center y
-
-    // Snapshot geometry so the vsOffset effect can measure the path.
-    geomRef.current = { lw, lh, rw, rh, lrx, rlx };
-
-    // Single closed loop — full perimeter of each panel before crossing the connector.
-    // NBA perimeter clockwise from right-center (up right side → top → left → bottom
-    // → back to right-center), then connector across to Soccer left-center, Soccer
-    // perimeter clockwise (up left side → top → right → bottom → back to left-center),
-    // then Z closes the return connector back to NBA right-center.
-    setPathD(
-      `M ${lrx},${lcy}` + // NBA right-center (connector junction, start)
-        ` L ${lrx},${ly}` + // ↑ up right side → NBA top-right
-        ` L ${lx},${ly}` + // ← left along top → NBA top-left
-        ` L ${lx},${ly + lh}` + // ↓ down left side → NBA bottom-left
-        ` L ${lrx},${ly + lh}` + // → right along bottom → NBA bottom-right
-        ` L ${lrx},${lcy}` + // ↑ up right side → NBA right-center (perimeter done)
-        ` L ${rlx},${rcy}` + // → connector → Soccer left-center
-        ` L ${rlx},${ry}` + // ↑ up left side → Soccer top-left
-        ` L ${rx + rw},${ry}` + // → right along top → Soccer top-right
-        ` L ${rx + rw},${ry + rh}` + // ↓ down right side → Soccer bottom-right
-        ` L ${rlx},${ry + rh}` + // ← left along bottom → Soccer bottom-left
-        ` L ${rlx},${rcy}` + // ↑ up left side → Soccer left-center (perimeter done)
-        ` Z`, // ← return connector → NBA right-center
-    );
-  }, []);
-
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-    recalcPath();
-    const ro = new ResizeObserver(recalcPath);
-    ro.observe(container);
-    if (leftRef.current) ro.observe(leftRef.current);
-    if (rightRef.current) ro.observe(rightRef.current);
-    return () => ro.disconnect();
-  }, [recalcPath]);
-
-  useEffect(() => {
-    if (!pathD) return;
-    const { lw, lh, rw, rh, rlx, lrx } = geomRef.current;
-    if (!lw) return;
-    const tmp = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    tmp.setAttribute("d", pathD);
-    const total = tmp.getTotalLength();
-    if (!total) return;
-
-    const connLen = rlx - lrx;
-
-    // Particle 1 starts at NBA bottom-right, travels forward (clockwise).
-    // From NBA bottom-right → up right side lh/2 → NBA right-center (VS-left).
-    const nba_br = (1.6408 * lh + 2 * lw) / total;
-
-    // Particle 2 starts at Soccer top-left, travels backward (counter-clockwise).
-    // From Soccer top-left → down left side rh/2 → Soccer left-center (VS-right).
-    const vs_right = (1 * lh + 2 * lw + connLen) / total;
-    const soccer_tl = vs_right + (0.5 * rh) / total;
-
-    setVsOffset({ nba_br, soccer_tl });
-  }, [pathD]);
-
   function compare() {
     if (!ready) return;
     navigate(`/compare/${enc(nba)}/${enc(soccer)}`);
@@ -255,80 +159,13 @@ export default function ComparePickerPage() {
       </h1>
 
       {/* Two picker panels with a VS hexagon between them */}
-      <div
-        ref={containerRef}
-        className="mt-10 relative flex flex-col md:flex-row items-stretch gap-4"
-      >
-        {/* Unified circuit loop — one closed SVG path spanning both panels */}
-        {pathD && vsOffset !== null && (
-          <svg
-            aria-hidden="true"
-            className="hidden md:block absolute inset-0 pointer-events-none"
-            style={{
-              width: "100%",
-              height: "100%",
-              overflow: "visible",
-              zIndex: 10,
-            }}
-          >
-            <defs>
-              <style>{`
-                @keyframes circuit-line-a {
-                  from { stroke-dashoffset: ${-vsOffset.nba_br}; }
-                  to   { stroke-dashoffset: ${-(1 + vsOffset.nba_br)}; }
-                }
-                @keyframes circuit-line-b {
-                  from { stroke-dashoffset: ${-vsOffset.soccer_tl}; }
-                  to   { stroke-dashoffset: ${1 - vsOffset.soccer_tl}; }
-                }
-              `}</style>
-              <filter id="cp-glow" x="-40%" y="-40%" width="180%" height="180%">
-                <feGaussianBlur
-                  in="SourceGraphic"
-                  stdDeviation="3"
-                  result="blur"
-                />
-                <feMerge>
-                  <feMergeNode in="blur" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
-              </filter>
-              <linearGradient id="cp-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#4a7fff" stopOpacity="0.9" />
-                <stop offset="50%" stopColor="#e8ff47" />
-                <stop offset="100%" stopColor="#39d353" stopOpacity="0.9" />
-              </linearGradient>
-            </defs>
-            {/* Line 1 — starts at path origin */}
-            <path
-              d={pathD}
-              fill="none"
-              stroke="url(#cp-grad)"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeDasharray="0.05 0.95"
-              strokeDashoffset="0"
-              pathLength="1"
-              filter="url(#cp-glow)"
-              style={{ animation: "circuit-line-a 20s linear infinite" }}
-            />
-            {/* Line 2 — offset by half the loop so both meet at VS simultaneously */}
-            <path
-              d={pathD}
-              fill="none"
-              stroke="url(#cp-grad)"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeDasharray="0.05 0.95"
-              strokeDashoffset="0"
-              pathLength="1"
-              filter="url(#cp-glow)"
-              style={{ animation: "circuit-line-b 20s linear infinite" }}
-            />
-          </svg>
-        )}
-
-        <div ref={leftRef} className="flex-1 flex flex-col">
+      <div className="mt-10 relative flex flex-col md:flex-row items-stretch gap-4">
+        <div className="flex-1 relative rounded overflow-hidden border" style={{ borderColor: "rgba(74,127,255,0.25)" }}>
+          <BorderBeam
+            duration={6}
+            size={200}
+            className="from-transparent via-[#4a7fff] to-transparent"
+          />
           <PickerPanel
             sport="basketball"
             label="NBA"
@@ -371,7 +208,12 @@ export default function ComparePickerPage() {
           />
         </div>
 
-        <div ref={rightRef} className="flex-1 flex flex-col">
+        <div className="flex-1 relative rounded overflow-hidden border" style={{ borderColor: "rgba(57,211,83,0.25)" }}>
+          <BorderBeam
+            duration={6}
+            size={200}
+            className="from-transparent via-[#39d353] to-transparent"
+          />
           <PickerPanel
             sport="soccer"
             label="SOCCER"
@@ -381,7 +223,6 @@ export default function ComparePickerPage() {
             selected={soccer}
             onSelect={setSoccer}
             onClear={() => setSoccer(null)}
-            reverse
           />
         </div>
       </div>
