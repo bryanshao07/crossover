@@ -8,6 +8,12 @@ export default {
         accent: "#e8ff47",
         nba: "#4a7fff",
         soccer: "#39d353",
+        /* shadcn-compatible tokens for InteractiveHoverButton */
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        background: "hsl(var(--background))",
       },
       fontFamily: {
         sans: ["'JetBrains Mono'", "ui-monospace", "monospace"],

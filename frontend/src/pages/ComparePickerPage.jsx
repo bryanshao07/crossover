@@ -228,51 +228,37 @@ export default function ComparePickerPage() {
       </div>
 
       {/* Compare action */}
-      <button
-        type="button"
-        onClick={compare}
-        disabled={!ready}
-        className={`glass w-full mt-6 py-5 flex items-center justify-center gap-3 font-mono font-bold tracking-wider transition-colors ${
-          ready
-            ? "border-accent text-accent hover:bg-accent/10 cursor-pointer"
-            : "text-white/30 cursor-not-allowed"
-        }`}
-      >
-        {ready ? (
-          <>
-            <svg
-              className="w-5 h-5"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <polyline points="16 3 21 3 21 8" />
-              <line x1="4" y1="20" x2="21" y2="3" />
-              <polyline points="21 16 21 21 16 21" />
-              <line x1="15" y1="15" x2="21" y2="21" />
-              <line x1="4" y1="4" x2="9" y2="9" />
-            </svg>
-            COMPARE PLAYERS →
-          </>
-        ) : (
-          <svg
-            className="w-4 h-4"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-          </svg>
+      <div className="relative overflow-hidden rounded mt-6">
+        <button
+          type="button"
+          onClick={compare}
+          disabled={!ready}
+          className={`w-full py-5 flex items-center justify-center gap-3 font-mono font-bold tracking-wider border transition-colors duration-300 ${
+            ready
+              ? "bg-transparent text-accent border-accent hover:bg-accent hover:text-bg cursor-pointer"
+              : "bg-transparent text-white/30 border-white/10 cursor-not-allowed"
+          }`}
+        >
+          {ready ? (
+            <>COMPARE PLAYERS →</>
+          ) : (
+            <>
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+              </svg>
+              Select one NBA player and one soccer player to continue.
+            </>
+          )}
+        </button>
+        {ready && (
+          <BorderBeam
+            duration={6}
+            size={200}
+            className="from-transparent via-[#e8ff47] to-transparent"
+          />
         )}
-        {!ready && "Select one NBA player and one soccer player to continue."}
-      </button>
+      </div>
 
       {/* Popular matchups */}
       <div className="mt-12">

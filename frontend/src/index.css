@@ -3,7 +3,13 @@
 @tailwind utilities;
 
 @layer base {
-  :root { color-scheme: dark; }
+  :root {
+    color-scheme: dark;
+    /* shadcn-compatible tokens used by InteractiveHoverButton */
+    --primary: 68 100% 64%;            /* #e8ff47 accent */
+    --primary-foreground: 240 20% 5%;  /* #0a0a0f dark bg — text on accent */
+    --background: 240 20% 5%;          /* #0a0a0f dark bg */
+  }
   /* Always reserve space for the vertical scrollbar so the page width stays
      constant whether or not content overflows (e.g. a single search result). */
   html { scrollbar-gutter: stable; }
