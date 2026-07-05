@@ -32,7 +32,7 @@ function createSolidTexture() {
   return new THREE.CanvasTexture(canvas);
 }
 
-const HIGHLIGHTED_PLAYERS = ["haaland", "jokic", "declan rice", "kevin durant"];
+const HIGHLIGHTED_PLAYERS = [];
 
 function normalize(str) {
   return str.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "");
