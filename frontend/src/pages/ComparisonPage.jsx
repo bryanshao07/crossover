@@ -167,41 +167,52 @@ function formatBullet(text) {
   );
 }
 
-function ExplainSection({ playerA, playerB, explainOn, setExplainOn, explain }) {
+function ExplainModal({ playerA, playerB, onClose, explain }) {
   const whyBullets = explain.data?.bullets?.slice(0, 3) ?? [];
   const keyBullets = explain.data?.bullets?.slice(3) ?? [];
-
-  const isLoading = explainOn && explain.isLoading;
+  const isLoading = explain.isLoading;
   const hasData = !!explain.data;
 
   return (
-    <div className="glass p-5">
-      <div className="flex flex-col md:flex-row gap-6">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      style={{ backgroundColor: "rgba(0,0,0,0.75)", backdropFilter: "blur(4px)" }}
+      onClick={onClose}
+    >
+      <div
+        className="relative w-full max-w-2xl glass p-6"
+        style={{ maxHeight: "80vh", overflowY: "auto" }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between mb-5">
+          <h2 className="font-mono text-sm font-bold uppercase tracking-wider" style={{ color: "#e8ff47" }}>
+            {playerA} × {playerB}
+          </h2>
+          <button
+            onClick={onClose}
+            className="text-white/40 hover:text-white/90 transition-colors p-0.5"
+            aria-label="Close"
+          >
+            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+        </div>
+
         {/* WHY THEY MATCH */}
-        <div className="flex-[2]">
-          <div className="flex items-center justify-between mb-3">
-            <h2 className="font-mono text-xs font-bold uppercase tracking-wider" style={{ color: "#e8ff47" }}>
-              Why They Match
-            </h2>
-            {!explainOn && (
-              <button
-                onClick={() => setExplainOn(true)}
-                className="font-mono text-xs px-3 py-1 border border-accent text-accent hover:bg-accent/10 transition-colors"
-                style={{ borderRadius: "2px" }}
-              >
-                Generate explanation
-              </button>
-            )}
-          </div>
+        <div className="mb-5">
+          <h3 className="font-mono text-xs font-bold uppercase tracking-wider mb-3 text-white/60">
+            Why They Match
+          </h3>
           {isLoading && (
             <div className="grid gap-2">
-              {[0, 1, 2].map((i) => (
-                <Skeleton key={i} className="h-4 w-full" />
-              ))}
+              {[0, 1, 2].map((i) => <Skeleton key={i} className="h-4 w-full" />)}
             </div>
           )}
           {hasData && whyBullets.length > 0 && (
-            <ul className="space-y-2">
+            <ul className="space-y-2.5">
               {whyBullets.map((bullet, i) => (
                 <li key={i} className="flex gap-2 text-sm text-white/80 leading-snug">
                   <span className="text-white/30 shrink-0 mt-0.5">•</span>
@@ -210,40 +221,37 @@ function ExplainSection({ playerA, playerB, explainOn, setExplainOn, explain }) 
               ))}
             </ul>
           )}
-          {explainOn && explain.isError && (
+          {explain.isError && (
             <div className="text-xs text-white/40">Could not load explanation.</div>
           )}
         </div>
 
-        {/* Divider */}
-        <div className="hidden md:block w-px bg-white/10 shrink-0" />
-
         {/* KEY DIFFERENCE */}
-        <div className="flex-1">
-          <h2 className="font-mono text-xs font-bold uppercase tracking-wider mb-3" style={{ color: "#e8ff47" }}>
-            Key Difference
-          </h2>
-          {isLoading && (
-            <div className="grid gap-2">
-              {[0, 1].map((i) => (
-                <Skeleton key={i} className="h-4 w-full" />
-              ))}
+        {(isLoading || (hasData && keyBullets.length > 0)) && (
+          <>
+            <div className="w-full h-px bg-white/10 mb-5" />
+            <div>
+              <h3 className="font-mono text-xs font-bold uppercase tracking-wider mb-3 text-white/60">
+                Key Difference
+              </h3>
+              {isLoading && (
+                <div className="grid gap-2">
+                  {[0, 1].map((i) => <Skeleton key={i} className="h-4 w-full" />)}
+                </div>
+              )}
+              {hasData && keyBullets.length > 0 && (
+                <ul className="space-y-2.5">
+                  {keyBullets.map((bullet, i) => (
+                    <li key={i} className="flex gap-2 text-sm text-white/80 leading-snug">
+                      <span className="text-white/30 shrink-0 mt-0.5">•</span>
+                      <span dangerouslySetInnerHTML={{ __html: formatBullet(bullet) }} />
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
-          )}
-          {hasData && keyBullets.length > 0 && (
-            <ul className="space-y-2">
-              {keyBullets.map((bullet, i) => (
-                <li key={i} className="flex gap-2 text-sm text-white/80 leading-snug">
-                  <span className="text-white/30 shrink-0 mt-0.5">•</span>
-                  <span dangerouslySetInnerHTML={{ __html: formatBullet(bullet) }} />
-                </li>
-              ))}
-            </ul>
-          )}
-          {hasData && keyBullets.length === 0 && !isLoading && whyBullets.length === 0 && (
-            <div className="text-xs text-white/30 italic">Generate explanation to see differences.</div>
-          )}
-        </div>
+          </>
+        )}
       </div>
     </div>
   );
@@ -255,8 +263,14 @@ export default function ComparisonPage() {
   const bn = decodeURIComponent(b);
   const { data, isLoading, isError } = useCompare(an, bn);
   const showSkeleton = useDelayedLoading(isLoading);
+  const [modalOpen, setModalOpen] = useState(false);
   const [explainOn, setExplainOn] = useState(false);
   const explain = useExplain(an, bn, { enabled: explainOn });
+
+  function openExplain() {
+    setExplainOn(true);
+    setModalOpen(true);
+  }
 
   if (showSkeleton) {
     return (
@@ -337,17 +351,18 @@ export default function ComparisonPage() {
         <PlayerColumn player={player_b} />
       </div>
 
-      {/* Bottom: Explanation */}
-      <ExplainSection
-        playerA={player_a}
-        playerB={player_b}
-        explainOn={explainOn}
-        setExplainOn={setExplainOn}
-        explain={explain}
-      />
+      {/* Explanation modal */}
+      {modalOpen && (
+        <ExplainModal
+          playerA={player_a.name}
+          playerB={player_b.name}
+          onClose={() => setModalOpen(false)}
+          explain={explain}
+        />
+      )}
 
       {/* Navigation buttons */}
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-3 gap-4">
         <Link
           to={`/player/${enc(player_b.name)}`}
           className="flex items-center justify-center gap-2 font-mono text-sm py-3 px-6 border border-accent text-accent hover:bg-accent/10 transition-colors text-center"
@@ -355,6 +370,14 @@ export default function ComparisonPage() {
         >
           Find matches for {player_b.name} →
         </Link>
+        <button
+          type="button"
+          onClick={openExplain}
+          className="flex items-center justify-center gap-2 font-mono text-sm py-3 px-6 border border-accent text-accent hover:bg-accent/10 transition-colors"
+          style={{ borderRadius: "2px" }}
+        >
+          Generate explanation
+        </button>
         <Link
           to={`/player/${enc(player_a.name)}`}
           className="flex items-center justify-center gap-2 font-mono text-sm py-3 px-6 border border-accent text-accent hover:bg-accent/10 transition-colors text-center"
