@@ -122,24 +122,38 @@ function AttributeScores({ player }) {
 }
 
 function PlayerColumn({ player }) {
+  const [hovered, setHovered] = useState(false);
   return (
-    <div className="glass p-5 flex flex-col h-full">
-      <div className="flex items-center gap-3">
-        <Avatar sport={player.sport} src={player.headshot_url} size={72} />
-        <div>
-          <h2 className="text-xl font-bold leading-tight">{player.name}</h2>
-          <div className="flex items-center gap-2 mt-1.5">
-            <SportBadge sport={player.sport} />
-            <span className="font-mono text-xs text-white/50">{player.position}</span>
+    <Link
+      to={`/player/${enc(player.name)}`}
+      className="block h-full"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      <div
+        className="p-5 flex flex-col h-full transition-all duration-150 bg-white/5 backdrop-blur-md rounded"
+        style={{
+          border: `1px solid ${hovered ? "rgba(232,255,71,0.55)" : "rgba(255,255,255,0.1)"}`,
+          boxShadow: hovered ? "0 0 18px 0 rgba(232,255,71,0.1)" : "none",
+        }}
+      >
+        <div className="flex items-center gap-3">
+          <Avatar sport={player.sport} src={player.headshot_url} size={72} />
+          <div>
+            <h2 className="text-xl font-bold leading-tight">{player.name}</h2>
+            <div className="flex items-center gap-2 mt-1.5">
+              <SportBadge sport={player.sport} />
+              <span className="font-mono text-xs text-white/50">{player.position}</span>
+            </div>
           </div>
         </div>
+        <div className="mt-3">
+          <div className="font-mono text-[10px] text-white/40 uppercase tracking-wider mb-1.5">DNA</div>
+          <DnaLabel dna={player.dna} />
+        </div>
+        <AttributeScores player={player} />
       </div>
-      <div className="mt-3">
-        <div className="font-mono text-[10px] text-white/40 uppercase tracking-wider mb-1.5">DNA</div>
-        <DnaLabel dna={player.dna} />
-      </div>
-      <AttributeScores player={player} />
-    </div>
+    </Link>
   );
 }
 

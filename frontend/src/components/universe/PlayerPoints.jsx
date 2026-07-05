@@ -1,7 +1,6 @@
-import { useRef, useMemo, useState } from "react";
+import { useRef, useMemo } from "react";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
-import { Html } from "@react-three/drei";
 
 function createGlowTexture() {
   const size = 128;
@@ -31,18 +30,6 @@ function createSolidTexture() {
   ctx.fill();
   return new THREE.CanvasTexture(canvas);
 }
-
-const HIGHLIGHTED_PLAYERS = [];
-
-function normalize(str) {
-  return str.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "");
-}
-
-function isHighlighted(name) {
-  const n = normalize(name);
-  return HIGHLIGHTED_PLAYERS.some((h) => n.includes(h));
-}
-
 
 const SPORT_COLORS = {
   basketball: new THREE.Color("#4488ff"),
@@ -119,83 +106,24 @@ function GlowPoint({ player, colorBy, glowTexture, solidTexture, onHover, onSele
   );
 }
 
-function HighlightedPoint({ player, colorBy, glowTexture, solidTexture, onHover, onSelect, isSelected }) {
-  const dotScale = useMemo(() => qualityToScale(player.quality), [player.quality]);
-  const [labelHovered, setLabelHovered] = useState(false);
-
-  return (
-    <group position={[player.x, player.y, player.z]}>
-      <GlowPoint
-        player={{ ...player, x: 0, y: 0, z: 0 }}
-        colorBy={colorBy}
-        glowTexture={glowTexture}
-        solidTexture={solidTexture}
-        onHover={onHover}
-        onSelect={onSelect}
-        isSelected={isSelected}
-      />
-      <Html
-        position={[dotScale * 0.8, dotScale * 0.4, 0]}
-        occlude={false}
-        zIndexRange={[40, 0]}
-      >
-        <div
-          onClick={() => onSelect(player.name)}
-          onMouseEnter={() => setLabelHovered(true)}
-          onMouseLeave={() => setLabelHovered(false)}
-          style={{
-            fontFamily: "Inter, sans-serif",
-            fontSize: "10px",
-            fontWeight: 600,
-            color: labelHovered ? "#0a0a0f" : "#e8ff47",
-            whiteSpace: "nowrap",
-            letterSpacing: "0.04em",
-            padding: "2px 6px",
-            border: "1px solid rgba(232,255,71,0.55)",
-            background: labelHovered ? "#e8ff47" : "rgba(10,10,15,0.75)",
-            cursor: "pointer",
-            userSelect: "none",
-            transition: "background 0.15s, color 0.15s",
-          }}
-        >
-          {player.name}
-        </div>
-      </Html>
-    </group>
-  );
-}
-
-export default function PlayerPoints({ points, colorBy, onHover, onSelect, selectedPlayerName, mode = "active" }) {
+export default function PlayerPoints({ points, colorBy, onHover, onSelect, selectedPlayerName }) {
   const glowTexture = useMemo(() => createGlowTexture(), []);
   const solidTexture = useMemo(() => createSolidTexture(), []);
 
   return (
     <group>
-      {points.map((p) =>
-        mode === "active" && isHighlighted(p.name) ? (
-          <HighlightedPoint
-            key={p.name}
-            player={p}
-            colorBy={colorBy}
-            glowTexture={glowTexture}
-            solidTexture={solidTexture}
-            onHover={onHover}
-            onSelect={onSelect}
-            isSelected={p.name === selectedPlayerName}
-          />
-        ) : (
-          <GlowPoint
-            key={p.name}
-            player={p}
-            colorBy={colorBy}
-            glowTexture={glowTexture}
-            solidTexture={solidTexture}
-            onHover={onHover}
-            onSelect={onSelect}
-            isSelected={p.name === selectedPlayerName}
-          />
-        )
-      )}
+      {points.map((p) => (
+        <GlowPoint
+          key={p.name}
+          player={p}
+          colorBy={colorBy}
+          glowTexture={glowTexture}
+          solidTexture={solidTexture}
+          onHover={onHover}
+          onSelect={onSelect}
+          isSelected={p.name === selectedPlayerName}
+        />
+      ))}
     </group>
   );
 }
