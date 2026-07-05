@@ -174,7 +174,7 @@ export default function PlayerPopup({ playerName, onClose }) {
             ))
           : ATTRS.map((a) => {
               const val = player?.[a.key] ?? 0;
-              const pct = Math.round(val * 100);
+              const pctValue = Math.round(val * 100);
               return (
                 <div key={a.key} className="flex items-center gap-2 mb-1.5">
                   <span className="text-white/50 flex-shrink-0">{a.icon}</span>
@@ -184,14 +184,14 @@ export default function PlayerPopup({ playerName, onClose }) {
                   <div className="flex-1 h-1.5 bg-white/10 rounded-sm overflow-hidden">
                     <div
                       className="h-full rounded-sm transition-all duration-500"
-                      style={{ width: `${pct}%`, backgroundColor: sportColor }}
+                      style={{ width: `${pctValue}%`, backgroundColor: sportColor }}
                     />
                   </div>
                   <span
                     className="text-xs font-mono font-bold w-6 text-right flex-shrink-0"
                     style={{ color: sportColor }}
                   >
-                    {pct}
+                    {pctValue}
                   </span>
                 </div>
               );

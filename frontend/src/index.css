@@ -32,3 +32,7 @@
   from { transform: translate(-50%, -50%) rotate(43.2deg); }
   to   { transform: translate(-50%, -50%) rotate(-316.8deg); }
 }
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}

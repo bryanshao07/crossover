@@ -25,7 +25,7 @@ function applyTransform(data, centroid) {
 
 export function UniverseProvider({ children }) {
   const navigate = useNavigate();
-  const { data: rawData = [] } = useUniverse();
+  const { data: rawData = [], isLoading } = useUniverse();
 
   const [query, setQuery] = useState("");
   const [sport, setSport] = useState("all");
@@ -85,6 +85,7 @@ export function UniverseProvider({ children }) {
     <UniverseContext.Provider
       value={{
         rawData,
+        isLoading,
         bgPoints,
         activePoints,
         query, setQuery,

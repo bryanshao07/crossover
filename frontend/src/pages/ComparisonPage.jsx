@@ -2,11 +2,13 @@ import { useParams, Link } from "react-router-dom";
 import { useState } from "react";
 import { useCompare } from "../hooks/useCompare";
 import { useExplain } from "../hooks/useExplain";
+import { useDelayedLoading } from "../hooks/useDelayedLoading";
 import OverlapRadarChart from "../components/charts/OverlapRadarChart";
 import SportBadge from "../components/ui/SportBadge";
 import DnaLabel from "../components/ui/DnaLabel";
 import Avatar from "../components/ui/Avatar";
 import Skeleton from "../components/ui/Skeleton";
+import PlayerCardSkeleton, { CenterColumnSkeleton } from "../components/ui/PlayerCardSkeleton";
 import { pct, enc } from "../lib/format";
 import { SPORT_COLOR } from "../lib/attributes";
 
@@ -238,21 +240,23 @@ export default function ComparisonPage() {
   const an = decodeURIComponent(a);
   const bn = decodeURIComponent(b);
   const { data, isLoading, isError } = useCompare(an, bn);
-  const [explainOn, setExplainOn] = useState(true);
+  const showSkeleton = useDelayedLoading(isLoading);
+  const [explainOn, setExplainOn] = useState(false);
   const explain = useExplain(an, bn, { enabled: explainOn });
 
-  if (isLoading) {
+  if (showSkeleton) {
     return (
       <div className="max-w-7xl mx-auto p-6 grid gap-4">
-        <div className="grid md:grid-cols-[5fr_6fr_5fr] gap-4">
-          <Skeleton className="h-96" />
-          <Skeleton className="h-96" />
-          <Skeleton className="h-96" />
+        <div className="grid md:grid-cols-[5fr_6fr_5fr] gap-4 items-start">
+          <PlayerCardSkeleton />
+          <CenterColumnSkeleton />
+          <PlayerCardSkeleton />
         </div>
-        <Skeleton className="h-32" />
+        <div className="glass p-5" />
       </div>
     );
   }
+  if (isLoading) return null;
 
   if (isError || !data) {
     return <div className="p-8 text-white/60">Comparison unavailable.</div>;

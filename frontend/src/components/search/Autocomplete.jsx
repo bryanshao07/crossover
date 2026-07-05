@@ -1,7 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { usePlayers } from "../../hooks/usePlayers";
+import { useDelayedLoading } from "../../hooks/useDelayedLoading";
 import SportBadge from "../ui/SportBadge";
+import Skeleton from "../ui/Skeleton";
 
 const SPORT_OPTIONS = [
   { key: "all", label: "All Players", color: "#e8ff47" },
@@ -18,7 +20,8 @@ export default function Autocomplete({
   leadingIcon = false,
   kbd,
 }) {
-  const { data: players = [] } = usePlayers();
+  const { data: players = [], isLoading: playersLoading } = usePlayers();
+  const showLoadingSkeleton = useDelayedLoading(playersLoading);
   const [q, setQ] = useState("");
   const [highlighted, setHighlighted] = useState(-1);
   const [filterOpen, setFilterOpen] = useState(false);
@@ -42,8 +45,10 @@ export default function Autocomplete({
   // Track the input's viewport position so the portaled dropdown can be
   // positioned with `fixed` — this lets it escape the glass panels' stacking
   // contexts (backdrop-blur) and render above every other element.
+  const showDropdown = matches.length > 0 || (showLoadingSkeleton && !!q);
+
   useEffect(() => {
-    if (matches.length === 0) return;
+    if (!showDropdown) return;
     function update() {
       const el = wrapRef.current;
       if (!el) return;
@@ -57,7 +62,7 @@ export default function Autocomplete({
       window.removeEventListener("scroll", update, true);
       window.removeEventListener("resize", update);
     };
-  }, [matches.length]);
+  }, [showDropdown]);
 
   // Close the sport filter menu when clicking outside of it
   useEffect(() => {
@@ -260,6 +265,34 @@ export default function Autocomplete({
           ) : null}
         </div>
       </div>
+      {showLoadingSkeleton &&
+        q &&
+        menuRect &&
+        createPortal(
+          <ul
+            aria-busy="true"
+            aria-live="polite"
+            aria-label="Loading players"
+            style={{
+              position: "fixed",
+              left: menuRect.left,
+              top: menuRect.top + 8,
+              width: menuRect.width,
+              backgroundColor: "rgba(10, 10, 15, 0.97)",
+              zIndex: 100,
+            }}
+            className="glass"
+          >
+            {[0, 1, 2, 3].map((i) => (
+              <li key={i} className="px-4 py-2 flex items-center gap-3">
+                <Skeleton className="h-5 w-10 shrink-0" />
+                <Skeleton className="h-4 flex-1" />
+                <Skeleton className="h-3 w-6 ml-auto shrink-0" />
+              </li>
+            ))}
+          </ul>,
+          document.body,
+        )}
       {matches.length > 0 &&
         menuRect &&
         createPortal(
