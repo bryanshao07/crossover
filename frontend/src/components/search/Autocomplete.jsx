@@ -4,12 +4,7 @@ import { usePlayers } from "../../hooks/usePlayers";
 import { useDelayedLoading } from "../../hooks/useDelayedLoading";
 import SportBadge from "../ui/SportBadge";
 import Skeleton from "../ui/Skeleton";
-
-const SPORT_OPTIONS = [
-  { key: "all", label: "All Players", color: "#e8ff47" },
-  { key: "basketball", label: "NBA", color: "#4a7fff" },
-  { key: "soccer", label: "Soccer", color: "#39d353" },
-];
+import { SPORT_OPTIONS } from "../../lib/sports";
 
 export default function Autocomplete({
   onSelect,

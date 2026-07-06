@@ -7,8 +7,34 @@ import FeaturedCard from "../components/cards/FeaturedCard";
 import { usePlayers } from "../hooks/usePlayers";
 import { api } from "../api/client";
 import { useTransition } from "../context/TransitionContext";
+import { SPORT_OPTIONS } from "../lib/sports";
 
 const EASE = [0.4, 0, 0.2, 1];
+
+function SportPills({ value, onChange }) {
+  return (
+    <div className="flex items-center gap-1.5 mb-4">
+      {SPORT_OPTIONS.map((s) => {
+        const active = value === s.key;
+        return (
+          <button
+            key={s.key}
+            type="button"
+            onClick={() => onChange(s.key)}
+            className="font-mono text-xs tracking-wider uppercase px-3 py-1.5 border transition-colors duration-150"
+            style={
+              active
+                ? { color: s.color, borderColor: s.color, backgroundColor: `${s.color}18` }
+                : { color: "rgba(255,255,255,0.35)", borderColor: "rgba(255,255,255,0.12)", backgroundColor: "transparent" }
+            }
+          >
+            {s.label}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
 
 const FEATURED_NBA = ["Nikola Jokić", "Stephen Curry", "Giannis Antetokounmpo"];
 
@@ -54,7 +80,7 @@ export default function HomePage() {
   const leaving = universeMode === "active";
 
   return (
-    <div className="relative h-[calc(100vh-4rem)] overflow-hidden flex flex-col items-center justify-start pt-[9vh] px-6">
+    <div className="relative h-[calc(100vh-4rem)] overflow-hidden flex flex-col items-center justify-start pt-[6vh] px-6">
       {/* Foreground content — fades out and drifts up during Phase 1 */}
       <motion.div
         className="relative z-10 flex flex-col items-center"
@@ -65,9 +91,11 @@ export default function HomePage() {
         <h1 className="font-mono font-bold text-accent text-6xl sm:text-7xl tracking-tight leading-none">
           CrossOver
         </h1>
-        <p className="text-white/90 text-xl sm:text-2xl font-semibold mt-3 mb-8">
+        <p className="text-white/90 text-xl sm:text-2xl font-semibold mt-3 mb-5">
           Don&apos;t know soccer? Find your player.
         </p>
+
+        <SportPills value={sport} onChange={setSport} />
 
         <div className="relative z-30 w-full flex justify-center">
           <Autocomplete
@@ -75,7 +103,6 @@ export default function HomePage() {
             leadingIcon
             kbd="⌘ K"
             sportFilter={sport}
-            onSportChange={setSport}
             placeholder="Search any NBA or soccer player..."
             onSelect={(name) => navigate(`/player/${encodeURIComponent(name)}`)}
           />
@@ -83,7 +110,7 @@ export default function HomePage() {
 
         <button
           onClick={() => startUniverseTransition(() => navigate("/universe", { state: { fromHome: true } }))}
-          className="mt-8 flex flex-col items-center gap-1.5 text-white/40 hover:text-white/80 transition-colors duration-200 group"
+          className="mt-6 flex flex-col items-center gap-1.5 text-white/40 hover:text-white/80 transition-colors duration-200 group"
           aria-label="Explore the Universe"
         >
           <span className="font-mono text-xs tracking-widest uppercase">Explore Universe</span>
@@ -98,10 +125,10 @@ export default function HomePage() {
         </button>
       </motion.div>
 
-      {/* Absolute UI elements — fade out independently */}
+      {/* Absolute UI elements — fade out independently, staggered 100ms after foreground */}
       <motion.div
         animate={leaving ? { opacity: 0, y: -20 } : { opacity: 1, y: 0 }}
-        transition={{ duration: 0.3, delay: 0, ease: EASE }}
+        transition={{ duration: 0.3, delay: leaving ? 0.1 : 0, ease: EASE }}
       >
         <Legend />
         <FeaturedStack />

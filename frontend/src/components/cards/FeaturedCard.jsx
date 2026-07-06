@@ -2,6 +2,12 @@ import { Link } from "react-router-dom";
 import { pct } from "../../lib/format";
 import Avatar from "../ui/Avatar";
 
+function abbrevName(name) {
+  const parts = name.split(" ");
+  if (parts.length < 2) return name;
+  return `${parts[0][0]}. ${parts.slice(1).join(" ")}`;
+}
+
 export default function FeaturedCard({ a, b, similarity }) {
   return (
     <Link
@@ -14,8 +20,8 @@ export default function FeaturedCard({ a, b, similarity }) {
         <Avatar sport={b.sport} src={b.headshot_url} size={24} />
       </div>
       <div className="mt-1.5 flex items-start justify-center gap-2 w-full text-xs text-white/80">
-        <span className="flex-1 min-w-0 truncate">{a.name}</span>
-        <span className="flex-1 min-w-0 truncate">{b.name}</span>
+        <span className="flex-1 min-w-0 truncate" title={a.name}>{abbrevName(a.name)}</span>
+        <span className="flex-1 min-w-0 truncate" title={b.name}>{abbrevName(b.name)}</span>
       </div>
       <div className="mt-2 font-mono text-[10px] tracking-[0.18em] text-white/40">
         SIMILARITY
