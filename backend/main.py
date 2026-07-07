@@ -13,12 +13,14 @@ app = FastAPI(title="CrossOver API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.cors_origins,
+    allow_origins=[
+        "http://localhost:5173",
+        "https://crossover-ten-theta.vercel.app",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 app.include_router(players.router)
 app.include_router(compare.router)
 app.include_router(universe.router)
