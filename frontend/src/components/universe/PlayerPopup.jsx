@@ -1,79 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { api } from "../../api/client";
-import { SPORT_COLOR, SPORT_LABEL } from "../../lib/attributes";
+import { ATTRIBUTES, SPORT_COLOR, SPORT_LABEL } from "../../lib/attributes";
+import { ATTRIBUTE_ICONS } from "../../lib/attributeIcons";
 import { pct } from "../../lib/format";
 import Avatar from "../ui/Avatar";
-
-const ATTRS = [
-  {
-    key: "scoring",
-    label: "Scoring",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-4 h-4">
-        <rect x="3" y="3" width="18" height="18" rx="2" />
-        <path d="M3 9h18M9 21V9" />
-      </svg>
-    ),
-  },
-  {
-    key: "playmaking",
-    label: "Playmaking",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-4 h-4">
-        <path d="M4 12a8 8 0 0 1 8-8" strokeLinecap="round" />
-        <path d="M20 12a8 8 0 0 1-8 8" strokeLinecap="round" />
-        <path d="M9 4l3-3 3 3M15 20l-3 3-3-3" />
-      </svg>
-    ),
-  },
-  {
-    key: "defensive_impact",
-    label: "Defensive Impact",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-4 h-4">
-        <path d="M12 3L4 7v6c0 4.4 3.4 8.5 8 9.5 4.6-1 8-5.1 8-9.5V7l-8-4z" />
-      </svg>
-    ),
-  },
-  {
-    key: "efficiency",
-    label: "Efficiency",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-4 h-4">
-        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
-  {
-    key: "versatility",
-    label: "Versatility",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-4 h-4">
-        <path d="M5 9l-3 3 3 3M9 5l3-3 3 3M15 19l-3 3-3-3M19 9l3 3-3 3M12 12h.01" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
-  {
-    key: "physical_dominance",
-    label: "Physical Dominance",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-4 h-4">
-        <path d="M6 4h2v4H6zM16 4h2v4h-2zM4 6h16M8 8h8v8H8zM6 16h2v4H6zM16 16h2v4h-2zM4 18h16" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
-  {
-    key: "durability",
-    label: "Durability",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-4 h-4">
-        <rect x="3" y="3" width="18" height="18" rx="2" />
-        <path d="M12 8v8M8 12h8" strokeLinecap="round" />
-      </svg>
-    ),
-  },
-];
 
 export default function PlayerPopup({ playerName, onClose }) {
   const navigate = useNavigate();
@@ -165,21 +96,21 @@ export default function PlayerPopup({ playerName, onClose }) {
           ATTRIBUTE PROFILE (PERCENTILE)
         </p>
         {noData
-          ? ATTRS.map((a) => (
+          ? ATTRIBUTES.map((a) => (
               <div key={a.key} className="flex items-center gap-2 mb-1.5">
                 <div className="w-4 h-4 bg-white/10 rounded animate-pulse" />
                 <div className="flex-1 h-3 bg-white/10 rounded animate-pulse" />
                 <div className="w-6 h-3 bg-white/10 rounded animate-pulse" />
               </div>
             ))
-          : ATTRS.map((a) => {
+          : ATTRIBUTES.map((a) => {
               const val = player?.[a.key] ?? 0;
               const pctValue = Math.round(val * 100);
               return (
                 <div key={a.key} className="flex items-center gap-2 mb-1.5">
-                  <span className="text-white/50 flex-shrink-0">{a.icon}</span>
+                  <span className="text-white/50 flex-shrink-0">{ATTRIBUTE_ICONS[a.key]}</span>
                   <span className="text-white/70 text-xs font-mono w-[118px] flex-shrink-0">
-                    {a.label}
+                    {a.displayLabel}
                   </span>
                   <div className="flex-1 h-1.5 bg-white/10 rounded-sm overflow-hidden">
                     <div

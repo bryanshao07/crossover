@@ -6,77 +6,8 @@ import SportBadge from "../components/ui/SportBadge";
 import DnaLabel from "../components/ui/DnaLabel";
 import Avatar from "../components/ui/Avatar";
 import Skeleton from "../components/ui/Skeleton";
-import { SPORT_COLOR } from "../lib/attributes";
-
-const ATTR_ROWS = [
-  {
-    key: "scoring",
-    label: "SCORING",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-4 h-4">
-        <rect x="3" y="3" width="18" height="18" rx="2" />
-        <path d="M3 9h18M9 21V9" />
-      </svg>
-    ),
-  },
-  {
-    key: "playmaking",
-    label: "PLAYMAKING",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-4 h-4">
-        <path d="M4 12a8 8 0 0 1 8-8" strokeLinecap="round" />
-        <path d="M20 12a8 8 0 0 1-8 8" strokeLinecap="round" />
-        <path d="M9 4l3-3 3 3M15 20l-3 3-3-3" />
-      </svg>
-    ),
-  },
-  {
-    key: "defensive_impact",
-    label: "DEFENSIVE IMPACT",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-4 h-4">
-        <path d="M12 3L4 7v6c0 4.4 3.4 8.5 8 9.5 4.6-1 8-5.1 8-9.5V7l-8-4z" />
-      </svg>
-    ),
-  },
-  {
-    key: "efficiency",
-    label: "EFFICIENCY",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-4 h-4">
-        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
-  {
-    key: "versatility",
-    label: "VERSATILITY",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-4 h-4">
-        <path d="M5 9l-3 3 3 3M9 5l3-3 3 3M15 19l-3 3-3-3M19 9l3 3-3 3M12 12h.01" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
-  {
-    key: "physical_dominance",
-    label: "PHYSICAL DOMINANCE",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-4 h-4">
-        <path d="M6 4h2v4H6zM16 4h2v4h-2zM4 6h16M8 8h8v8H8zM6 16h2v4H6zM16 16h2v4h-2zM4 18h16" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
-  {
-    key: "durability",
-    label: "DURABILITY",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-4 h-4">
-        <rect x="3" y="3" width="18" height="18" rx="2" />
-        <path d="M12 8v8M8 12h8" strokeLinecap="round" />
-      </svg>
-    ),
-  },
-];
+import { ATTRIBUTES, SPORT_COLOR } from "../lib/attributes";
+import { ATTRIBUTE_ICONS } from "../lib/attributeIcons";
 
 function AttributeScores({ player }) {
   const sportColor = SPORT_COLOR[player.sport];
@@ -84,16 +15,16 @@ function AttributeScores({ player }) {
     <section className="glass p-5">
       <h2 className="font-mono text-xs text-white/50 mb-4 uppercase tracking-wider">Attribute Scores</h2>
       <div className="grid gap-3">
-        {ATTR_ROWS.map(({ key, label, icon }) => {
+        {ATTRIBUTES.map(({ key, displayLabel }) => {
           const score = Math.round((player[key] ?? 0) * 100);
           return (
             <div key={key} className="flex items-center gap-3">
-              <span className="text-white/40 shrink-0">{icon}</span>
+              <span className="text-white/40 shrink-0">{ATTRIBUTE_ICONS[key]}</span>
               <span
                 className="font-mono text-xs text-white/50 uppercase shrink-0"
                 style={{ width: "9rem" }}
               >
-                {label}
+                {displayLabel}
               </span>
               <div className="flex-1 h-1 rounded-full bg-white/10">
                 <div
