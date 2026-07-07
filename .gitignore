@@ -1,7 +1,3 @@
-exports/sim_matrix.csv
-exports/nba-stats.csv
-exports/soccer-stats.csv
-data
 backend/.env
 
 # Python
