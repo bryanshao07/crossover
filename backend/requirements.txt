@@ -7,3 +7,9 @@ pydantic-settings==2.*
 python-dotenv==1.*
 httpx==0.27.*
 pytest==8.*
+sqlalchemy==2.*
+alembic==1.*
+psycopg2-binary==2.*
+passlib[bcrypt]==1.*
+PyJWT==2.*
+bcrypt==4.0.1
