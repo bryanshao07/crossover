@@ -91,11 +91,84 @@ function PlayerSnapshot({ player, className = "" }) {
   );
 }
 
+function PlayerProfileSkeleton() {
+  return (
+    <div className="max-w-7xl mx-auto p-6 grid md:grid-cols-[5fr_4fr_5fr] gap-4">
+      {/* Left: hero card */}
+      <section className="glass p-6 min-w-0">
+        <div className="flex items-center gap-3 mb-3">
+          <Skeleton className="w-20 h-20 rounded-full shrink-0" />
+          <div className="flex-1 space-y-2">
+            <Skeleton className="h-6 w-3/5" />
+            <div className="flex items-center gap-2">
+              <Skeleton className="h-5 w-10 shrink-0" />
+              <Skeleton className="h-3 w-8 shrink-0" />
+            </div>
+          </div>
+        </div>
+        <div className="min-h-[3.75rem] space-y-1.5">
+          <Skeleton className="h-2.5 w-10" />
+          <Skeleton className="h-5 w-4/5" />
+        </div>
+        <Skeleton className="mt-4 h-64 w-full" />
+      </section>
+
+      {/* Middle: attribute scores + snapshot */}
+      <div className="flex flex-col gap-4 h-full min-w-0">
+        <section className="glass p-5">
+          <Skeleton className="h-3 w-32 mb-4" />
+          <div className="grid gap-3">
+            {Array.from({ length: 7 }).map((_, i) => (
+              <div key={i} className="flex items-center gap-3">
+                <Skeleton className="w-4 h-4 shrink-0" />
+                <Skeleton className="h-2.5 shrink-0" style={{ width: "9rem" }} />
+                <Skeleton className="flex-1 h-1" />
+                <Skeleton className="h-6 w-9 shrink-0" />
+              </div>
+            ))}
+          </div>
+        </section>
+        <section className="glass p-5 flex-1">
+          <Skeleton className="h-3 w-32 mb-4" />
+          <div className="grid grid-cols-3 gap-2">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} className="glass p-3 flex flex-col gap-1.5">
+                <Skeleton className="h-2.5 w-10" />
+                <Skeleton className="h-6 w-12" />
+              </div>
+            ))}
+          </div>
+        </section>
+      </div>
+
+      {/* Right: match cards */}
+      <section className="glass p-6 min-w-0 flex flex-col">
+        <Skeleton className="h-3 w-36 mb-4 shrink-0" />
+        <div className="flex flex-col flex-1 gap-3">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <div key={i} className="glass p-4 flex items-center gap-3 flex-1">
+              <Skeleton className="w-12 h-12 rounded-full shrink-0" />
+              <div className="flex-1 min-w-0 space-y-1.5">
+                <div className="flex items-center gap-2">
+                  <Skeleton className="h-4 w-28" />
+                  <Skeleton className="h-5 w-10 shrink-0" />
+                </div>
+                <Skeleton className="h-3 w-4/5" />
+              </div>
+              <Skeleton className="h-5 w-10 shrink-0" />
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+  );
+}
+
 export default function PlayerProfilePage() {
   const { name } = useParams();
   const { data, isLoading, isError } = usePlayer(decodeURIComponent(name));
 
-  if (isLoading) return <div className="p-8 grid gap-4"><Skeleton className="h-40" /><Skeleton className="h-80" /></div>;
+  if (isLoading) return <PlayerProfileSkeleton />;
   if (isError || !data) return <div className="p-8 text-white/60">Player not found.</div>;
 
   const { player, matches } = data;

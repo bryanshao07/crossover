@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { useSearch } from "../hooks/useSearch";
 import PlayerCard from "../components/cards/PlayerCard";
+import PlayerCardSkeleton from "../components/ui/PlayerCardSkeleton";
 import FilterPill from "../components/ui/FilterPill";
 
 const POSITIONS = ["PG", "SG", "SF", "PF", "C", "FW", "MF", "DF"];
@@ -19,7 +20,7 @@ export default function SearchResultsPage() {
   // Fetch every athlete matching the query + position (ignoring the sport
   // filter) so we can show a per-sport count on each pill, then filter for
   // display client-side.
-  const { data = [] } = useSearch({ q, position });
+  const { data = [], isLoading } = useSearch({ q, position });
   const counts = useMemo(
     () => ({
       "": data.length,
@@ -82,9 +83,9 @@ export default function SearchResultsPage() {
         ))}
       </div>
       <div className="grid sm:grid-cols-1 lg:grid-cols-2 gap-4">
-        {slice.map((p) => (
-          <PlayerCard key={p.name} player={p} />
-        ))}
+        {isLoading
+          ? Array.from({ length: 6 }).map((_, i) => <PlayerCardSkeleton key={i} />)
+          : slice.map((p) => <PlayerCard key={p.name} player={p} />)}
       </div>
       {pages > 1 && (
         <div className="flex items-center justify-center gap-4 mt-6 font-mono text-sm">

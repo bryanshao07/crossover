@@ -4,6 +4,7 @@ import { useQueries } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import Autocomplete from "../components/search/Autocomplete";
 import FeaturedCard from "../components/cards/FeaturedCard";
+import Skeleton from "../components/ui/Skeleton";
 import { usePlayers } from "../hooks/usePlayers";
 import { api } from "../api/client";
 import { useTransition } from "../context/TransitionContext";
@@ -38,17 +39,38 @@ function SportPills({ value, onChange }) {
 
 const FEATURED_NBA = ["Nikola Jokić", "Stephen Curry", "Giannis Antetokounmpo"];
 
+function FeaturedCardSkeleton() {
+  return (
+    <div className="glass px-3 py-3 w-44 flex flex-col items-center text-center">
+      <div className="flex items-center justify-center gap-2 w-full">
+        <Skeleton className="w-6 h-6 rounded-full" />
+        <Skeleton className="w-2 h-2" />
+        <Skeleton className="w-6 h-6 rounded-full" />
+      </div>
+      <div className="mt-1.5 flex items-start justify-center gap-2 w-full">
+        <Skeleton className="h-3 flex-1" />
+        <Skeleton className="h-3 flex-1" />
+      </div>
+      <Skeleton className="mt-2 h-2 w-16" />
+      <Skeleton className="mt-1 h-6 w-12" />
+    </div>
+  );
+}
+
 function FeaturedStack() {
   const results = useQueries({
     queries: FEATURED_NBA.map((n) => ({ queryKey: ["player", n], queryFn: () => api.getPlayer(n) })),
   });
+  const allSettled = results.every((r) => !r.isPending);
   const ready = results.filter((r) => r.data);
   return (
     <div className="hidden lg:flex absolute z-10 bottom-6 right-6 gap-3">
-      {ready.map((r) => {
-        const a = r.data.player, b = r.data.matches[0];
-        return <FeaturedCard key={a.name} a={a} b={{ name: b.name, sport: b.sport, headshot_url: b.headshot_url }} similarity={b.similarity} />;
-      })}
+      {allSettled
+        ? ready.map((r) => {
+            const a = r.data.player, b = r.data.matches[0];
+            return <FeaturedCard key={a.name} a={a} b={{ name: b.name, sport: b.sport, headshot_url: b.headshot_url }} similarity={b.similarity} />;
+          })
+        : FEATURED_NBA.map((n) => <FeaturedCardSkeleton key={n} />)}
     </div>
   );
 }
