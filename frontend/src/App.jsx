@@ -7,6 +7,7 @@ import ComparePickerPage from "./pages/ComparePickerPage";
 import UniversePage from "./pages/UniversePage";
 import SearchResultsPage from "./pages/SearchResultsPage";
 import AuthPage from "./pages/AuthPage";
+import ProfilePage from "./pages/ProfilePage";
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
         <Route path="/universe" element={<UniversePage />} />
         <Route path="/search" element={<SearchResultsPage />} />
         <Route path="/login" element={<AuthPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
       </Routes>
     </PageShell>
   );
