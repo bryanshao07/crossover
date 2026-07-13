@@ -9,3 +9,6 @@ __pycache__/
 
 backend/venv/
 venv/
+
+# curl cookie jars from local manual testing
+cookie*.txt
