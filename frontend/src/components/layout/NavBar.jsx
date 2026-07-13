@@ -1,5 +1,6 @@
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useTransition } from "../../context/TransitionContext";
+import { useAuth } from "../../context/AuthContext";
 
 const navLinkClass = ({ isActive }) =>
   `hover:text-white pb-0.5 border-b-2 ${
@@ -10,6 +11,7 @@ export default function NavBar() {
   const location = useLocation();
   const navigate = useNavigate();
   const { startUniverseTransition } = useTransition();
+  const { user, loading, logout } = useAuth();
 
   const handleUniverseClick = (e) => {
     if (location.pathname === "/") {
@@ -17,6 +19,11 @@ export default function NavBar() {
       startUniverseTransition(() => navigate("/universe", { state: { fromHome: true } }));
     }
   };
+
+  async function handleLogout() {
+    await logout();
+    navigate("/");
+  }
 
   return (
     <nav className="flex items-center gap-3 px-6 h-16 border-b border-white/10 sticky top-0 z-50 bg-bg/80 backdrop-blur">
@@ -28,6 +35,14 @@ export default function NavBar() {
         <NavLink to="/universe" className={navLinkClass} onClick={handleUniverseClick}>Universe</NavLink>
         <NavLink to="/compare" className={navLinkClass}>Compare</NavLink>
         <NavLink to="/search" className={navLinkClass}>Search</NavLink>
+        {!loading && (user ? (
+          <>
+            <NavLink to="/profile" className={navLinkClass}>{user.email}</NavLink>
+            <button type="button" onClick={handleLogout} className="hover:text-white">Log out</button>
+          </>
+        ) : (
+          <Link to="/login" className="hover:text-white">Log in / Sign up</Link>
+        ))}
       </div>
     </nav>
   );
