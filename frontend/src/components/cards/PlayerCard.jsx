@@ -18,8 +18,7 @@ const CARD_ATTRIBUTES = [
 export default function PlayerCard({ player }) {
   const color = SPORT_COLOR[player.sport];
   return (
-    <div className="glass relative flex flex-col overflow-hidden p-4 transition-colors hover:border-accent/50">
-      <FavoriteButton playerName={player.name} className="absolute top-3 right-3 z-10" />
+    <div className="glass flex flex-col overflow-hidden p-4 transition-colors hover:border-accent/50">
       <div className="flex gap-4">
         <Avatar sport={player.sport} src={player.headshot_url} size={52} />
         <div className="min-w-0 flex-1">
@@ -32,6 +31,8 @@ export default function PlayerCard({ player }) {
           </div>
           <DnaLabel dna={player.dna} className="mt-3 block text-xs" />
         </div>
+
+        <FavoriteButton playerName={player.name} className="self-start" />
 
         <div className="grid w-44 shrink-0 content-start gap-1.5">
           {CARD_ATTRIBUTES.map((a) => {
