@@ -6,6 +6,7 @@ import SportBadge from "../components/ui/SportBadge";
 import DnaLabel from "../components/ui/DnaLabel";
 import Avatar from "../components/ui/Avatar";
 import Skeleton from "../components/ui/Skeleton";
+import FavoriteButton from "../components/ui/FavoriteButton";
 import { ATTRIBUTES, SPORT_COLOR } from "../lib/attributes";
 import { ATTRIBUTE_ICONS } from "../lib/attributeIcons";
 
@@ -184,6 +185,7 @@ export default function PlayerProfilePage() {
               <span className="font-mono text-xs text-white/50">{player.position}</span>
             </div>
           </div>
+          <FavoriteButton playerName={player.name} className="ml-auto" />
         </div>
         <div className="min-h-[3.75rem]">
           <DnaLabel dna={player.dna} />

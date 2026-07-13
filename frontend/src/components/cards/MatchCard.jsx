@@ -3,6 +3,7 @@ import { pct } from "../../lib/format";
 import Avatar from "../ui/Avatar";
 import SportBadge from "../ui/SportBadge";
 import DnaLabel from "../ui/DnaLabel";
+import FavoriteButton from "../ui/FavoriteButton";
 
 export default function MatchCard({ match, playerA }) {
   const to = playerA
@@ -19,6 +20,7 @@ export default function MatchCard({ match, playerA }) {
         </div>
         <DnaLabel dna={match.dna} className="text-xs truncate block" />
       </div>
+      <FavoriteButton playerName={match.name} />
       <span className="shrink-0 font-mono text-accent text-lg">{pct(match.similarity)}</span>
     </Link>
   );

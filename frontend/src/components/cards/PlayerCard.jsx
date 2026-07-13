@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Avatar from "../ui/Avatar";
 import SportBadge from "../ui/SportBadge";
 import DnaLabel from "../ui/DnaLabel";
+import FavoriteButton from "../ui/FavoriteButton";
 import { SPORT_COLOR } from "../../lib/attributes";
 
 const CARD_ATTRIBUTES = [
@@ -17,7 +18,8 @@ const CARD_ATTRIBUTES = [
 export default function PlayerCard({ player }) {
   const color = SPORT_COLOR[player.sport];
   return (
-    <div className="glass flex flex-col overflow-hidden p-4 transition-colors hover:border-accent/50">
+    <div className="glass relative flex flex-col overflow-hidden p-4 transition-colors hover:border-accent/50">
+      <FavoriteButton playerName={player.name} className="absolute top-3 right-3 z-10" />
       <div className="flex gap-4">
         <Avatar sport={player.sport} src={player.headshot_url} size={52} />
         <div className="min-w-0 flex-1">

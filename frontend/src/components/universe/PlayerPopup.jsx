@@ -5,6 +5,7 @@ import { ATTRIBUTES, SPORT_COLOR, SPORT_LABEL } from "../../lib/attributes";
 import { ATTRIBUTE_ICONS } from "../../lib/attributeIcons";
 import { pct } from "../../lib/format";
 import Avatar from "../ui/Avatar";
+import FavoriteButton from "../ui/FavoriteButton";
 
 export default function PlayerPopup({ playerName, onClose }) {
   const navigate = useNavigate();
@@ -64,14 +65,17 @@ export default function PlayerPopup({ playerName, onClose }) {
             </div>
           </div>
         </div>
-        <button
-          onClick={onClose}
-          className="text-white/40 hover:text-white transition-colors mt-0.5 flex-shrink-0"
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
-            <path d="M18 6L6 18M6 6l12 12" strokeLinecap="round" />
-          </svg>
-        </button>
+        <div className="flex items-center gap-2 mt-0.5 flex-shrink-0">
+          {!noData && <FavoriteButton playerName={player.name} />}
+          <button
+            onClick={onClose}
+            className="text-white/40 hover:text-white transition-colors"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5">
+              <path d="M18 6L6 18M6 6l12 12" strokeLinecap="round" />
+            </svg>
+          </button>
+        </div>
       </div>
 
       {/* DNA */}
