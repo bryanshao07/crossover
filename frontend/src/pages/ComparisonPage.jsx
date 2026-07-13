@@ -1,7 +1,9 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useCompare } from "../hooks/useCompare";
 import { useExplain } from "../hooks/useExplain";
+import { useSaveComparison } from "../hooks/useComparisons";
+import { useAuth } from "../context/AuthContext";
 import { useDelayedLoading } from "../hooks/useDelayedLoading";
 import OverlapRadarChart from "../components/charts/OverlapRadarChart";
 import SportBadge from "../components/ui/SportBadge";
@@ -9,6 +11,7 @@ import DnaLabel from "../components/ui/DnaLabel";
 import Avatar from "../components/ui/Avatar";
 import Skeleton from "../components/ui/Skeleton";
 import PlayerCardSkeleton, { CenterColumnSkeleton } from "../components/ui/PlayerCardSkeleton";
+import { Bookmark, Check } from "lucide-react";
 import { pct, enc } from "../lib/format";
 import { ATTRIBUTES, SPORT_COLOR } from "../lib/attributes";
 import { ATTRIBUTE_ICONS } from "../lib/attributeIcons";
@@ -188,6 +191,49 @@ function ExplainModal({ playerA, playerB, onClose, explain }) {
   );
 }
 
+function SaveComparisonButton({ playerA, playerB, similarity }) {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  const saveComparison = useSaveComparison();
+  const [justSaved, setJustSaved] = useState(false);
+
+  function handleClick() {
+    if (!user) {
+      navigate("/login");
+      return;
+    }
+    saveComparison.mutate(
+      { player_a: playerA, player_b: playerB, similarity_score: similarity },
+      {
+        onSuccess: () => {
+          setJustSaved(true);
+          setTimeout(() => setJustSaved(false), 2000);
+        },
+      }
+    );
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={handleClick}
+      disabled={saveComparison.isPending}
+      className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider py-2 px-4 border border-accent text-accent hover:bg-accent/10 transition-colors disabled:opacity-50"
+      style={{ borderRadius: "2px" }}
+    >
+      {justSaved ? (
+        <>
+          <Check className="w-3.5 h-3.5" /> Saved
+        </>
+      ) : (
+        <>
+          <Bookmark className="w-3.5 h-3.5" /> {user ? "Save comparison" : "Log in to save"}
+        </>
+      )}
+    </button>
+  );
+}
+
 export default function ComparisonPage() {
   const { a, b } = useParams();
   const an = decodeURIComponent(a);
@@ -250,6 +296,8 @@ export default function ComparisonPage() {
               </div>
             )}
           </div>
+
+          <SaveComparisonButton playerA={player_a.name} playerB={player_b.name} similarity={similarity} />
 
           <div className="glass p-4 w-full">
             <OverlapRadarChart a={player_a} b={player_b} />
