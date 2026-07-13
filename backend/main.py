@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 import data_store
 from config import settings
-from routers import auth, compare, explain, players, universe
+from routers import auth, compare, comparisons, explain, favorites, players, universe
 from services import similarity
 
 data_store.load()
@@ -26,6 +26,8 @@ app.include_router(players.router)
 app.include_router(compare.router)
 app.include_router(universe.router)
 app.include_router(explain.router)
+app.include_router(comparisons.router)
+app.include_router(favorites.router)
 
 
 @app.get("/health")
