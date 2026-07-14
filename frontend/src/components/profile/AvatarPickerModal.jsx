@@ -1,7 +1,6 @@
 import { useRef, useState } from "react";
 import Autocomplete from "../search/Autocomplete";
 import { useAuth } from "../../context/AuthContext";
-import { api } from "../../api/client";
 
 const ALLOWED_TYPES = ["image/png", "image/jpeg", "image/webp"];
 const MAX_AVATAR_BYTES = 5 * 1024 * 1024;
@@ -15,10 +14,8 @@ export default function AvatarPickerModal({ onClose }) {
   const [uploading, setUploading] = useState(false);
   const fileInputRef = useRef(null);
 
-  const [selectedPlayer, setSelectedPlayer] = useState(null);
   const [playerLoading, setPlayerLoading] = useState(false);
   const [playerError, setPlayerError] = useState(null);
-  const [savingPlayer, setSavingPlayer] = useState(false);
 
   const [removing, setRemoving] = useState(false);
 
@@ -55,34 +52,15 @@ export default function AvatarPickerModal({ onClose }) {
   }
 
   async function handleSelectPlayer(name) {
-    setSelectedPlayer(null);
     setPlayerError(null);
     setPlayerLoading(true);
     try {
-      const detail = await api.getPlayer(name);
-      if (!detail.player.headshot_url) {
-        setPlayerError("No photo available for this player.");
-      } else {
-        setSelectedPlayer({ name, headshot_url: detail.player.headshot_url });
-      }
-    } catch {
-      setPlayerError("Could not load that player.");
-    } finally {
-      setPlayerLoading(false);
-    }
-  }
-
-  async function handleUsePlayerPhoto() {
-    if (!selectedPlayer) return;
-    setSavingPlayer(true);
-    setPlayerError(null);
-    try {
-      await setAvatarFromPlayer(selectedPlayer.name);
+      await setAvatarFromPlayer(name);
       onClose();
     } catch (err) {
       setPlayerError(err.response?.data?.detail || "Could not set that photo.");
     } finally {
-      setSavingPlayer(false);
+      setPlayerLoading(false);
     }
   }
 
@@ -122,14 +100,28 @@ export default function AvatarPickerModal({ onClose }) {
         <div className="grid grid-cols-2 gap-6">
           <div className="flex flex-col items-center gap-3 pr-6 border-r border-white/10">
             <h3 className="font-mono text-xs text-white/50 uppercase tracking-wider">Upload a Photo</h3>
-            <button
-              type="button"
-              onClick={() => fileInputRef.current?.click()}
-              className="w-24 h-24 rounded-full flex items-center justify-center overflow-hidden shrink-0 border border-white/20 hover:border-accent transition-colors"
-              style={{ backgroundColor: !filePreview ? "#4a7fff" : undefined }}
-            >
-              {filePreview && <img src={filePreview} alt="" className="w-full h-full object-cover" />}
-            </button>
+            <div className="flex-1 flex items-center justify-center">
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                className={
+                  filePreview
+                    ? "w-24 h-24 rounded-full flex items-center justify-center overflow-hidden shrink-0 border border-white/20 hover:border-accent transition-colors"
+                    : "w-24 h-24 flex items-center justify-center shrink-0 border border-white/20 text-white/50 hover:border-accent hover:text-accent transition-colors"
+                }
+                style={{ borderRadius: filePreview ? undefined : "4px" }}
+              >
+                {filePreview ? (
+                  <img src={filePreview} alt="" className="w-full h-full object-cover" />
+                ) : (
+                  <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="17 8 12 3 7 8" />
+                    <line x1="12" y1="3" x2="12" y2="15" />
+                  </svg>
+                )}
+              </button>
+            </div>
             <input
               ref={fileInputRef}
               type="file"
@@ -142,7 +134,7 @@ export default function AvatarPickerModal({ onClose }) {
               type="button"
               disabled={!file || uploading}
               onClick={handleSaveFile}
-              className="mt-auto px-4 py-1.5 font-mono text-xs uppercase tracking-wider text-bg bg-accent hover:brightness-110 transition-all disabled:opacity-40"
+              className="px-4 py-1.5 font-mono text-xs uppercase tracking-wider text-bg bg-accent hover:brightness-110 transition-all disabled:opacity-40"
               style={{ borderRadius: "2px" }}
             >
               {uploading ? "Saving…" : "Save"}
@@ -151,29 +143,25 @@ export default function AvatarPickerModal({ onClose }) {
 
           <div className="flex flex-col items-center gap-3">
             <h3 className="font-mono text-xs text-white/50 uppercase tracking-wider">Use a Player's Photo</h3>
-            <div
-              className="w-24 h-24 rounded-full flex items-center justify-center overflow-hidden shrink-0 border border-white/20"
-              style={{ backgroundColor: !selectedPlayer ? "#39d353" : undefined }}
-            >
-              {playerLoading ? (
-                <span className="text-white/50 text-xs">Loading…</span>
-              ) : (
-                selectedPlayer && <img src={selectedPlayer.headshot_url} alt="" className="w-full h-full object-cover" />
-              )}
+            <div className="flex-1 flex items-center justify-center">
+              <div
+                className="w-24 h-24 flex items-center justify-center shrink-0 border border-white/20 text-white/50"
+                style={{ borderRadius: "4px" }}
+              >
+                {playerLoading ? (
+                  <span className="text-white/50 text-xs">Saving…</span>
+                ) : (
+                  <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="8" r="4" />
+                    <path d="M4 21v-1a8 8 0 0 1 16 0v1" />
+                  </svg>
+                )}
+              </div>
             </div>
+            {playerError && <p className="text-xs text-red-400 text-center">{playerError}</p>}
             <div className="w-full">
               <Autocomplete onSelect={handleSelectPlayer} placeholder="Search a player…" />
             </div>
-            {playerError && <p className="text-xs text-red-400 text-center">{playerError}</p>}
-            <button
-              type="button"
-              disabled={!selectedPlayer || savingPlayer}
-              onClick={handleUsePlayerPhoto}
-              className="mt-auto px-4 py-1.5 font-mono text-xs uppercase tracking-wider text-bg bg-accent hover:brightness-110 transition-all disabled:opacity-40"
-              style={{ borderRadius: "2px" }}
-            >
-              {savingPlayer ? "Saving…" : "Use This Photo"}
-            </button>
           </div>
         </div>
 
