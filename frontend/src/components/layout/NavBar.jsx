@@ -41,7 +41,13 @@ export default function NavBar() {
             <button type="button" onClick={handleLogout} className="hover:text-white">Log out</button>
           </>
         ) : (
-          <Link to="/login" className="hover:text-white">Log in / Sign up</Link>
+          <Link
+            to="/login"
+            className="px-3 py-1 text-bg bg-accent hover:brightness-110 transition-all font-semibold"
+            style={{ borderRadius: "2px" }}
+          >
+            Login
+          </Link>
         ))}
       </div>
     </nav>
