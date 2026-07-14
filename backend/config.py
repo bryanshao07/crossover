@@ -17,6 +17,7 @@ class Settings(BaseSettings):
     ]
     database_url: str = "postgresql://postgres:postgres@localhost:5432/crossover"
     jwt_secret_key: str = "change-me-in-dot-env"
+    environment: str = "development"
 
 
 settings = Settings()

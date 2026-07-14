@@ -3,6 +3,7 @@ from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
 from auth import create_access_token, get_current_user, hash_password, verify_password
+from config import settings
 from db import get_db
 from db_models import User
 
@@ -22,13 +23,23 @@ class UserResponse(BaseModel):
     email: str
 
 
+def _cookie_kwargs() -> dict:
+    # Cross-origin deploys (frontend and backend on different domains) require
+    # SameSite=None, which browsers only honor alongside Secure.
+    is_production = settings.environment == "production"
+    return {
+        "httponly": True,
+        "samesite": "none" if is_production else "lax",
+        "secure": is_production,
+    }
+
+
 def _set_auth_cookie(response: Response, token: str) -> None:
     response.set_cookie(
         key=_COOKIE_NAME,
         value=token,
-        httponly=True,
-        samesite="lax",  # use "none" + secure=True when frontend is on a separate origin
         max_age=_COOKIE_MAX_AGE,
+        **_cookie_kwargs(),
     )
 
 
@@ -54,7 +65,7 @@ def login(body: AuthRequest, response: Response, db: Session = Depends(get_db)) 
 
 @router.post("/logout")
 def logout(response: Response) -> dict:
-    response.delete_cookie(_COOKIE_NAME)
+    response.delete_cookie(_COOKIE_NAME, **_cookie_kwargs())
     return {"detail": "Logged out"}
 
 
