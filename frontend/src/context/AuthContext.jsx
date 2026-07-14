@@ -31,7 +31,34 @@ export function AuthProvider({ children }) {
     queryClient.removeQueries({ queryKey: ["favorites"] });
   }
 
-  const value = { user: user ?? null, loading: isLoading, login, signup, logout };
+  async function uploadAvatar(file) {
+    const updated = await api.uploadAvatar(file);
+    queryClient.setQueryData(["auth", "me"], updated);
+    return updated;
+  }
+
+  async function setAvatarFromPlayer(playerName) {
+    const updated = await api.setAvatarFromPlayer(playerName);
+    queryClient.setQueryData(["auth", "me"], updated);
+    return updated;
+  }
+
+  async function removeAvatar() {
+    const updated = await api.removeAvatar();
+    queryClient.setQueryData(["auth", "me"], updated);
+    return updated;
+  }
+
+  const value = {
+    user: user ?? null,
+    loading: isLoading,
+    login,
+    signup,
+    logout,
+    uploadAvatar,
+    setAvatarFromPlayer,
+    removeAvatar,
+  };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 

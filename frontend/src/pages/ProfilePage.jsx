@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useComparisons, useDeleteComparison } from "../hooks/useComparisons";
 import { useFavorites, useRemoveFavorite } from "../hooks/useFavorites";
-import { pct, enc } from "../lib/format";
+import { pct, enc, resolveAvatarUrl } from "../lib/format";
+import AvatarPickerModal from "../components/profile/AvatarPickerModal";
 
 function EmptyState({ label }) {
   return <div className="text-sm text-white/40 py-6 text-center">{label}</div>;
@@ -65,6 +67,7 @@ export default function ProfilePage() {
   const { data: favorites = [], isLoading: favoritesLoading } = useFavorites();
   const deleteComparison = useDeleteComparison();
   const removeFavorite = useRemoveFavorite();
+  const [avatarModalOpen, setAvatarModalOpen] = useState(false);
 
   if (loading) {
     return <div className="max-w-4xl mx-auto p-8 text-center text-white/40">Loading…</div>;
@@ -82,12 +85,19 @@ export default function ProfilePage() {
   return (
     <div className="max-w-4xl mx-auto p-6 flex flex-col gap-6">
       <section className="glass p-6 flex items-center gap-6">
-        <div
-          className="w-16 h-16 rounded-full flex items-center justify-center font-mono text-xl font-bold shrink-0"
-          style={{ background: "linear-gradient(180deg, #0a0a0f 0%, #4a7fff 100%)" }}
+        <button
+          type="button"
+          onClick={() => setAvatarModalOpen(true)}
+          aria-label="Change profile picture"
+          className="w-16 h-16 rounded-full flex items-center justify-center overflow-hidden font-mono text-xl font-bold shrink-0 transition-all hover:ring-2 hover:ring-white/50"
+          style={!user.avatar_url ? { background: "linear-gradient(180deg, #0a0a0f 0%, #4a7fff 100%)" } : undefined}
         >
-          {user.email[0].toUpperCase()}
-        </div>
+          {user.avatar_url ? (
+            <img src={resolveAvatarUrl(user.avatar_url)} alt="" className="w-full h-full object-cover" />
+          ) : (
+            user.email[0].toUpperCase()
+          )}
+        </button>
         <div className="min-w-0">
           <h1 className="text-xl font-bold truncate">{user.email}</h1>
           <p className="text-sm text-white/50">My CrossOver profile</p>
@@ -133,6 +143,8 @@ export default function ProfilePage() {
           </div>
         )}
       </section>
+
+      {avatarModalOpen && <AvatarPickerModal onClose={() => setAvatarModalOpen(false)} />}
     </div>
   );
 }

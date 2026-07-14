@@ -1,5 +1,8 @@
+from pathlib import Path
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
 import data_store
 from config import settings
@@ -9,7 +12,10 @@ from services import similarity
 data_store.load()
 similarity.build_pair_distribution()
 
+Path(settings.uploads_dir).mkdir(parents=True, exist_ok=True)
+
 app = FastAPI(title="CrossOver API")
+app.mount("/static", StaticFiles(directory=settings.uploads_dir), name="static")
 
 app.add_middleware(
     CORSMiddleware,

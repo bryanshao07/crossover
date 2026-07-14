@@ -20,6 +20,15 @@ export const api = {
   logout: () => http.post("/auth/logout").then((r) => r.data),
   getMe: () => http.get("/auth/me").then((r) => r.data),
 
+  uploadAvatar: (file) => {
+    const form = new FormData();
+    form.append("file", file);
+    return http.post("/auth/avatar/upload", form).then((r) => r.data);
+  },
+  setAvatarFromPlayer: (playerName) =>
+    http.post("/auth/avatar/player", { player_name: playerName }).then((r) => r.data),
+  removeAvatar: () => http.delete("/auth/avatar").then((r) => r.data),
+
   getComparisons: () => http.get("/comparisons").then((r) => r.data),
   createComparison: (player_a, player_b, similarity_score) =>
     http.post("/comparisons", { player_a, player_b, similarity_score }).then((r) => r.data),
