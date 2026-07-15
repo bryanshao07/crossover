@@ -27,7 +27,7 @@ function UserMenu({ user, onLogout }) {
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
-        className="w-7 h-7 rounded-full flex items-center justify-center overflow-hidden font-mono text-xs font-bold shrink-0 transition-all hover:ring-2 hover:ring-white/50"
+        className="w-7 h-7 rounded-full flex items-center justify-center overflow-hidden font-mono text-xs font-bold shrink-0 transition-all ring-2 ring-white/40 hover:brightness-110"
         style={!user.avatar_url ? { background: "linear-gradient(180deg, #0a0a0f 0%, #4a7fff 100%)" } : undefined}
       >
         {user.avatar_url ? (
