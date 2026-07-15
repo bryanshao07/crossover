@@ -2,7 +2,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useCompare } from "../hooks/useCompare";
 import { useExplain } from "../hooks/useExplain";
-import { useSaveComparison } from "../hooks/useComparisons";
+import { useComparisons, useSaveComparison } from "../hooks/useComparisons";
 import { useAuth } from "../context/AuthContext";
 import { useDelayedLoading } from "../hooks/useDelayedLoading";
 import OverlapRadarChart from "../components/charts/OverlapRadarChart";
@@ -194,8 +194,15 @@ function ExplainModal({ playerA, playerB, onClose, explain }) {
 function SaveComparisonButton({ playerA, playerB, similarity }) {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const { data: comparisons = [] } = useComparisons();
   const saveComparison = useSaveComparison();
   const [justSaved, setJustSaved] = useState(false);
+
+  const alreadySaved = comparisons.some(
+    (c) =>
+      (c.player_a === playerA && c.player_b === playerB) ||
+      (c.player_a === playerB && c.player_b === playerA)
+  );
 
   function handleClick() {
     if (!user) {
@@ -217,13 +224,17 @@ function SaveComparisonButton({ playerA, playerB, similarity }) {
     <button
       type="button"
       onClick={handleClick}
-      disabled={saveComparison.isPending}
+      disabled={saveComparison.isPending || alreadySaved}
       className="flex items-center gap-2 font-mono text-xs uppercase tracking-wider py-2 px-4 border border-accent text-accent hover:bg-accent/10 transition-colors disabled:opacity-50"
       style={{ borderRadius: "2px" }}
     >
       {justSaved ? (
         <>
           <Check className="w-3.5 h-3.5" /> Saved
+        </>
+      ) : alreadySaved ? (
+        <>
+          <Bookmark className="w-3.5 h-3.5" fill="currentColor" /> Already saved
         </>
       ) : (
         <>
