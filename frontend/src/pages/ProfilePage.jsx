@@ -2,31 +2,15 @@ import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useComparisons } from "../hooks/useComparisons";
-import { useFavorites, useRemoveFavorite } from "../hooks/useFavorites";
+import { useFavorites } from "../hooks/useFavorites";
 import { useSearch } from "../hooks/useSearch";
-import { enc, resolveAvatarUrl } from "../lib/format";
+import { resolveAvatarUrl } from "../lib/format";
 import AvatarPickerModal from "../components/profile/AvatarPickerModal";
 import SavedComparisonCard from "../components/cards/SavedComparisonCard";
+import FavoriteCard from "../components/cards/FavoriteCard";
 
 function EmptyState({ label }) {
   return <div className="text-sm text-white/40 py-6 text-center">{label}</div>;
-}
-
-function FavoriteRow({ favorite, onDelete }) {
-  return (
-    <div className="glass p-4 flex items-center justify-between gap-4">
-      <Link to={`/player/${enc(favorite.player_name)}`} className="truncate font-medium hover:text-accent">
-        {favorite.player_name}
-      </Link>
-      <button
-        type="button"
-        onClick={() => onDelete(favorite.id)}
-        className="text-white/40 hover:text-red-400 transition-colors font-mono text-xs shrink-0"
-      >
-        Remove
-      </button>
-    </div>
-  );
 }
 
 export default function ProfilePage() {
@@ -34,7 +18,6 @@ export default function ProfilePage() {
   const { data: comparisons = [], isLoading: comparisonsLoading } = useComparisons();
   const { data: favorites = [], isLoading: favoritesLoading } = useFavorites();
   const { data: players = [], isLoading: playersLoading } = useSearch({});
-  const removeFavorite = useRemoveFavorite();
   const [avatarModalOpen, setAvatarModalOpen] = useState(false);
 
   const playersByName = useMemo(() => new Map(players.map((p) => [p.name, p])), [players]);
@@ -106,14 +89,14 @@ export default function ProfilePage() {
 
       <section>
         <h2 className="font-mono text-xs text-white/50 uppercase tracking-wider mb-3">Favorites</h2>
-        {favoritesLoading ? (
+        {favoritesLoading || playersLoading ? (
           <EmptyState label="Loading…" />
         ) : favorites.length === 0 ? (
           <EmptyState label="No favorites yet." />
         ) : (
-          <div className="grid gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {favorites.map((f) => (
-              <FavoriteRow key={f.id} favorite={f} onDelete={(id) => removeFavorite.mutate(id)} />
+              <FavoriteCard key={f.id} favorite={f} player={playersByName.get(f.player_name)} />
             ))}
           </div>
         )}
