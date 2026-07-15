@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useComparisons } from "../hooks/useComparisons";
 import { useFavorites, useRemoveFavorite } from "../hooks/useFavorites";
-import { usePlayers } from "../hooks/usePlayers";
+import { useSearch } from "../hooks/useSearch";
 import { enc, resolveAvatarUrl } from "../lib/format";
 import AvatarPickerModal from "../components/profile/AvatarPickerModal";
 import SavedComparisonCard from "../components/cards/SavedComparisonCard";
@@ -33,7 +33,7 @@ export default function ProfilePage() {
   const { user, loading } = useAuth();
   const { data: comparisons = [], isLoading: comparisonsLoading } = useComparisons();
   const { data: favorites = [], isLoading: favoritesLoading } = useFavorites();
-  const { data: players = [], isLoading: playersLoading } = usePlayers();
+  const { data: players = [], isLoading: playersLoading } = useSearch({});
   const removeFavorite = useRemoveFavorite();
   const [avatarModalOpen, setAvatarModalOpen] = useState(false);
 
