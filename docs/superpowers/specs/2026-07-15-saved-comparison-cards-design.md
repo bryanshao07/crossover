@@ -10,7 +10,9 @@ The user wants this section restyled as visual cards — player photos, sport ba
 
 `SavedComparison` (backend `db_models.py`, exposed via `routers/comparisons.py`) only stores `player_a` / `player_b` as name strings plus `similarity_score`. It has no `sport` or `headshot_url`. To render photos and sport badges, the frontend must resolve each name against the full player list.
 
-`usePlayers()` (`frontend/src/hooks/usePlayers.js`) already fetches `/players` with `staleTime: Infinity`, and each player record includes `sport` and `headshot_url` (confirmed in `backend/routers/players.py`). `ProfilePage` will call this hook alongside the existing `useComparisons()` / `useFavorites()` calls and build a `name → player` lookup map to resolve both sides of each saved comparison before rendering.
+`GET /players` (backing `usePlayers()`) only returns the bare `ds.players()` index — `name`, `sport`, `position`, `dna` — with no `headshot_url`. `headshot_url` is only added by `_with_attributes()` in `backend/routers/players.py`, which backs `GET /search` instead. `ProfilePage` therefore uses the existing `useSearch({})` hook (already used by `SearchResultsPage`) rather than `usePlayers()`, alongside the existing `useComparisons()` / `useFavorites()` calls, building a `name → player` lookup map to resolve both sides of each saved comparison before rendering.
+
+(This correction was made after the initial implementation — the first draft of this spec incorrectly assumed `usePlayers()` included `headshot_url`. Caught via a live API check during manual verification; fixed in the same branch.)
 
 Player names in saved comparisons always originate from this same canonical player list, so no fallback handling is needed for an unresolved name.
 
