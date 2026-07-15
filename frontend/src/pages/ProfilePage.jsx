@@ -1,47 +1,15 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { useComparisons, useDeleteComparison } from "../hooks/useComparisons";
+import { useComparisons } from "../hooks/useComparisons";
 import { useFavorites, useRemoveFavorite } from "../hooks/useFavorites";
-import { pct, enc, resolveAvatarUrl } from "../lib/format";
+import { usePlayers } from "../hooks/usePlayers";
+import { enc, resolveAvatarUrl } from "../lib/format";
 import AvatarPickerModal from "../components/profile/AvatarPickerModal";
+import SavedComparisonCard from "../components/cards/SavedComparisonCard";
 
 function EmptyState({ label }) {
   return <div className="text-sm text-white/40 py-6 text-center">{label}</div>;
-}
-
-function ComparisonRow({ comparison, onDelete }) {
-  return (
-    <div className="glass p-4 flex items-center justify-between gap-4">
-      <div className="min-w-0">
-        <div className="flex items-center gap-2 text-sm">
-          <span className="truncate font-medium">{comparison.player_a}</span>
-          <span className="text-white/30">×</span>
-          <span className="truncate font-medium">{comparison.player_b}</span>
-        </div>
-        {comparison.similarity_score != null && (
-          <div className="font-mono text-xs mt-1" style={{ color: "#e8ff47" }}>
-            {pct(comparison.similarity_score)} similar
-          </div>
-        )}
-      </div>
-      <div className="flex items-center gap-3 shrink-0">
-        <Link
-          to={`/compare/${enc(comparison.player_a)}/${enc(comparison.player_b)}`}
-          className="font-mono text-xs text-accent hover:underline"
-        >
-          View →
-        </Link>
-        <button
-          type="button"
-          onClick={() => onDelete(comparison.id)}
-          className="text-white/40 hover:text-red-400 transition-colors font-mono text-xs"
-        >
-          Remove
-        </button>
-      </div>
-    </div>
-  );
 }
 
 function FavoriteRow({ favorite, onDelete }) {
@@ -65,9 +33,11 @@ export default function ProfilePage() {
   const { user, loading } = useAuth();
   const { data: comparisons = [], isLoading: comparisonsLoading } = useComparisons();
   const { data: favorites = [], isLoading: favoritesLoading } = useFavorites();
-  const deleteComparison = useDeleteComparison();
+  const { data: players = [], isLoading: playersLoading } = usePlayers();
   const removeFavorite = useRemoveFavorite();
   const [avatarModalOpen, setAvatarModalOpen] = useState(false);
+
+  const playersByName = useMemo(() => new Map(players.map((p) => [p.name, p])), [players]);
 
   if (loading) {
     return <div className="max-w-4xl mx-auto p-8 text-center text-white/40">Loading…</div>;
@@ -116,14 +86,19 @@ export default function ProfilePage() {
 
       <section>
         <h2 className="font-mono text-xs text-white/50 uppercase tracking-wider mb-3">Saved Comparisons</h2>
-        {comparisonsLoading ? (
+        {comparisonsLoading || playersLoading ? (
           <EmptyState label="Loading…" />
         ) : comparisons.length === 0 ? (
           <EmptyState label="No saved comparisons yet." />
         ) : (
-          <div className="grid gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {comparisons.map((c) => (
-              <ComparisonRow key={c.id} comparison={c} onDelete={(id) => deleteComparison.mutate(id)} />
+              <SavedComparisonCard
+                key={c.id}
+                comparison={c}
+                playerA={playersByName.get(c.player_a)}
+                playerB={playersByName.get(c.player_b)}
+              />
             ))}
           </div>
         )}
