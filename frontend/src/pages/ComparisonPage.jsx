@@ -352,13 +352,13 @@ export default function ComparisonPage() {
       )}
 
       {/* Navigation buttons */}
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-[5fr_6fr_5fr] gap-4">
         <Link
-          to={`/player/${enc(player_b.name)}`}
+          to={`/player/${enc(player_a.name)}`}
           className="flex items-center justify-center gap-2 font-mono text-sm py-3 px-6 border border-accent text-accent hover:bg-accent/10 transition-colors text-center"
           style={{ borderRadius: "2px" }}
         >
-          Find matches for {player_b.name} →
+          Find matches for {player_a.name} →
         </Link>
         <button
           type="button"
@@ -369,11 +369,11 @@ export default function ComparisonPage() {
           Generate explanation
         </button>
         <Link
-          to={`/player/${enc(player_a.name)}`}
+          to={`/player/${enc(player_b.name)}`}
           className="flex items-center justify-center gap-2 font-mono text-sm py-3 px-6 border border-accent text-accent hover:bg-accent/10 transition-colors text-center"
           style={{ borderRadius: "2px" }}
         >
-          Find matches for {player_a.name} →
+          Find matches for {player_b.name} →
         </Link>
       </div>
     </div>
