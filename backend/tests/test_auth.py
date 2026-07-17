@@ -31,6 +31,19 @@ def test_set_auth_cookie_uses_none_and_secure_in_production(monkeypatch):
     assert "secure" in cookie
 
 
+def test_set_auth_cookie_is_secure_for_undeclared_environment(monkeypatch):
+    # Fail secure: any value other than an explicit "development" must yield a
+    # Secure cookie, so a misconfigured/undeclared deploy is never insecure.
+    monkeypatch.setattr(config.settings, "environment", "staging")
+    response = Response()
+
+    _set_auth_cookie(response, "sometoken")
+
+    cookie = _set_cookie_header(response)
+    assert "samesite=none" in cookie
+    assert "secure" in cookie
+
+
 def test_logout_deletes_cookie_with_matching_production_attrs(monkeypatch):
     monkeypatch.setattr(config.settings, "environment", "production")
     response = Response()

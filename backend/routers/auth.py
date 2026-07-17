@@ -43,11 +43,15 @@ class AvatarFromPlayerRequest(BaseModel):
 def _cookie_kwargs() -> dict:
     # Cross-origin deploys (frontend and backend on different domains) require
     # SameSite=None, which browsers only honor alongside Secure.
-    is_production = settings.environment == "production"
+    #
+    # Fail secure: only an explicit "development" environment (local http) opts out
+    # of Secure + SameSite=None. Any other or undeclared value is treated as
+    # production, so a misconfigured deploy never silently issues insecure cookies.
+    is_secure = settings.environment != "development"
     return {
         "httponly": True,
-        "samesite": "none" if is_production else "lax",
-        "secure": is_production,
+        "samesite": "none" if is_secure else "lax",
+        "secure": is_secure,
     }
 
 

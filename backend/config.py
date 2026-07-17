@@ -17,8 +17,12 @@ class Settings(BaseSettings):
         "http://127.0.0.1:5173",
     ]
     database_url: str = "postgresql://postgres:postgres@localhost:5432/crossover"
-    jwt_secret_key: str = "change-me-in-dot-env"
-    environment: str = "development"
+    # Required: no default. A missing JWT_SECRET_KEY raises at startup rather than
+    # silently signing tokens with a publicly-known key (which would be forgeable).
+    jwt_secret_key: str
+    # Fail secure: default to production so an undeclared environment gets secure
+    # cookies. Local http dev must opt out explicitly with ENVIRONMENT=development.
+    environment: str = "production"
 
 
 settings = Settings()
