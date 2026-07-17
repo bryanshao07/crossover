@@ -14,5 +14,6 @@ psycopg2-binary==2.*
 passlib[bcrypt]==1.*
 PyJWT==2.*
 slowapi==0.1.10
+email-validator==2.3.0
 bcrypt==4.0.1
 python-multipart==0.0.32

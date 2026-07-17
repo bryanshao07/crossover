@@ -1,9 +1,9 @@
 import secrets
 from pathlib import Path
-from typing import Optional
+from typing import Annotated, Optional
 
 from fastapi import APIRouter, Depends, File, HTTPException, Request, Response, UploadFile, status
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr, StringConstraints, field_validator
 from sqlalchemy.orm import Session
 
 import data_store as ds
@@ -35,14 +35,34 @@ _MAX_AVATAR_BYTES = 5 * 1024 * 1024  # 5MB
 _ACCOUNT_MAX_ATTEMPTS = 5
 _ACCOUNT_WINDOW_SECONDS = 15 * 60  # 15 minutes
 
+_MIN_PASSWORD_LEN = 12
+_MAX_PASSWORD_LEN = 72  # bcrypt silently truncates input beyond 72 bytes
+
 
 def _account_key(email: str) -> str:
     return email.strip().lower()
 
 
-class AuthRequest(BaseModel):
-    email: str
+class _EmailBody(BaseModel):
+    email: EmailStr
+
+    @field_validator("email")
+    @classmethod
+    def _normalize_email(cls, v: str) -> str:
+        # Store/compare emails in a single canonical form so casing can't create
+        # duplicate accounts or bypass the per-account rate limit.
+        return v.strip().lower()
+
+
+class LoginRequest(_EmailBody):
+    # No length constraint on login: existing passwords must still verify.
     password: str
+
+
+class SignupRequest(_EmailBody):
+    password: Annotated[
+        str, StringConstraints(min_length=_MIN_PASSWORD_LEN, max_length=_MAX_PASSWORD_LEN)
+    ]
 
 
 class UserResponse(BaseModel):
@@ -85,14 +105,20 @@ def _user_response(user: User) -> UserResponse:
 
 @router.post("/signup", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
 @limiter.limit("10/minute")
-def signup(request: Request, body: AuthRequest, db: Session = Depends(get_db)) -> UserResponse:
+def signup(request: Request, body: SignupRequest, db: Session = Depends(get_db)) -> UserResponse:
     account_key = _account_key(body.email)
     check_account_limit(
         account_key, max_attempts=_ACCOUNT_MAX_ATTEMPTS, window_seconds=_ACCOUNT_WINDOW_SECONDS
     )
     record_account_attempt(account_key)
     if db.query(User).filter(User.email == body.email).first():
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Email already registered")
+        # Generic message + always hash so response wording and timing don't
+        # reveal whether the email is already registered.
+        hash_password(body.password)
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Unable to complete signup with the provided details.",
+        )
     user = User(email=body.email, hashed_password=hash_password(body.password))
     db.add(user)
     db.commit()
@@ -103,7 +129,7 @@ def signup(request: Request, body: AuthRequest, db: Session = Depends(get_db)) -
 @router.post("/login", response_model=UserResponse)
 @limiter.limit("10/minute")
 def login(
-    request: Request, body: AuthRequest, response: Response, db: Session = Depends(get_db)
+    request: Request, body: LoginRequest, response: Response, db: Session = Depends(get_db)
 ) -> UserResponse:
     account_key = _account_key(body.email)
     check_account_limit(
