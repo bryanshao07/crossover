@@ -49,6 +49,21 @@ def _account_key(email: str) -> str:
     return email.strip().lower()
 
 
+def _sniff_image_ext(data: bytes) -> Optional[str]:
+    """Return the image extension implied by the file's magic bytes, or None.
+
+    Trusting the client-supplied Content-Type alone lets an attacker upload
+    arbitrary bytes under an image/* label; the content signature is checked too.
+    """
+    if data.startswith(b"\x89PNG\r\n\x1a\n"):
+        return "png"
+    if data.startswith(b"\xff\xd8\xff"):
+        return "jpg"
+    if len(data) >= 12 and data[0:4] == b"RIFF" and data[8:12] == b"WEBP":
+        return "webp"
+    return None
+
+
 class _EmailBody(BaseModel):
     email: EmailStr
 
@@ -168,8 +183,7 @@ def upload_avatar(
     db: Session = Depends(get_db),
     _csrf: None = Depends(require_csrf_header),
 ) -> UserResponse:
-    ext = _ALLOWED_AVATAR_TYPES.get(file.content_type)
-    if ext is None:
+    if file.content_type not in _ALLOWED_AVATAR_TYPES:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Unsupported file type. Use PNG, JPEG, or WebP.",
@@ -178,6 +192,14 @@ def upload_avatar(
     contents = file.file.read()
     if len(contents) > _MAX_AVATAR_BYTES:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="File too large. Max 5MB.")
+
+    # Trust the actual bytes over the client-declared Content-Type.
+    ext = _sniff_image_ext(contents)
+    if ext is None:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="File contents are not a valid PNG, JPEG, or WebP image.",
+        )
 
     avatars_dir = Path(settings.uploads_dir) / "avatars"
     avatars_dir.mkdir(parents=True, exist_ok=True)

@@ -15,5 +15,8 @@ passlib[bcrypt]==1.*
 PyJWT==2.*
 slowapi==0.1.10
 email-validator==2.3.0
+# Pinned to 4.0.1: passlib 1.7.4 (the last passlib release) is incompatible with
+# bcrypt >= 4.1 — its backend probe raises on a >72-byte test password and
+# hash_password() fails. Bumping bcrypt requires first replacing passlib.
 bcrypt==4.0.1
 python-multipart==0.0.32
