@@ -3,9 +3,12 @@ from pathlib import Path
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from slowapi import _rate_limit_exceeded_handler
+from slowapi.errors import RateLimitExceeded
 
 import data_store
 from config import settings
+from rate_limit import limiter
 from routers import auth, compare, comparisons, explain, favorites, players, universe
 from services import similarity
 
@@ -15,6 +18,8 @@ similarity.build_pair_distribution()
 Path(settings.uploads_dir).mkdir(parents=True, exist_ok=True)
 
 app = FastAPI(title="CrossOver API")
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 app.mount("/static", StaticFiles(directory=settings.uploads_dir), name="static")
 
 app.add_middleware(
