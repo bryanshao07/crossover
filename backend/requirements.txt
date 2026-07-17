@@ -1,4 +1,5 @@
-fastapi==0.115.*
+fastapi==0.139.2
+starlette==1.3.1
 uvicorn[standard]==0.30.*
 pandas==2.2.*
 numpy==1.26.*
@@ -13,4 +14,4 @@ psycopg2-binary==2.*
 passlib[bcrypt]==1.*
 PyJWT==2.*
 bcrypt==4.0.1
-python-multipart==0.0.*
+python-multipart==0.0.32
