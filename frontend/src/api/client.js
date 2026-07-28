@@ -2,7 +2,14 @@ import axios from "axios";
 import { enc } from "../lib/format";
 
 const base = import.meta.env.VITE_API_BASE_URL || "/api";
-const http = axios.create({ baseURL: base, withCredentials: true });
+// X-Requested-With satisfies the backend CSRF header check on cookie-authed,
+// state-changing endpoints (logout, avatar upload/delete). Sending it on every
+// request is harmless and keeps the header present for those routes.
+const http = axios.create({
+  baseURL: base,
+  withCredentials: true,
+  headers: { "X-Requested-With": "XMLHttpRequest" },
+});
 
 export const api = {
   getPlayers: () => http.get("/players").then((r) => r.data),

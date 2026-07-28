@@ -2,7 +2,7 @@ from datetime import datetime, timedelta, timezone
 from typing import Optional
 
 import jwt
-from fastapi import Cookie, Depends, HTTPException, status
+from fastapi import Cookie, Depends, HTTPException, Request, status
 from passlib.context import CryptContext
 from sqlalchemy.orm import Session
 
@@ -13,6 +13,22 @@ from db_models import User
 _pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 _ALGORITHM = "HS256"
 _TOKEN_EXPIRE_HOURS = 24
+
+# CSRF defense for cookie-authenticated, state-changing endpoints that a browser
+# would otherwise send cross-site without a preflight (multipart uploads, and
+# bodyless POST/DELETE). Requiring a custom header forces a CORS preflight for
+# cross-origin callers, which the origin allowlist then rejects. Same-origin JS
+# (our SPA) sets it freely; a cross-site <form>/<img> cannot.
+_CSRF_HEADER = "X-Requested-With"
+_CSRF_EXPECTED = "XMLHttpRequest"
+
+
+def require_csrf_header(request: Request) -> None:
+    if request.headers.get(_CSRF_HEADER) != _CSRF_EXPECTED:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Missing or invalid CSRF header",
+        )
 
 
 def hash_password(plain: str) -> str:

@@ -7,7 +7,13 @@ from pydantic import BaseModel, EmailStr, StringConstraints, field_validator
 from sqlalchemy.orm import Session
 
 import data_store as ds
-from auth import create_access_token, get_current_user, hash_password, verify_password
+from auth import (
+    create_access_token,
+    get_current_user,
+    hash_password,
+    require_csrf_header,
+    verify_password,
+)
 from config import settings
 from db import get_db
 from db_models import User
@@ -145,7 +151,7 @@ def login(
 
 
 @router.post("/logout")
-def logout(response: Response) -> dict:
+def logout(response: Response, _csrf: None = Depends(require_csrf_header)) -> dict:
     response.delete_cookie(_COOKIE_NAME, **_cookie_kwargs())
     return {"detail": "Logged out"}
 
@@ -160,6 +166,7 @@ def upload_avatar(
     file: UploadFile = File(...),
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
+    _csrf: None = Depends(require_csrf_header),
 ) -> UserResponse:
     ext = _ALLOWED_AVATAR_TYPES.get(file.content_type)
     if ext is None:
@@ -211,6 +218,7 @@ def set_avatar_from_player(
 def remove_avatar(
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
+    _csrf: None = Depends(require_csrf_header),
 ) -> UserResponse:
     current_user.avatar_url = None
     db.commit()
