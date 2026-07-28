@@ -20,6 +20,26 @@
   .glass {
     @apply border border-white/10 bg-white/5 backdrop-blur-md rounded;
   }
+
+  /* Thin, subtle horizontal scrollbar for the homepage lower band's
+     comparison row. Firefox uses scrollbar-* ; WebKit uses ::-webkit. */
+  .lower-band-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+  }
+  .lower-band-scroll::-webkit-scrollbar {
+    height: 6px;
+  }
+  .lower-band-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .lower-band-scroll::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: 3px;
+  }
+  .lower-band-scroll::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
 }
 
 @keyframes rotateBorder {

@@ -12,21 +12,21 @@ export default function FeaturedCard({ a, b, similarity }) {
   return (
     <Link
       to={`/compare/${encodeURIComponent(a.name)}/${encodeURIComponent(b.name)}`}
-      className="glass px-3 py-3 w-44 flex flex-col items-center text-center hover:border-accent/50 transition-colors"
+      className="glass px-3 py-2 w-44 flex flex-col items-center text-center hover:border-accent/50 transition-colors"
     >
       <div className="flex items-center justify-center gap-2 w-full">
-        <Avatar sport={a.sport} src={a.headshot_url} size={24} />
+        <Avatar sport={a.sport} src={a.headshot_url} size={22} />
         <span className="text-white/40 text-xs">×</span>
-        <Avatar sport={b.sport} src={b.headshot_url} size={24} />
+        <Avatar sport={b.sport} src={b.headshot_url} size={22} />
       </div>
-      <div className="mt-1.5 flex items-start justify-center gap-2 w-full text-xs text-white/80">
+      <div className="mt-1 flex items-start justify-center gap-2 w-full text-xs text-white/80">
         <span className="flex-1 min-w-0 truncate" title={a.name}>{abbrevName(a.name)}</span>
         <span className="flex-1 min-w-0 truncate" title={b.name}>{abbrevName(b.name)}</span>
       </div>
-      <div className="mt-2 font-mono text-[10px] tracking-[0.18em] text-white/40">
+      <div className="mt-1.5 font-mono text-[10px] tracking-[0.18em] text-white/40">
         SIMILARITY
       </div>
-      <div className="font-mono text-accent text-xl leading-tight">
+      <div className="font-mono text-accent text-lg leading-tight">
         {pct(similarity)}
       </div>
     </Link>

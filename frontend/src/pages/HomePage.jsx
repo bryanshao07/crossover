@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import { useQueries } from "@tanstack/react-query";
 import { motion, useReducedMotion } from "framer-motion";
 import Autocomplete from "../components/search/Autocomplete";
@@ -37,60 +37,155 @@ function SportPills({ value, onChange }) {
   );
 }
 
-const FEATURED_NBA = ["Nikola Jokić", "Stephen Curry", "Giannis Antetokounmpo"];
+const FEATURED_NBA = [
+  "Nikola Jokić",
+  "Stephen Curry",
+  "Giannis Antetokounmpo",
+  "LeBron James",
+  "Luka Dončić",
+  "Joel Embiid",
+  "Jayson Tatum",
+  "Shai Gilgeous-Alexander",
+  "Anthony Edwards",
+  "Kevin Durant",
+];
 
 function FeaturedCardSkeleton() {
   return (
-    <div className="glass px-3 py-3 w-44 flex flex-col items-center text-center">
+    <div className="glass px-3 py-2 w-44 flex flex-col items-center text-center">
       <div className="flex items-center justify-center gap-2 w-full">
-        <Skeleton className="w-6 h-6 rounded-full" />
+        <Skeleton className="w-[22px] h-[22px] rounded-full" />
         <Skeleton className="w-2 h-2" />
-        <Skeleton className="w-6 h-6 rounded-full" />
+        <Skeleton className="w-[22px] h-[22px] rounded-full" />
       </div>
-      <div className="mt-1.5 flex items-start justify-center gap-2 w-full">
+      <div className="mt-1 flex items-start justify-center gap-2 w-full">
         <Skeleton className="h-3 flex-1" />
         <Skeleton className="h-3 flex-1" />
       </div>
-      <Skeleton className="mt-2 h-2 w-16" />
-      <Skeleton className="mt-1 h-6 w-12" />
+      <Skeleton className="mt-1.5 h-2 w-16" />
+      <Skeleton className="mt-1 h-5 w-12" />
     </div>
   );
 }
 
-function FeaturedStack() {
+// Title panel that heads the band — replaces the old player-count legend.
+function BandTitle() {
+  return (
+    <div className="shrink-0 flex flex-col justify-center gap-1 px-5 py-3 border-r border-white/10 w-[172px]">
+      <span className="font-mono text-[10px] tracking-[0.22em] uppercase text-accent/80">
+        Cross-Sport
+      </span>
+      <span className="text-white/90 text-lg font-semibold leading-tight">
+        Top Comparisons
+      </span>
+    </div>
+  );
+}
+
+// "See more" tile that lives at the end of the scrollable row, revealed once
+// you scroll the comparisons to the end. Same footprint as a FeaturedCard.
+function SeeMoreCard() {
+  return (
+    <Link
+      to="/compare"
+      className="shrink-0 w-44 glass flex flex-col items-center justify-center gap-2 text-center border-accent/40 hover:border-accent hover:bg-accent/10 transition-colors"
+    >
+      <span className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-accent leading-snug">
+        See more<br />comparisons
+      </span>
+      <span className="text-accent text-lg leading-none">→</span>
+    </Link>
+  );
+}
+
+// Chevron button that scrolls the comparison row. Dims (non-interactive) when
+// there's nothing further to reveal in that direction.
+function ScrollArrow({ direction, onClick, disabled }) {
+  const right = direction === "right";
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      aria-label={right ? "Scroll comparisons right" : "Scroll comparisons left"}
+      className={`shrink-0 flex items-center justify-center px-2 transition-colors ${
+        right ? "border-l" : "border-r"
+      } border-white/10 ${
+        disabled ? "text-white/15 cursor-default" : "text-white/50 hover:text-accent hover:bg-white/5"
+      }`}
+    >
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+        <path
+          d={right ? "M9 6l6 6-6 6" : "M15 6l-6 6 6 6"}
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </button>
+  );
+}
+
+// Centered, fixed band pinned to the bottom of the viewport: legend on the left,
+// then a horizontally-scrollable row of top comparisons ending in a "See more"
+// tile, flanked by arrow buttons that reveal more without bleeding off-screen.
+function LowerBand() {
   const results = useQueries({
     queries: FEATURED_NBA.map((n) => ({ queryKey: ["player", n], queryFn: () => api.getPlayer(n) })),
   });
   const allSettled = results.every((r) => !r.isPending);
   const ready = results.filter((r) => r.data);
-  return (
-    <div className="hidden lg:flex absolute z-10 bottom-6 right-6 gap-3">
-      {allSettled
-        ? ready.map((r) => {
-            const a = r.data.player, b = r.data.matches[0];
-            return <FeaturedCard key={a.name} a={a} b={{ name: b.name, sport: b.sport, headshot_url: b.headshot_url }} similarity={b.similarity} />;
-          })
-        : FEATURED_NBA.map((n) => <FeaturedCardSkeleton key={n} />)}
-    </div>
-  );
-}
 
-function Legend() {
-  const { data: players = [] } = usePlayers();
-  const nba = players.filter((p) => p.sport === "basketball").length;
-  const soccer = players.filter((p) => p.sport === "soccer").length;
+  const scrollRef = useRef(null);
+  const [atStart, setAtStart] = useState(true);
+  const [atEnd, setAtEnd] = useState(false);
+
+  const updateArrows = useCallback(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    setAtStart(el.scrollLeft <= 1);
+    setAtEnd(el.scrollLeft + el.clientWidth >= el.scrollWidth - 1);
+  }, []);
+
+  useEffect(() => {
+    updateArrows();
+  }, [updateArrows, allSettled]);
+
+  const scrollByPage = (dir) => {
+    const el = scrollRef.current;
+    if (el) el.scrollBy({ left: dir * el.clientWidth * 0.8, behavior: "smooth" });
+  };
+
   return (
-    <div className="hidden md:block absolute z-10 bottom-6 left-6 glass px-4 py-3 text-sm">
-      <div className="flex items-center gap-2">
-        <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: "#4a7fff" }} />
-        <span className="text-white/70">NBA</span>
-        <span className="font-mono text-white/40">({nba} players)</span>
+    <div
+      data-lower-band
+      className="hidden md:flex absolute z-10 bottom-4 left-4 right-4 mx-auto max-w-6xl glass items-stretch overflow-hidden"
+    >
+      <Legend />
+      <ScrollArrow direction="left" onClick={() => scrollByPage(-1)} disabled={atStart} />
+      <div
+        ref={scrollRef}
+        onScroll={updateArrows}
+        className="lower-band-scroll flex-1 min-w-0 flex items-stretch gap-2.5 overflow-x-auto px-3 py-2"
+      >
+        {allSettled
+          ? ready.map((r) => {
+              const a = r.data.player, b = r.data.matches[0];
+              return (
+                <div key={a.name} className="shrink-0">
+                  <FeaturedCard a={a} b={{ name: b.name, sport: b.sport, headshot_url: b.headshot_url }} similarity={b.similarity} />
+                </div>
+              );
+            })
+          : FEATURED_NBA.map((n) => (
+              <div key={n} className="shrink-0">
+                <FeaturedCardSkeleton />
+              </div>
+            ))}
+        <SeeMoreCard />
       </div>
-      <div className="mt-2 flex items-center gap-2">
-        <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: "#39d353" }} />
-        <span className="text-white/70">Soccer</span>
-        <span className="font-mono text-white/40">({soccer} players)</span>
-      </div>
+      <ScrollArrow direction="right" onClick={() => scrollByPage(1)} disabled={atEnd} />
     </div>
   );
 }
@@ -113,10 +208,11 @@ export default function HomePage() {
     if (leaving) return;
     let acc = 0;
     let done = false;
-    const insideDropdown = (e) => !!e.target?.closest?.('[role="listbox"]');
+    const insideInteractive = (e) =>
+      !!e.target?.closest?.('[role="listbox"], [data-lower-band]');
 
     const onWheel = (e) => {
-      if (done || insideDropdown(e)) return;
+      if (done || insideInteractive(e)) return;
       if (e.deltaY <= 0) {
         acc = 0;
         return;
@@ -133,7 +229,7 @@ export default function HomePage() {
       startY = e.touches[0]?.clientY ?? null;
     };
     const onTouchMove = (e) => {
-      if (done || startY == null || insideDropdown(e)) return;
+      if (done || startY == null || insideInteractive(e)) return;
       const delta = startY - (e.touches[0]?.clientY ?? startY);
       if (delta > 60) {
         done = true;
@@ -178,7 +274,7 @@ export default function HomePage() {
         animate={leaving ? { opacity: 0, y: -20 } : { opacity: 1, y: 0 }}
         transition={{ duration: 0.3, delay: 0, ease: EASE }}
       >
-        <img src="/logo.png" alt="CrossOver" className="h-24 w-24 mb-3" />
+        <img src="/logo.png" alt="CrossOver" className="h-20 w-20 mb-2" />
         <h1 className="font-mono font-bold text-accent text-6xl sm:text-7xl tracking-tight leading-none">
           CrossOver
         </h1>
@@ -203,7 +299,7 @@ export default function HomePage() {
             are one button; clicking OR scrolling down both enter the universe */}
         <button
           onClick={exploreUniverse}
-          className="group mt-8 flex flex-col items-center gap-3 rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-4 focus-visible:ring-offset-[#0a0a0f]"
+          className="group mt-5 flex flex-col items-center gap-2 rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-4 focus-visible:ring-offset-[#0a0a0f]"
           aria-label="Explore the Universe — or scroll down"
         >
           <span className="flex items-center rounded-sm border border-accent bg-accent/10 px-7 py-3 text-accent transition-colors duration-200 group-hover:bg-accent group-hover:text-[#0a0a0f]">
@@ -228,8 +324,7 @@ export default function HomePage() {
         animate={leaving ? { opacity: 0, y: -20 } : { opacity: 1, y: 0 }}
         transition={{ duration: 0.3, delay: leaving ? 0.1 : 0, ease: EASE }}
       >
-        <Legend />
-        <FeaturedStack />
+        <LowerBand />
       </motion.div>
     </div>
   );

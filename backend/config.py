@@ -1,6 +1,7 @@
 from pathlib import Path
 from typing import List, Optional
 
+from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 _REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -26,6 +27,17 @@ class Settings(BaseSettings):
     # Fail secure: default to production so an undeclared environment gets secure
     # cookies. Local http dev must opt out explicitly with ENVIRONMENT=development.
     environment: str = "production"
+
+    @field_validator("database_url")
+    @classmethod
+    def _normalize_database_url(cls, value: str) -> str:
+        # Render (and Heroku) hand out connection strings with the legacy
+        # "postgres://" scheme, but SQLAlchemy 2.x only recognizes
+        # "postgresql://" and raises NoSuchModuleError at create_engine() on the
+        # former. Rewrite it so the platform URL can be pasted in verbatim.
+        if value.startswith("postgres://"):
+            return "postgresql://" + value[len("postgres://") :]
+        return value
 
 
 settings = Settings()
