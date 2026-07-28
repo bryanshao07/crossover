@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useQueries } from "@tanstack/react-query";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import Autocomplete from "../components/search/Autocomplete";
 import FeaturedCard from "../components/cards/FeaturedCard";
 import Skeleton from "../components/ui/Skeleton";
@@ -100,9 +100,78 @@ export default function HomePage() {
   const [sport, setSport] = useState("all");
   const { universeMode, startUniverseTransition } = useTransition();
   const leaving = universeMode === "active";
+  const reduceMotion = useReducedMotion();
+
+  const exploreUniverse = useCallback(() => {
+    startUniverseTransition(() => navigate("/universe", { state: { fromHome: true } }));
+  }, [startUniverseTransition, navigate]);
+
+  // Scrolling down anywhere on the homepage triggers the same universe
+  // transition as the Explore button. There's no real scroll (the page is a
+  // fixed viewport), so we listen for downward wheel / swipe intent instead.
+  useEffect(() => {
+    if (leaving) return;
+    let acc = 0;
+    let done = false;
+    const insideDropdown = (e) => !!e.target?.closest?.('[role="listbox"]');
+
+    const onWheel = (e) => {
+      if (done || insideDropdown(e)) return;
+      if (e.deltaY <= 0) {
+        acc = 0;
+        return;
+      }
+      acc += e.deltaY;
+      if (acc > 30) {
+        done = true;
+        exploreUniverse();
+      }
+    };
+
+    let startY = null;
+    const onTouchStart = (e) => {
+      startY = e.touches[0]?.clientY ?? null;
+    };
+    const onTouchMove = (e) => {
+      if (done || startY == null || insideDropdown(e)) return;
+      const delta = startY - (e.touches[0]?.clientY ?? startY);
+      if (delta > 60) {
+        done = true;
+        exploreUniverse();
+      }
+    };
+
+    window.addEventListener("wheel", onWheel, { passive: true });
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchmove", onTouchMove, { passive: true });
+    return () => {
+      window.removeEventListener("wheel", onWheel);
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchmove", onTouchMove);
+    };
+  }, [leaving, exploreUniverse]);
 
   return (
     <div className="relative h-[calc(100vh-4rem)] overflow-hidden flex flex-col items-center justify-start pt-[6vh] px-6">
+      {/* Readability halo — darkens + softens the busy universe directly behind
+          the hero text, fading smoothly to the clear background at the edges */}
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-0"
+        style={{
+          background:
+            "radial-gradient(58% 66% at 50% 44%, rgba(10,10,15,0.5) 0%, rgba(10,10,15,0.3) 42%, rgba(10,10,15,0) 74%)",
+          backdropFilter: "blur(3px)",
+          WebkitBackdropFilter: "blur(3px)",
+          maskImage:
+            "radial-gradient(58% 66% at 50% 44%, #000 38%, transparent 76%)",
+          WebkitMaskImage:
+            "radial-gradient(58% 66% at 50% 44%, #000 38%, transparent 76%)",
+        }}
+        animate={leaving ? { opacity: 0 } : { opacity: 1 }}
+        transition={{ duration: 0.3, delay: 0, ease: EASE }}
+      />
+
       {/* Foreground content — fades out and drifts up during Phase 1 */}
       <motion.div
         className="relative z-10 flex flex-col items-center"
@@ -130,20 +199,27 @@ export default function HomePage() {
           />
         </div>
 
+        {/* Single Explore control — the accent CTA and the scroll affordance
+            are one button; clicking OR scrolling down both enter the universe */}
         <button
-          onClick={() => startUniverseTransition(() => navigate("/universe", { state: { fromHome: true } }))}
-          className="mt-6 flex flex-col items-center gap-1.5 text-white/40 hover:text-white/80 transition-colors duration-200 group"
-          aria-label="Explore the Universe"
+          onClick={exploreUniverse}
+          className="group mt-8 flex flex-col items-center gap-3 rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-4 focus-visible:ring-offset-[#0a0a0f]"
+          aria-label="Explore the Universe — or scroll down"
         >
-          <span className="font-mono text-xs tracking-widest uppercase">Explore Universe</span>
-          <motion.svg
-            width="20" height="20" viewBox="0 0 20 20" fill="none"
-            animate={{ y: [0, 4, 0] }}
-            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-            className="text-accent opacity-70 group-hover:opacity-100 transition-opacity duration-200"
-          >
-            <path d="M10 4v12M4 10l6 6 6-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-          </motion.svg>
+          <span className="flex items-center rounded-sm border border-accent bg-accent/10 px-7 py-3 text-accent transition-colors duration-200 group-hover:bg-accent group-hover:text-[#0a0a0f]">
+            <span className="font-mono text-sm font-semibold tracking-widest uppercase">Explore Universe</span>
+          </span>
+          <span className="flex items-center gap-1.5 text-white/35 transition-colors duration-200 group-hover:text-white/70">
+            <span className="font-mono text-[10px] tracking-[0.25em] uppercase">Scroll</span>
+            <motion.svg
+              width="14" height="14" viewBox="0 0 24 24" fill="none"
+              animate={reduceMotion ? undefined : { y: [0, 3, 0] }}
+              transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+              className="text-accent/80"
+            >
+              <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </motion.svg>
+          </span>
         </button>
       </motion.div>
 
