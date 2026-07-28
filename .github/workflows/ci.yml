@@ -1,0 +1,111 @@
+name: CI
+
+# Verification only — install, test, audit, lint. No deploy step yet.
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+# Cancel superseded runs on the same ref to save CI minutes.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  backend:
+    name: Backend (pytest + pip-audit)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    # A few auth tests exercise the real /auth/login path, which SELECTs the
+    # users table over a live connection — so CI needs a Postgres, not a stub.
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: crossover
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      # Matches config.py's default DSN, so the service is reachable as-is.
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/crossover
+      JWT_SECRET_KEY: ci-test-secret-not-for-production
+      ENVIRONMENT: development
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: backend/requirements.txt
+
+      # App dependencies go in an isolated venv so the audit sees the app's
+      # dependency closure only — not the CI tooling installed below.
+      - name: Install backend dependencies
+        run: |
+          python -m venv .venv
+          .venv/bin/python -m pip install --upgrade pip
+          .venv/bin/python -m pip install -r requirements.txt
+
+      - name: Install CI tooling
+        run: python -m pip install pip-audit cvss ruff
+
+      # Build the schema straight from the ORM models — the tests only need the
+      # tables to exist, and this sidesteps the repo's multiple alembic heads.
+      - name: Create database schema
+        run: .venv/bin/python -c "from db import engine; from db_models import Base; Base.metadata.create_all(engine)"
+
+      - name: Run tests (pytest)
+        run: .venv/bin/python -m pytest -q
+
+      # pip-audit exits non-zero on ANY advisory; the gate script re-decides
+      # based on CVSS severity, so tolerate its exit and let the gate rule.
+      - name: Audit dependencies (fail on HIGH/CRITICAL)
+        run: |
+          pip-audit --path .venv/lib/python3.11/site-packages -f json \
+            > pip-audit-report.json || true
+          python "$GITHUB_WORKSPACE/.github/scripts/pip_audit_gate.py" \
+            pip-audit-report.json
+
+      # Report-only for now — ratchet to blocking once the tree is ruff-clean.
+      - name: Lint (ruff, non-blocking)
+        continue-on-error: true
+        run: ruff check . --exclude venv --exclude .venv --exclude alembic
+
+  frontend:
+    name: Frontend (build + lint)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install frontend dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      # Report-only for now — ratchet to blocking once the tree is eslint-clean.
+      - name: Lint (eslint, non-blocking)
+        continue-on-error: true
+        run: npm run lint
