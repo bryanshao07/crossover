@@ -2,7 +2,7 @@ import secrets
 from pathlib import Path
 from typing import Optional
 
-from fastapi import APIRouter, Depends, File, HTTPException, Response, UploadFile, status
+from fastapi import APIRouter, Depends, File, HTTPException, Request, Response, UploadFile, status
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
@@ -11,6 +11,12 @@ from auth import create_access_token, get_current_user, hash_password, verify_pa
 from config import settings
 from db import get_db
 from db_models import User
+from rate_limit import (
+    check_account_limit,
+    limiter,
+    record_account_attempt,
+    reset_account,
+)
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
@@ -23,6 +29,15 @@ _ALLOWED_AVATAR_TYPES = {
     "image/webp": "webp",
 }
 _MAX_AVATAR_BYTES = 5 * 1024 * 1024  # 5MB
+
+# Per-account (per-email) throttle: an attacker rotating IPs still can't hammer
+# one account. Per-IP throttling is applied separately via @limiter.limit.
+_ACCOUNT_MAX_ATTEMPTS = 5
+_ACCOUNT_WINDOW_SECONDS = 15 * 60  # 15 minutes
+
+
+def _account_key(email: str) -> str:
+    return email.strip().lower()
 
 
 class AuthRequest(BaseModel):
@@ -69,7 +84,13 @@ def _user_response(user: User) -> UserResponse:
 
 
 @router.post("/signup", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
-def signup(body: AuthRequest, db: Session = Depends(get_db)) -> UserResponse:
+@limiter.limit("10/minute")
+def signup(request: Request, body: AuthRequest, db: Session = Depends(get_db)) -> UserResponse:
+    account_key = _account_key(body.email)
+    check_account_limit(
+        account_key, max_attempts=_ACCOUNT_MAX_ATTEMPTS, window_seconds=_ACCOUNT_WINDOW_SECONDS
+    )
+    record_account_attempt(account_key)
     if db.query(User).filter(User.email == body.email).first():
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Email already registered")
     user = User(email=body.email, hashed_password=hash_password(body.password))
@@ -80,10 +101,19 @@ def signup(body: AuthRequest, db: Session = Depends(get_db)) -> UserResponse:
 
 
 @router.post("/login", response_model=UserResponse)
-def login(body: AuthRequest, response: Response, db: Session = Depends(get_db)) -> UserResponse:
+@limiter.limit("10/minute")
+def login(
+    request: Request, body: AuthRequest, response: Response, db: Session = Depends(get_db)
+) -> UserResponse:
+    account_key = _account_key(body.email)
+    check_account_limit(
+        account_key, max_attempts=_ACCOUNT_MAX_ATTEMPTS, window_seconds=_ACCOUNT_WINDOW_SECONDS
+    )
     user = db.query(User).filter(User.email == body.email).first()
     if not user or not verify_password(body.password, user.hashed_password):
+        record_account_attempt(account_key)
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials")
+    reset_account(account_key)
     _set_auth_cookie(response, create_access_token(user.id))
     return _user_response(user)
 
