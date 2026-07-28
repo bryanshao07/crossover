@@ -18,7 +18,7 @@ const CARD_ATTRIBUTES = [
 export default function PlayerCard({ player }) {
   const color = SPORT_COLOR[player.sport];
   return (
-    <div className="glass flex flex-col overflow-hidden p-4 transition-colors hover:border-accent/50">
+    <div className="glass flex flex-col overflow-hidden p-4 transition-transform transition-colors duration-150 hover:scale-[1.02] hover:border-accent/50">
       <div className="flex gap-4">
         <Avatar sport={player.sport} src={player.headshot_url} size={52} />
         <div className="min-w-0 flex-1">
