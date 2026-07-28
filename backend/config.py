@@ -12,9 +12,12 @@ class Settings(BaseSettings):
     gemini_api_key: Optional[str] = None
     exports_dir: str = str(_REPO_ROOT / "exports")
     uploads_dir: str = str(_REPO_ROOT / "uploads")
+    # Single source of truth for allowed CORS origins (main.py reads this).
+    # Override per-deploy with the CORS_ORIGINS env var (JSON list).
     cors_origins: List[str] = [
         "http://localhost:5173",
         "http://127.0.0.1:5173",
+        "https://crossover-ten-theta.vercel.app",
     ]
     database_url: str = "postgresql://postgres:postgres@localhost:5432/crossover"
     # Required: no default. A missing JWT_SECRET_KEY raises at startup rather than
