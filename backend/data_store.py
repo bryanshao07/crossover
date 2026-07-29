@@ -116,13 +116,13 @@ def load() -> None:
 
     try:
         _cards = _read_json("style_cards.json")
-    except FileNotFoundError:
+    except (FileNotFoundError, json.JSONDecodeError):
         _cards = {}
     try:
         _raw_emb = _read_json("style_embeddings.json")
-    except FileNotFoundError:
-        _raw_emb = {}
-    _set_embeddings(_raw_emb)
+        _set_embeddings(_raw_emb)
+    except (FileNotFoundError, json.JSONDecodeError, ValueError):
+        _set_embeddings({})
 
     _loaded = True
 

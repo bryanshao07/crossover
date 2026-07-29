@@ -4,6 +4,7 @@ Run from backend/:  venv/bin/python -m scripts.build_rag
 Requires GEMINI_API_KEY. Idempotent — reruns only fill in missing players.
 """
 import json
+import os
 import time
 from pathlib import Path
 from typing import Dict
@@ -39,7 +40,12 @@ def _load(path: Path) -> Dict:
 
 
 def _save(path: Path, obj: Dict) -> None:
-    path.write_text(json.dumps(obj, ensure_ascii=False, indent=0), encoding="utf-8")
+    # Write to a temp file in the same directory, then atomically swap it into
+    # place (os.replace is atomic on POSIX) so an interrupted run can never
+    # leave a half-written / truncated JSON file at `path`.
+    tmp = path.parent / f"{path.name}.tmp"
+    tmp.write_text(json.dumps(obj, ensure_ascii=False, indent=0), encoding="utf-8")
+    os.replace(tmp, path)
 
 
 def _stats_for(name: str, sport: str) -> dict:
