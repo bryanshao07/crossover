@@ -17,8 +17,13 @@ CARD_MODEL = "gemini-2.5-flash"
 EMBED_MODEL = "models/text-embedding-004"
 
 
+def _is_empty(v):
+    """Check if a stat value is empty/missing (None, empty string, literal 'nan', or float NaN)."""
+    return v is None or v == "" or v == "nan" or v != v  # v != v catches float('nan')
+
+
 def card_prompt(name: str, sport: str, position: str, stats: dict) -> str:
-    line = ", ".join(f"{k}={v}" for k, v in stats.items() if v not in (None, "", "nan"))
+    line = ", ".join(f"{k}={v}" for k, v in stats.items() if not _is_empty(v))
     return (
         f"Write a 3 sentence scouting profile of this {sport} player's playing "
         "style, strengths, and weaknesses. Be concrete and stylistic; do NOT "
