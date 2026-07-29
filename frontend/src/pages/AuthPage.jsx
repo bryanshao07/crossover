@@ -3,8 +3,22 @@ import { useNavigate } from "react-router-dom";
 import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 
+const MIN_PASSWORD_LEN = 12;
+
 function friendlyError(err, fallback) {
-  return err.response?.data?.detail || fallback;
+  const detail = err.response?.data?.detail;
+  // FastAPI returns a plain string for HTTPExceptions but an array of
+  // { loc, msg, ... } objects for 422 validation errors. Rendering that array
+  // directly as a React child crashes the page, so flatten it to a string.
+  if (typeof detail === "string") return detail;
+  if (Array.isArray(detail)) {
+    const msg = detail
+      .map((d) => (typeof d === "string" ? d : d?.msg))
+      .filter(Boolean)
+      .join(" ");
+    if (msg) return msg;
+  }
+  return fallback;
 }
 
 export default function AuthPage() {
@@ -27,6 +41,10 @@ export default function AuthPage() {
     setError("");
     if (!email.trim() || !password) {
       setError("Email and password are required.");
+      return;
+    }
+    if (mode === "signup" && password.length < MIN_PASSWORD_LEN) {
+      setError(`Password must be at least ${MIN_PASSWORD_LEN} characters.`);
       return;
     }
     setSubmitting(true);
@@ -121,6 +139,11 @@ export default function AuthPage() {
                 {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
               </button>
             </div>
+            {mode === "signup" && (
+              <span className="mt-1.5 block font-mono text-[10px] text-white/40">
+                At least {MIN_PASSWORD_LEN} characters.
+              </span>
+            )}
           </label>
 
           {error && <div className="text-xs text-red-400">{error}</div>}
