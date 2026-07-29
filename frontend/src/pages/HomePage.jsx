@@ -5,7 +5,6 @@ import { motion, useReducedMotion } from "framer-motion";
 import Autocomplete from "../components/search/Autocomplete";
 import FeaturedCard from "../components/cards/FeaturedCard";
 import Skeleton from "../components/ui/Skeleton";
-import { usePlayers } from "../hooks/usePlayers";
 import { api } from "../api/client";
 import { useTransition } from "../context/TransitionContext";
 import { SPORT_OPTIONS } from "../lib/sports";
@@ -157,18 +156,28 @@ function LowerBand() {
     if (el) el.scrollBy({ left: dir * el.clientWidth * 0.8, behavior: "smooth" });
   };
 
+  // Fade each edge only when there's hidden content that way, so the cards
+  // dissolve into motion as they scroll off — mirroring the arrow affordance.
+  const fadeLeft = !atStart;
+  const fadeRight = !atEnd;
+  const leftStop = fadeLeft ? "transparent 0, #000 44px" : "#000 0";
+  const rightStop = fadeRight ? "#000 calc(100% - 44px), transparent 100%" : "#000 100%";
+  const maskImage = `linear-gradient(to right, ${leftStop}, ${rightStop})`;
+
   return (
     <div
       data-lower-band
       className="hidden md:flex absolute z-10 bottom-4 left-4 right-4 mx-auto max-w-6xl glass items-stretch overflow-hidden"
     >
-      <Legend />
+      <BandTitle />
       <ScrollArrow direction="left" onClick={() => scrollByPage(-1)} disabled={atStart} />
-      <div
-        ref={scrollRef}
-        onScroll={updateArrows}
-        className="lower-band-scroll flex-1 min-w-0 flex items-stretch gap-2.5 overflow-x-auto px-3 py-2"
-      >
+      <div className="relative flex flex-1 min-w-0">
+        <div
+          ref={scrollRef}
+          onScroll={updateArrows}
+          style={{ maskImage, WebkitMaskImage: maskImage }}
+          className="lower-band-scroll flex-1 min-w-0 flex items-stretch gap-2.5 overflow-x-auto px-3 py-2"
+        >
         {allSettled
           ? ready.map((r) => {
               const a = r.data.player, b = r.data.matches[0];
@@ -184,6 +193,18 @@ function LowerBand() {
               </div>
             ))}
         <SeeMoreCard />
+        </div>
+        {/* Blurred edges — strongest at the outer edge, fading inward — so cards
+            appear to blur into motion as they scroll off. Shown only where there
+            is hidden content that way. */}
+        <div
+          aria-hidden
+          className={`lower-band-edge lower-band-edge-left transition-opacity duration-300 ${fadeLeft ? "opacity-100" : "opacity-0"}`}
+        />
+        <div
+          aria-hidden
+          className={`lower-band-edge lower-band-edge-right transition-opacity duration-300 ${fadeRight ? "opacity-100" : "opacity-0"}`}
+        />
       </div>
       <ScrollArrow direction="right" onClick={() => scrollByPage(1)} disabled={atEnd} />
     </div>

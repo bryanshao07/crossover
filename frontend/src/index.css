@@ -40,6 +40,29 @@
   .lower-band-scroll::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.3);
   }
+
+  /* Blurred edge overlays for the comparison row: a soft blur strongest at the
+     outer edge, fading inward, so cards blur into motion as they scroll off. */
+  .lower-band-edge {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 56px;
+    pointer-events: none;
+    z-index: 1;
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+  }
+  .lower-band-edge-left {
+    left: 0;
+    -webkit-mask-image: linear-gradient(to right, #000, transparent);
+    mask-image: linear-gradient(to right, #000, transparent);
+  }
+  .lower-band-edge-right {
+    right: 0;
+    -webkit-mask-image: linear-gradient(to left, #000, transparent);
+    mask-image: linear-gradient(to left, #000, transparent);
+  }
 }
 
 @keyframes rotateBorder {
