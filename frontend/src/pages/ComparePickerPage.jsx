@@ -85,7 +85,7 @@ function MatchupCard({ a, b, similarity }) {
   return (
     <Link
       to={`/compare/${enc(a)}/${enc(b)}`}
-      className="glass p-4 flex flex-col hover:border-accent/50 transition-colors"
+      className="glass p-4 flex flex-col hover:border-accent/50 transition-transform transition-colors duration-150 hover:scale-[1.02]"
     >
       <div className="flex items-center justify-between font-mono text-xs font-semibold tracking-wider">
         <span style={{ color: "#4a7fff" }}>NBA</span>

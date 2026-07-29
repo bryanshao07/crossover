@@ -87,7 +87,7 @@ function SeeMoreCard() {
   return (
     <Link
       to="/compare"
-      className="shrink-0 w-44 glass flex flex-col items-center justify-center gap-2 text-center border-accent/40 hover:border-accent hover:bg-accent/10 transition-colors"
+      className="shrink-0 w-44 glass flex flex-col items-center justify-center gap-2 text-center border-accent/40 hover:border-accent hover:bg-accent/10 transition-transform transition-colors duration-150 hover:scale-[1.02]"
     >
       <span className="font-mono text-[11px] font-semibold tracking-[0.18em] uppercase text-accent leading-snug">
         See more<br />comparisons

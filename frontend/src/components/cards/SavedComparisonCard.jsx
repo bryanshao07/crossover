@@ -17,7 +17,7 @@ export default function SavedComparisonCard({ comparison, playerA, playerB }) {
   return (
     <Link
       to={`/compare/${enc(playerA.name)}/${enc(playerB.name)}`}
-      className="glass p-4 flex flex-col gap-3 hover:border-accent/50 transition-colors"
+      className="glass p-4 flex flex-col gap-3 hover:border-accent/50 transition-transform transition-colors duration-150 hover:scale-[1.02]"
     >
       <div className="flex items-center justify-between">
         <SportBadge sport={playerA.sport} />

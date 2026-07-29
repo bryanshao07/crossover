@@ -18,7 +18,7 @@ export default function FavoriteCard({ favorite, player }) {
   return (
     <Link
       to={`/player/${enc(favorite.player_name)}`}
-      className="glass p-4 flex flex-col gap-3 hover:border-accent/50 transition-colors"
+      className="glass p-4 flex flex-col gap-3 hover:border-accent/50 transition-transform transition-colors duration-150 hover:scale-[1.02]"
     >
       <div className="flex items-center justify-between">
         {player ? <SportBadge sport={player.sport} /> : <span />}

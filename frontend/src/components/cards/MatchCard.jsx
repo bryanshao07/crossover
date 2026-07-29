@@ -10,7 +10,7 @@ export default function MatchCard({ match, playerA }) {
     ? `/compare/${encodeURIComponent(playerA)}/${encodeURIComponent(match.name)}`
     : `/player/${encodeURIComponent(match.name)}`;
   return (
-    <Link to={to} className="glass p-4 flex items-center gap-3 hover:border-accent/50 overflow-hidden h-full">
+    <Link to={to} className="glass p-4 flex items-center gap-3 hover:border-accent/50 overflow-hidden h-full transition-transform transition-colors duration-150 hover:scale-[1.02]">
       <Avatar sport={match.sport} src={match.headshot_url} size={48} />
       <div className="min-w-0 flex-1 overflow-hidden">
         <div className="flex items-center gap-2 min-w-0">
