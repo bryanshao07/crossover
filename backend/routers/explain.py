@@ -17,6 +17,5 @@ def explain(player_a: str, player_b: str) -> Explanation:
         raise HTTPException(status_code=404, detail=f"Player not found: {missing}")
     row = ds.sim_row(player_a)
     sim = float(row[player_b]) if row is not None and player_b in row else 0.0
-    bullets = gemini.explain(a, b, sim, ds.pct_stats(player_a, a.sport),
-                             ds.pct_stats(player_b, b.sport))
+    bullets = gemini.explain(a, b, sim, ds.style_card(a.name), ds.style_card(b.name))
     return Explanation(bullets=bullets)
