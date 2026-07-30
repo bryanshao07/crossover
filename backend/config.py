@@ -11,6 +11,12 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
     gemini_api_key: Optional[str] = None
+    # Single source of truth for the Gemini model ids. The embedding model MUST
+    # be identical for the offline document build (scripts/build_rag.py) and the
+    # runtime query embedding (services/rag.py) — a mismatch makes cosine
+    # similarity meaningless. Override per-account via env if a model id retires.
+    gemini_card_model: str = "gemini-flash-latest"
+    gemini_embed_model: str = "models/gemini-embedding-001"
     exports_dir: str = str(_REPO_ROOT / "exports")
     uploads_dir: str = str(_REPO_ROOT / "uploads")
     # Single source of truth for allowed CORS origins (main.py reads this).

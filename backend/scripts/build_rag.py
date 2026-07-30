@@ -14,8 +14,8 @@ import data_store as ds
 
 CARDS_PATH = Path(settings.exports_dir) / "style_cards.json"
 EMB_PATH = Path(settings.exports_dir) / "style_embeddings.json"
-CARD_MODEL = "gemini-2.5-flash"
-EMBED_MODEL = "models/text-embedding-004"
+CARD_MODEL = settings.gemini_card_model
+EMBED_MODEL = settings.gemini_embed_model
 
 MAX_RETRIES = 6
 BASE_BACKOFF = 8.0  # seconds; doubled each rate-limit retry, capped at CAP_BACKOFF

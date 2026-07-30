@@ -9,7 +9,7 @@ if settings.gemini_api_key:
         import google.generativeai as genai
 
         genai.configure(api_key=settings.gemini_api_key)
-        _model = genai.GenerativeModel("gemini-2.5-flash")
+        _model = genai.GenerativeModel(settings.gemini_card_model)
     except Exception:
         _model = None
 

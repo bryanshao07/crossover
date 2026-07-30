@@ -6,7 +6,9 @@ import numpy as np
 import data_store as ds
 from config import settings
 
-EMBED_MODEL = "models/text-embedding-004"
+# Must match scripts/build_rag.py's document-embedding model (both read the same
+# setting) — otherwise query and document vectors live in different spaces.
+EMBED_MODEL = settings.gemini_embed_model
 
 _genai = None
 if settings.gemini_api_key:
