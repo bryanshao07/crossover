@@ -17,6 +17,44 @@ EMB_PATH = Path(settings.exports_dir) / "style_embeddings.json"
 CARD_MODEL = "gemini-2.5-flash"
 EMBED_MODEL = "models/text-embedding-004"
 
+MAX_RETRIES = 6
+BASE_BACKOFF = 8.0  # seconds; doubled each rate-limit retry, capped at CAP_BACKOFF
+CAP_BACKOFF = 120.0
+
+
+def _is_rate_limit(e: Exception) -> bool:
+    """True if the exception looks like a 429 / quota / rate-limit error."""
+    s = str(e).lower()
+    return any(t in s for t in ("429", "quota", "rate limit", "ratelimit", "exhaust", "resource_exhausted"))
+
+
+def _retry_delay_hint(e: Exception):
+    """Honor the API's suggested retry delay when it carries one (seconds)."""
+    rd = getattr(e, "retry_delay", None)
+    secs = getattr(rd, "seconds", None)
+    return float(secs) if secs else None
+
+
+def _call_with_retry(fn, label: str):
+    """Call fn() with exponential backoff. Rate-limit errors back off long
+    (honoring the API's retry_delay hint when present); other transient errors
+    back off briefly. Re-raises the last error after MAX_RETRIES attempts."""
+    last: Exception = RuntimeError("no attempt made")
+    for attempt in range(MAX_RETRIES):
+        try:
+            return fn()
+        except Exception as e:  # noqa: BLE001 — offline batch job, retry everything
+            last = e
+            if attempt == MAX_RETRIES - 1:
+                break
+            if _is_rate_limit(e):
+                wait = _retry_delay_hint(e) or min(BASE_BACKOFF * (2 ** attempt), CAP_BACKOFF)
+            else:
+                wait = min(2.0 * (2 ** attempt), 30.0)
+            print(f"retry {label} (attempt {attempt + 1}/{MAX_RETRIES}) in {wait:.0f}s: {str(e)[:120]}")
+            time.sleep(wait)
+    raise last
+
 
 def _is_empty(v):
     """Check if a stat value is empty/missing (None, empty string, literal 'nan', or float NaN)."""
@@ -71,7 +109,10 @@ def main() -> None:
         if name not in cards:
             prompt = card_prompt(name, p["sport"], p["position"], _stats_for(name, p["sport"]))
             try:
-                cards[name] = (model.generate_content(prompt).text or "").strip()
+                cards[name] = _call_with_retry(
+                    lambda: (model.generate_content(prompt).text or "").strip(),
+                    f"card {name}",
+                )
             except Exception as e:
                 print(f"card FAIL {name}: {e}")
                 continue
@@ -85,8 +126,11 @@ def main() -> None:
         if name in embs or not text:
             continue
         try:
-            resp = genai.embed_content(model=EMBED_MODEL, content=text,
-                                       task_type="retrieval_document")
+            resp = _call_with_retry(
+                lambda: genai.embed_content(model=EMBED_MODEL, content=text,
+                                            task_type="retrieval_document"),
+                f"embed {name}",
+            )
             embs[name] = list(resp["embedding"])
         except Exception as e:
             print(f"embed FAIL {name}: {e}")
