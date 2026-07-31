@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Search } from "lucide-react";
 import { useSearch } from "../hooks/useSearch";
 import PlayerCard from "../components/cards/PlayerCard";
@@ -21,6 +22,7 @@ export default function SearchResultsPage() {
   const [sport, setSport] = useState("");
   const [position, setPosition] = useState("");
   const [page, setPage] = useState(0);
+  const reduceMotion = useReducedMotion();
 
   const semantic = mode === "semantic";
 
@@ -72,29 +74,79 @@ export default function SearchResultsPage() {
   return (
     <div className="max-w-6xl mx-auto p-6">
       <form onSubmit={submit} className="mb-4">
-        <div className="flex items-center gap-3 bg-white/5 border border-white/15 rounded px-3 transition-colors focus-within:border-accent">
-          <Search size={16} className="shrink-0 text-white/40" />
-          <input
-            value={q}
-            onChange={(e) => {
-              setQ(e.target.value);
-              if (!semantic) setPage(0);
-            }}
-            placeholder={
+        <div className="relative">
+          {/* Soft ambient wash behind the bar, sitting under the box-shadow
+              glow below to give the halo some spread. */}
+          <AnimatePresence>
+            {semantic && (
+              <motion.div
+                key="ai-halo"
+                aria-hidden="true"
+                initial={{ opacity: 0 }}
+                animate={
+                  reduceMotion
+                    ? { opacity: 0.5 }
+                    : { opacity: [0.45, 0.85, 0.45], scale: [1, 1.02, 1] }
+                }
+                exit={{ opacity: 0, transition: { duration: 0.3, repeat: 0 } }}
+                transition={
+                  reduceMotion
+                    ? { duration: 0.25 }
+                    : { duration: 2.4, repeat: Infinity, ease: "easeInOut" }
+                }
+                className="pointer-events-none absolute -inset-1 rounded-md bg-accent/30 blur-lg"
+              />
+            )}
+          </AnimatePresence>
+          {/* The bar itself carries the pulsing glow: a box-shadow hugs the
+              element, where a wide backdrop blur just diffuses into nothing. */}
+          <motion.div
+            animate={
               semantic
-                ? "Describe a player — e.g. 'elite rim protector'"
-                : "Search for a player"
+                ? {
+                    boxShadow: reduceMotion
+                      ? "0 0 26px rgba(232,255,71,0.34)"
+                      : [
+                          "0 0 14px rgba(232,255,71,0.16)",
+                          "0 0 38px rgba(232,255,71,0.48)",
+                          "0 0 14px rgba(232,255,71,0.16)",
+                        ],
+                  }
+                : { boxShadow: "0 0 0px rgba(232,255,71,0)" }
             }
-            aria-label="Search players"
-            className="w-full bg-transparent py-3 outline-none"
-          />
-          <button
-            type="submit"
-            aria-label="Search"
-            className="shrink-0 font-mono text-xs px-3 py-1 rounded-sm border border-white/15 text-white/60 transition-colors hover:border-accent hover:text-accent"
+            transition={
+              semantic && !reduceMotion
+                ? { duration: 2.4, repeat: Infinity, ease: "easeInOut" }
+                : { duration: 0.3 }
+            }
+            className={`relative flex items-center gap-3 rounded border px-3 transition-colors ${
+              semantic
+                ? "border-accent/60 bg-accent/[0.05]"
+                : "border-white/15 bg-white/5 focus-within:border-accent"
+            }`}
           >
-            SEARCH
-          </button>
+            <Search
+              size={16}
+              className={`shrink-0 transition-colors ${
+                semantic ? "text-accent" : "text-white/40"
+              }`}
+            />
+            <input
+              value={q}
+              onChange={(e) => {
+                setQ(e.target.value);
+                if (!semantic) setPage(0);
+              }}
+              placeholder={
+                semantic
+                  ? "Describe a player — e.g. 'elite rim protector'"
+                  : "Search for a player"
+              }
+              aria-label="Search players"
+              className="w-full bg-transparent py-3 outline-none"
+            />
+            <SearchModeToggle mode={mode} onChange={changeMode} />
+          </motion.div>
         </div>
       </form>
 
@@ -136,9 +188,6 @@ export default function SearchResultsPage() {
             {p}
           </FilterPill>
         ))}
-        <div className="ml-auto">
-          <SearchModeToggle mode={mode} onChange={changeMode} />
-        </div>
       </div>
 
       <div aria-live="polite" className="sr-only">

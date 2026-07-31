@@ -1,16 +1,19 @@
 import { useRef } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 
 const MODES = [
-  { key: "keyword", label: "KEYWORD" },
+  { key: "keyword", label: "NAME" },
   { key: "semantic", label: "SMART" },
 ];
 const ARROWS = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"];
 
-// Segmented control for choosing between substring keyword search and
-// natural-language semantic search. Implements the ARIA radiogroup pattern:
-// roving tabindex + arrow-key navigation.
+// Compact segmented control that lives inside the search bar. The accent fill
+// is a single shared-layout element, so framer-motion slides it between the two
+// segments instead of popping. Implements the ARIA radiogroup pattern: roving
+// tabindex + arrow-key navigation.
 export default function SearchModeToggle({ mode, onChange }) {
   const refs = useRef([]);
+  const reduceMotion = useReducedMotion();
 
   const handleKeyDown = (e) => {
     if (!ARROWS.includes(e.key)) return;
@@ -27,7 +30,7 @@ export default function SearchModeToggle({ mode, onChange }) {
       role="radiogroup"
       aria-label="Search mode"
       onKeyDown={handleKeyDown}
-      className="inline-flex items-center gap-1 rounded-sm border border-white/15 bg-white/5 p-1"
+      className="relative shrink-0 inline-flex items-center gap-0.5 rounded-sm border border-white/15 bg-black/40 p-0.5"
     >
       {MODES.map((m, i) => {
         const active = mode === m.key;
@@ -42,13 +45,24 @@ export default function SearchModeToggle({ mode, onChange }) {
             aria-checked={active}
             tabIndex={active ? 0 : -1}
             onClick={() => onChange(m.key)}
-            className={`font-mono text-xs px-3 py-1 rounded-sm transition-colors ${
-              active
-                ? "bg-accent text-bg font-semibold"
-                : "text-white/60 hover:text-white"
+            className={`relative px-2.5 py-1 font-mono text-[10px] tracking-wider rounded-sm transition-colors ${
+              active ? "text-bg" : "text-white/50 hover:text-white/80"
             }`}
           >
-            {m.label}
+            {active && (
+              <motion.span
+                layoutId="search-mode-indicator"
+                transition={
+                  reduceMotion
+                    ? { duration: 0 }
+                    : // Deliberately gentle: fast springs finish in ~100ms,
+                      // which reads as a pop rather than a slide.
+                      { type: "spring", stiffness: 200, damping: 26, mass: 1.1 }
+                }
+                className="absolute inset-0 rounded-sm bg-accent"
+              />
+            )}
+            <span className="relative z-10">{m.label}</span>
           </button>
         );
       })}
