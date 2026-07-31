@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Search } from "lucide-react";
 import { useSearch } from "../hooks/useSearch";
 import PlayerCard from "../components/cards/PlayerCard";
@@ -75,41 +75,19 @@ export default function SearchResultsPage() {
     <div className="max-w-6xl mx-auto p-6">
       <form onSubmit={submit} className="mb-4">
         <div className="relative">
-          {/* Soft ambient wash behind the bar, sitting under the box-shadow
-              glow below to give the halo some spread. */}
-          <AnimatePresence>
-            {semantic && (
-              <motion.div
-                key="ai-halo"
-                aria-hidden="true"
-                initial={{ opacity: 0 }}
-                animate={
-                  reduceMotion
-                    ? { opacity: 0.5 }
-                    : { opacity: [0.45, 0.85, 0.45], scale: [1, 1.02, 1] }
-                }
-                exit={{ opacity: 0, transition: { duration: 0.3, repeat: 0 } }}
-                transition={
-                  reduceMotion
-                    ? { duration: 0.25 }
-                    : { duration: 2.4, repeat: Infinity, ease: "easeInOut" }
-                }
-                className="pointer-events-none absolute -inset-1 rounded-md bg-accent/30 blur-lg"
-              />
-            )}
-          </AnimatePresence>
-          {/* The bar itself carries the pulsing glow: a box-shadow hugs the
-              element, where a wide backdrop blur just diffuses into nothing. */}
+          {/* A tight box-shadow on the bar itself: the glow sits on the border
+              and emanates only a little. No backdrop wash -- a filled aura
+              behind the bar reads as heavy rather than as an edge glow. */}
           <motion.div
             animate={
               semantic
                 ? {
                     boxShadow: reduceMotion
-                      ? "0 0 26px rgba(232,255,71,0.34)"
+                      ? "0 0 9px rgba(232,255,71,0.17)"
                       : [
-                          "0 0 14px rgba(232,255,71,0.16)",
-                          "0 0 38px rgba(232,255,71,0.48)",
-                          "0 0 14px rgba(232,255,71,0.16)",
+                          "0 0 4px rgba(232,255,71,0.09)",
+                          "0 0 13px rgba(232,255,71,0.24)",
+                          "0 0 4px rgba(232,255,71,0.09)",
                         ],
                   }
                 : { boxShadow: "0 0 0px rgba(232,255,71,0)" }
@@ -121,7 +99,7 @@ export default function SearchResultsPage() {
             }
             className={`relative flex items-center gap-3 rounded border px-3 transition-colors ${
               semantic
-                ? "border-accent/60 bg-accent/[0.05]"
+                ? "border-accent/50 bg-accent/[0.02]"
                 : "border-white/15 bg-white/5 focus-within:border-accent"
             }`}
           >
