@@ -94,8 +94,12 @@ function PlayerColumn({ player }) {
 const STAT_HIGHLIGHT = `color:#e8ff47;font-family:monospace;font-weight:700`;
 
 function formatBullet(text) {
+  // Bold every **metric** the model emits; also highlight a bare numeric
+  // parenthetical as a fallback — but the paren rule must NOT contain a "*",
+  // otherwise it would swallow an already-bolded "(AST **top 7%**)" and render
+  // the inner asterisks literally.
   return text.replace(
-    /\*\*([^*]+)\*\*|(\([^)]*\d[^)]*\))/g,
+    /\*\*([^*]+)\*\*|(\([^)*]*\d[^)*]*\))/g,
     (match, bold, paren) =>
       `<strong style="${STAT_HIGHLIGHT}">${bold ?? paren}</strong>`
   );

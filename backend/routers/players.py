@@ -4,7 +4,7 @@ from fastapi import APIRouter, HTTPException, Query
 
 import data_store as ds
 from models import PlayerDetail
-from services import similarity
+from services import similarity, rag
 from services.serialize import player_model
 
 router = APIRouter()
@@ -28,7 +28,15 @@ def search(
     q: Optional[str] = Query(default=None),
     sport: Optional[str] = Query(default=None),
     position: Optional[str] = Query(default=None),
+    mode: Optional[str] = Query(default=None),
 ) -> List[dict]:
+    if mode == "semantic" and q:
+        names = rag.semantic_search(q, sport, position, limit=30)
+        if names is not None:
+            rows = [ds.get_player(n) for n in names]
+            return [_with_attributes(r) for r in rows if r is not None]
+        # fall through to keyword search when semantic is unavailable
+
     rows = ds.players()
     if q:
         ql = q.lower()

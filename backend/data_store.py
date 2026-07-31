@@ -2,6 +2,7 @@ import json
 from pathlib import Path
 from typing import Dict, List, Optional
 
+import numpy as np
 import pandas as pd
 
 from config import settings
@@ -27,6 +28,9 @@ _nba_stats: Dict[str, dict] = {}
 _soccer_stats: Dict[str, dict] = {}
 _nba_id_map: Dict[str, int] = {}
 _pl_id_map: Dict[str, int] = {}
+_cards: Dict[str, str] = {}
+_emb_names: List[str] = []
+_emb_matrix: Optional["np.ndarray"] = None
 _loaded = False
 
 
@@ -44,8 +48,33 @@ def _load_pct(filename: str) -> Dict[str, Dict[str, float]]:
     return out
 
 
+def _set_embeddings(raw: Dict[str, list]) -> None:
+    global _emb_names, _emb_matrix
+    if not raw:
+        _emb_names, _emb_matrix = [], None
+        return
+    names = list(raw.keys())
+    mat = np.asarray([raw[n] for n in names], dtype=float)
+    norms = np.linalg.norm(mat, axis=1, keepdims=True)
+    norms[norms == 0] = 1.0
+    _emb_names = names
+    _emb_matrix = mat / norms
+
+
+def style_card(name: str) -> Optional[str]:
+    return _cards.get(name)
+
+
+def embedding_matrix() -> Optional["np.ndarray"]:
+    return _emb_matrix
+
+
+def embedding_names() -> List[str]:
+    return _emb_names
+
+
 def load() -> None:
-    global _index, _index_by_name, _vectors, _umap, _quality, _pct, _sim, _nba_stats, _soccer_stats, _nba_id_map, _pl_id_map, _loaded
+    global _index, _index_by_name, _vectors, _umap, _quality, _pct, _sim, _nba_stats, _soccer_stats, _nba_id_map, _pl_id_map, _cards, _loaded
     if _loaded:
         return
 
@@ -84,6 +113,16 @@ def load() -> None:
 
     _nba_id_map = _read_json("nba_id_map.json")
     _pl_id_map = _read_json("pl_id_map.json")
+
+    try:
+        _cards = _read_json("style_cards.json")
+    except (FileNotFoundError, json.JSONDecodeError):
+        _cards = {}
+    try:
+        _raw_emb = _read_json("style_embeddings.json")
+        _set_embeddings(_raw_emb)
+    except (FileNotFoundError, json.JSONDecodeError, ValueError):
+        _set_embeddings({})
 
     _loaded = True
 
