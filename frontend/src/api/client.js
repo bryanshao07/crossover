@@ -17,9 +17,16 @@ export const api = {
   compare: (a, b) => http.get(`/compare/${enc(a)}/${enc(b)}`).then((r) => r.data),
   getUniverse: () => http.get("/universe").then((r) => r.data),
   explain: (a, b) => http.get(`/explain/${enc(a)}/${enc(b)}`).then((r) => r.data),
-  search: ({ q, sport, position }) =>
+  search: ({ q, sport, position, mode }) =>
     http
-      .get("/search", { params: { q: q || undefined, sport: sport || undefined, position: position || undefined } })
+      .get("/search", {
+        params: {
+          q: q || undefined,
+          sport: sport || undefined,
+          position: position || undefined,
+          mode: mode || undefined,
+        },
+      })
       .then((r) => r.data),
 
   signup: (email, password) => http.post("/auth/signup", { email, password }).then((r) => r.data),
