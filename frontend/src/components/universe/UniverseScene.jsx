@@ -3,6 +3,15 @@ import * as THREE from "three";
 import { Canvas, useThree, useFrame } from "@react-three/fiber";
 import { OrbitControls, Line, Html, GizmoHelper } from "@react-three/drei";
 import PlayerPoints from "./PlayerPoints";
+import PerfHUD from "./PerfHUD";
+
+// Dev-only perf overlay, opt-in per page load via /universe?perf=1. The DEV
+// check is compile-time, so the HUD and its useFrame subscription are absent
+// from production builds entirely.
+const PERF_ENABLED =
+  import.meta.env.DEV &&
+  typeof window !== "undefined" &&
+  new URLSearchParams(window.location.search).has("perf");
 
 const DEFAULT_TARGET = new THREE.Vector3(0, 0, 0);
 const DEFAULT_CAMERA = new THREE.Vector3(8.1, 7, 14.0);
@@ -453,6 +462,7 @@ export default function UniverseScene({
   return (
     <Canvas camera={{ position: [0, 10, 28], fov: 60 }}>
       <ambientLight />
+      {PERF_ENABLED && <PerfHUD />}
       <CameraRig
         selectedPlayer={selectedPlayer}
         resetZoomRef={resetZoomRef}
