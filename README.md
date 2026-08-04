@@ -11,60 +11,31 @@ players into one seven-attribute space and ranks each player's closest counterpa
 sport, built with React (Vite) + Three.js on the front end, FastAPI + PostgreSQL on the back end,
 and the Gemini API for semantic search and comparison explanations.
 
-The similarity math is offline: `notebook/notebook.ipynb` scales the raw stat lines into seven
-normalized attributes (scoring, playmaking, defensive_impact, efficiency, versatility,
-physical_dominance, durability), computes the cosine similarity matrix and a 3D UMAP embedding, and
-writes everything to `exports/`. Those files are committed, and `backend/data_store.py` loads them
-once at process start — nothing is recomputed per request. On top of that sit a FastAPI service
-(player/compare/universe/search endpoints, plus JWT cookie auth, saved comparisons and favorites in
-Postgres) and a React SPA whose Universe page renders all 585 players as a single instanced
-Three.js mesh.
-
 ## Project Status
 
 Deployed live at **https://crossover-ten-theta.vercel.app/** — frontend on Vercel, API on Render.
 
 
-The user-facing flows are complete and covered by 77 passing backend tests. What is still open:
+The user-facing flows are complete and covered by 77 passing backend tests. 
 
-- **Lint gates in CI are advisory, not blocking.** Both lint steps in `.github/workflows/ci.yml`
-  carry `continue-on-error: true` with the note "ratchet to blocking once the tree is ruff-clean /
-  eslint-clean". On a fresh clone of `main`, `ruff check . --exclude venv --exclude .venv --exclude
-  alembic` reports 166 findings (113 auto-fixable) and `npm run lint` reports 4 errors and 1 warning
-  (for example, an unused `useNavigate` import in `frontend/src/pages/UniversePage.jsx`).
-- **CI verifies but does not deploy.** The pipeline runs pytest against a Postgres service, a
-  `pip-audit` gate that fails on HIGH/CRITICAL advisories, and the frontend build. Deploys happen on
-  Vercel and Render outside of it.
-- **The notebook does not run end to end from a fresh clone.** `notebook/notebook.ipynb` reads
-  `exports/nba-advanced-stats.csv` and `data/soccer-stats.csv`, but in the repo those files live at
-  `data/nba-advanced-stats.csv` and `exports/soccer-stats.csv`. The app is unaffected — every
-  artifact the notebook produces is already committed under `exports/`.
-- **`next-app/` is an unused scaffold.** It is an unmodified Vite + React + TypeScript + shadcn/ui
-  starter template; nothing in `frontend/`, `backend/`, or CI references it.
 
 ## Project Screenshots
 
+**Homepage** — search with autocomplete over all 585 players, sport filter pills, and a Three.js
+particle field behind the hero, with the top cross-sport comparisons carousel below.
+
+![CrossOver homepage](docs/screenshots/homepage.png)
+
+**Universe** — every player rendered as one instanced Three.js mesh, with sport filters, a color-by
+selector, and click-through to a player profile.
+
 ![CrossOver universe view](docs/screenshots/universe.png)
 
+**Comparison** — both players side by side with their seven attribute scores and DNA labels, the
+similarity score and its percentile among all cross-sport pairs, and an overlapping radar chart.
+The Gemini write-up opens in a modal behind "Generate explanation".
+
 ![CrossOver comparison view](docs/screenshots/comparison.png)
-
-Neither file is in the repo yet. To produce them, start both servers (see below), create the
-directory, and capture the two views at roughly 1440×900:
-
-```bash
-mkdir -p docs/screenshots
-```
-
-1. `docs/screenshots/universe.png` — open http://localhost:5173/universe and let the intro
-   animation settle so the left control panel is in place and the point cloud is fully rendered,
-   then hover a point so the tooltip shows. Frame the whole viewport: control panel on the left, 3D
-   scatter filling the rest.
-2. `docs/screenshots/comparison.png` — open http://localhost:5173/compare, pick one NBA and one
-   soccer player (for example Nikola Jokić and Kevin De Bruyne) to land on
-   `/compare/Nikola%20Joki%C4%87/Kevin%20De%20Bruyne`. Frame the similarity score, both player
-   columns, and the overlapping radar chart. The Gemini write-up is not on this page by default —
-   it opens in a modal behind the "Generate explanation" button, so capture that separately if you
-   want it shown.
 
 ## Installation and Setup Instructions
 
