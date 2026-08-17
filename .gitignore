@@ -1,4 +1,5 @@
 backend/.env
+frontend/.env
 
 # Python
 __pycache__/

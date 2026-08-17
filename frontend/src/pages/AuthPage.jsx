@@ -35,7 +35,11 @@ export default function AuthPage() {
   const navigate = useNavigate();
 
   const googleButtonRef = useRef(null);
-  const gsiReady = useGoogleIdentity(Boolean(GOOGLE_CLIENT_ID));
+  const { ready: gsiReady, failed: gsiFailed } = useGoogleIdentity(Boolean(GOOGLE_CLIENT_ID));
+  // A definitive load failure (blocked script, CSP, network, Google outage)
+  // hides the block entirely rather than leaving a permanent empty gap above
+  // the divider — the form below is unaffected either way.
+  const showGoogle = Boolean(GOOGLE_CLIENT_ID) && !gsiFailed;
 
   // The GSI callback is registered once, but it closes over state that changes
   // every render. A ref keeps Google calling the *current* handler instead of a
@@ -59,18 +63,50 @@ export default function AuthPage() {
   });
 
   useEffect(() => {
-    if (!gsiReady || !GOOGLE_CLIENT_ID || !googleButtonRef.current) return;
+    const container = googleButtonRef.current;
+    if (!gsiReady || !GOOGLE_CLIENT_ID || !container) return;
+
     window.google.accounts.id.initialize({
       client_id: GOOGLE_CLIENT_ID,
       callback: (response) => handleCredentialRef.current(response),
     });
-    window.google.accounts.id.renderButton(googleButtonRef.current, {
-      theme: "filled_black",
-      shape: "rectangular",
-      text: "continue_with",
-      // Matches the form width: max-w-md (448px) minus p-8 padding on both sides.
-      width: 384,
+
+    // Google's renderButton takes a fixed pixel width — no percentage or
+    // responsive option — so the container is measured and the button is
+    // re-rendered on resize instead of assuming the card's max width (which
+    // only holds on viewports wide enough that max-w-md is the binding
+    // constraint; on phones the card is narrower than 384px).
+    let lastWidth = 0;
+    let frame = null;
+
+    function renderAt(width) {
+      const clamped = Math.max(200, Math.min(400, Math.round(width)));
+      if (clamped === lastWidth) return;
+      lastWidth = clamped;
+      container.replaceChildren(); // avoid stacking duplicate buttons on re-render
+      window.google.accounts.id.renderButton(container, {
+        theme: "filled_black",
+        shape: "rectangular",
+        text: "continue_with",
+        width: clamped,
+      });
+    }
+
+    renderAt(container.getBoundingClientRect().width || 384);
+
+    const observer = new ResizeObserver((entries) => {
+      const width = entries[0]?.contentRect.width;
+      if (!width) return;
+      // Coalesce rapid resize callbacks to at most one render per frame.
+      if (frame !== null) cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => renderAt(width));
     });
+    observer.observe(container);
+
+    return () => {
+      observer.disconnect();
+      if (frame !== null) cancelAnimationFrame(frame);
+    };
   }, [gsiReady]);
 
   // Live hint only once the user has typed something to compare against, so the
@@ -152,7 +188,7 @@ export default function AuthPage() {
           {mode === "login" ? "Log in to continue your crossover journey." : "Start comparing across sports."}
         </p>
 
-        {GOOGLE_CLIENT_ID && (
+        {showGoogle && (
           <>
             <div ref={googleButtonRef} className="flex justify-center min-h-[40px]" />
             <div className="flex items-center gap-3 my-5">
