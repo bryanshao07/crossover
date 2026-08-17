@@ -110,3 +110,38 @@ def test_rejects_token_without_sub(stub_decode):
     stub_decode(claims)
     with pytest.raises(InvalidGoogleToken):
         verify_google_id_token("tok", CLIENT_ID)
+
+
+def test_jwks_url_points_at_google():
+    # Every test above replaces `get_signing_key_from_jwt` outright, so none
+    # of them ever exercise `_JWKS_URL` — a wrong endpoint would go
+    # undetected without pinning the literal value directly.
+    assert google_oauth._JWKS_URL == "https://www.googleapis.com/oauth2/v3/certs"
+
+
+def test_raises_distinct_error_when_jwks_endpoint_unreachable(monkeypatch):
+    # A network/outage failure is not evidence of forgery. The route needs a
+    # different exception here so it can return 503 instead of the 401 an
+    # actually-invalid token gets.
+    def fake_signing_key(credential):
+        raise jwt.PyJWKClientConnectionError("connection refused")
+
+    monkeypatch.setattr(
+        google_oauth._jwks_client, "get_signing_key_from_jwt", fake_signing_key
+    )
+    with pytest.raises(google_oauth.GoogleOAuthUnavailable):
+        verify_google_id_token("tok", CLIENT_ID)
+
+
+def test_does_not_swallow_unrelated_bugs_as_invalid_token(monkeypatch):
+    # A bare `except Exception` would misreport a genuine bug (e.g. a caller
+    # passing the wrong type somewhere upstream) as "invalid token". Only
+    # PyJWT's own error family should be treated as a rejected credential.
+    def fake_signing_key(credential):
+        raise TypeError("boom")
+
+    monkeypatch.setattr(
+        google_oauth._jwks_client, "get_signing_key_from_jwt", fake_signing_key
+    )
+    with pytest.raises(TypeError):
+        verify_google_id_token("tok", CLIENT_ID)
