@@ -23,6 +23,7 @@ from rate_limit import (
     record_account_attempt,
     reset_account,
 )
+from services.google_oauth import GoogleOAuthUnavailable, InvalidGoogleToken, verify_google_id_token
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
@@ -84,6 +85,10 @@ class SignupRequest(_EmailBody):
     password: Annotated[
         str, StringConstraints(min_length=_MIN_PASSWORD_LEN, max_length=_MAX_PASSWORD_LEN)
     ]
+
+
+class GoogleAuthRequest(BaseModel):
+    credential: str
 
 
 class UserResponse(BaseModel):
@@ -157,10 +162,67 @@ def login(
         account_key, max_attempts=_ACCOUNT_MAX_ATTEMPTS, window_seconds=_ACCOUNT_WINDOW_SECONDS
     )
     user = db.query(User).filter(User.email == body.email).first()
-    if not user or not verify_password(body.password, user.hashed_password):
+    # A Google-created account has no password. Fall through to the same generic
+    # 401 rather than passing None to verify_password (which would 500).
+    if not user or not user.hashed_password or not verify_password(
+        body.password, user.hashed_password
+    ):
         record_account_attempt(account_key)
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials")
     reset_account(account_key)
+    _set_auth_cookie(response, create_access_token(user.id))
+    return _user_response(user)
+
+
+@router.post("/google", response_model=UserResponse)
+@limiter.limit("10/minute")
+def google_auth(
+    request: Request, body: GoogleAuthRequest, response: Response, db: Session = Depends(get_db)
+) -> UserResponse:
+    if not settings.google_client_id:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Google sign-in is not configured.",
+        )
+
+    try:
+        identity = verify_google_id_token(body.credential, settings.google_client_id)
+    except InvalidGoogleToken:
+        # Generic message: the specific reason is useful to an attacker probing
+        # tokens and useless to a legitimate user.
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Could not sign in with Google.",
+        )
+    except GoogleOAuthUnavailable:
+        # Not the user's fault: Google's key service could not be reached. A 401
+        # here would make a Google-side outage indistinguishable from mass
+        # credential forgery, so this gets its own generic 503 instead.
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Google sign-in is temporarily unavailable.",
+        )
+
+    # Subject id first: it is permanent, whereas a user can change their email.
+    user = db.query(User).filter(User.google_sub == identity.sub).first()
+    if user is None:
+        user = db.query(User).filter(User.email == identity.email).first()
+        if user is not None:
+            # Link: Google vouched for this address (email_verified was enforced
+            # during verification), so it is the same person. The password, if
+            # any, is left intact and keeps working.
+            user.google_sub = identity.sub
+        else:
+            user = User(
+                email=identity.email,
+                hashed_password=None,
+                google_sub=identity.sub,
+                avatar_url=identity.picture,
+            )
+            db.add(user)
+    db.commit()
+    db.refresh(user)
+
     _set_auth_cookie(response, create_access_token(user.id))
     return _user_response(user)
 
