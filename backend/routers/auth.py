@@ -1,3 +1,4 @@
+import logging
 import secrets
 from pathlib import Path
 from typing import Annotated, Optional
@@ -25,6 +26,8 @@ from rate_limit import (
     reset_account,
 )
 from services.google_oauth import GoogleOAuthUnavailable, InvalidGoogleToken, verify_google_id_token
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
@@ -243,18 +246,44 @@ def google_auth(
             db.add(user)
             try:
                 db.commit()
-            except IntegrityError:
+            except IntegrityError as exc:
                 # Two first-time sign-ins can race (a double-clicked button, a
                 # GIS callback retry): both miss the SELECTs above and both try
                 # to INSERT, and the loser hits the email/google_sub unique
-                # constraint. That's a benign, mundane race, not evidence of
-                # anything wrong — recover by re-reading the row the winner
-                # created instead of letting the constraint violation surface
-                # as a 500.
+                # constraint. That's usually a benign, mundane race — but this
+                # bare except also catches any other integrity violation on this
+                # insert (a future NOT NULL/FK/check-constraint bug), so log it
+                # before recovering. Otherwise a genuine server-side defect would
+                # be silently absorbed into a routine-looking sign-in or 401 and
+                # never reach error monitoring.
+                logger.warning(
+                    "IntegrityError inserting Google-auth user (sub=%s): %s", identity.sub, exc
+                )
                 db.rollback()
                 user = db.query(User).filter(User.google_sub == identity.sub).first()
                 if user is None:
                     user = db.query(User).filter(User.email == identity.email).first()
+                    if user is not None:
+                        if user.google_sub is not None and user.google_sub != identity.sub:
+                            # Same guard as the non-race email-link path above,
+                            # required here too: re-reading by google_sub found
+                            # nothing, but a row for this email now exists and
+                            # belongs to a DIFFERENT Google identity. Without
+                            # this check, the recovery path would sign identity
+                            # A into identity B's account — the exact
+                            # cross-identity takeover the non-race path rejects,
+                            # just reached through the race window instead.
+                            raise HTTPException(
+                                status_code=status.HTTP_401_UNAUTHORIZED,
+                                detail="Could not sign in with Google.",
+                            )
+                        # The row a concurrent request created is a bare
+                        # password account for this address (no Google identity
+                        # attached yet) — link it exactly as the non-race
+                        # email-match path would, rather than signing the caller
+                        # in without recording the link.
+                        user.google_sub = identity.sub
+                        db.commit()
                 if user is None:
                     raise HTTPException(
                         status_code=status.HTTP_401_UNAUTHORIZED,

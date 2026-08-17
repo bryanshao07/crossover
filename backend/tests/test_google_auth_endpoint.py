@@ -195,6 +195,104 @@ def test_concurrent_first_time_signup_recovers_without_500(monkeypatch):
     db.close()
 
 
+def test_concurrent_signup_with_conflicting_email_and_different_sub_is_rejected(monkeypatch):
+    # NB1 regression: the winning row of the race belongs to a DIFFERENT
+    # Google identity (e.g. identity B already claimed this email moments
+    # earlier). Recovering by falling back to email with no ownership check
+    # would sign identity A straight into identity B's account — the exact
+    # cross-identity takeover the non-race email-link path rejects, reached
+    # here through the race window instead. Shaped exactly like
+    # test_concurrent_first_time_signup_recovers_without_500 above, except the
+    # winning row carries a different sub than the token.
+    real_db = SessionLocal()
+    original_commit = real_db.commit
+    state = {"raised": False}
+
+    def flaky_commit():
+        if not state["raised"]:
+            state["raised"] = True
+            winner = SessionLocal()
+            # The race's winner belongs to a different Google identity than
+            # the one in this request's token.
+            winner.add(User(email=EMAIL, hashed_password=None, google_sub="victim-sub-B"))
+            winner.commit()
+            winner.close()
+        return original_commit()
+
+    real_db.commit = flaky_commit
+
+    def override_get_db():
+        yield real_db
+
+    app.dependency_overrides[get_db] = override_get_db
+    try:
+        # Token belongs to a different ("attacker") identity than the row the
+        # race committed.
+        _stub_verify(
+            monkeypatch, GoogleIdentity(sub="attacker-sub-A", email=EMAIL, picture="https://pic")
+        )
+        r = client.post("/auth/google", json={"credential": "tok"})
+    finally:
+        app.dependency_overrides.pop(get_db, None)
+        real_db.close()
+
+    assert r.status_code == 401
+    # No session must be issued for the rejected takeover attempt.
+    assert r.cookies.get("access_token") is None
+
+    db = SessionLocal()
+    user = db.query(User).filter(User.email == EMAIL).first()
+    # Not hijacked: the victim identity still owns the account.
+    assert user.google_sub == "victim-sub-B"
+    db.close()
+
+
+def test_concurrent_signup_links_a_password_account_created_by_the_race(monkeypatch):
+    # NB2 regression: the winning row of the race is a plain password signup
+    # for the same address (no Google identity attached yet) — the same
+    # situation the non-race email-match path links. The recovery path must
+    # link it too, rather than signing the caller in while silently leaving
+    # google_sub unset (which would skip the link and repeat this same race
+    # path on every future Google sign-in for this user).
+    real_db = SessionLocal()
+    original_commit = real_db.commit
+    state = {"raised": False}
+
+    def flaky_commit():
+        if not state["raised"]:
+            state["raised"] = True
+            winner = SessionLocal()
+            winner.add(User(email=EMAIL, hashed_password=hash_password("a-good-password")))
+            winner.commit()
+            winner.close()
+        return original_commit()
+
+    real_db.commit = flaky_commit
+
+    def override_get_db():
+        yield real_db
+
+    app.dependency_overrides[get_db] = override_get_db
+    try:
+        _stub_verify(monkeypatch, GoogleIdentity(sub=SUB, email=EMAIL, picture="https://pic"))
+        r = client.post("/auth/google", json={"credential": "tok"})
+    finally:
+        app.dependency_overrides.pop(get_db, None)
+        real_db.close()
+
+    assert r.status_code == 200
+    assert r.cookies.get("access_token")
+
+    db = SessionLocal()
+    user = db.query(User).filter(User.email == EMAIL).first()
+    # Linked, not left dangling: the race-created password account now has the
+    # Google identity attached, exactly as the non-race path would do.
+    assert user.google_sub == SUB
+    # The password from the race-winning signup must survive the link.
+    assert user.hashed_password is not None
+    db.close()
+
+
 def test_sub_match_wins_over_a_different_users_email(monkeypatch):
     # User A already owns SUB (and address EMAIL). User B owns a different,
     # unrelated address that happens to match the incoming token's email claim.
