@@ -31,6 +31,8 @@ export const api = {
 
   signup: (email, password) => http.post("/auth/signup", { email, password }).then((r) => r.data),
   login: (email, password) => http.post("/auth/login", { email, password }).then((r) => r.data),
+  googleLogin: (credential) =>
+    http.post("/auth/google", { credential }).then((r) => r.data),
   logout: () => http.post("/auth/logout").then((r) => r.data),
   getMe: () => http.get("/auth/me").then((r) => r.data),
 
