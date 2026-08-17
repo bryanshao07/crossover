@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
+import { useGoogleIdentity } from "../hooks/useGoogleIdentity";
 
 const MIN_PASSWORD_LEN = 8;
+const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
 function friendlyError(err, fallback) {
   const detail = err.response?.data?.detail;
@@ -29,8 +31,47 @@ export default function AuthPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
-  const { login, signup } = useAuth();
+  const { login, signup, loginWithGoogle } = useAuth();
   const navigate = useNavigate();
+
+  const googleButtonRef = useRef(null);
+  const gsiReady = useGoogleIdentity(Boolean(GOOGLE_CLIENT_ID));
+
+  // The GSI callback is registered once, but it closes over state that changes
+  // every render. A ref keeps Google calling the *current* handler instead of a
+  // stale one captured at initialize() time. Assigned from an effect (not
+  // during render) so it stays a side effect rather than a render-time ref
+  // write — react-hooks/refs flags the latter even for this pattern.
+  const handleCredentialRef = useRef();
+  useEffect(() => {
+    handleCredentialRef.current = async ({ credential }) => {
+      setError("");
+      setSubmitting(true);
+      try {
+        await loginWithGoogle(credential);
+        navigate("/");
+      } catch (err) {
+        setError(friendlyError(err, "Could not sign in with Google."));
+      } finally {
+        setSubmitting(false);
+      }
+    };
+  });
+
+  useEffect(() => {
+    if (!gsiReady || !GOOGLE_CLIENT_ID || !googleButtonRef.current) return;
+    window.google.accounts.id.initialize({
+      client_id: GOOGLE_CLIENT_ID,
+      callback: (response) => handleCredentialRef.current(response),
+    });
+    window.google.accounts.id.renderButton(googleButtonRef.current, {
+      theme: "filled_black",
+      shape: "rectangular",
+      text: "continue_with",
+      // Matches the form width: max-w-md (448px) minus p-8 padding on both sides.
+      width: 384,
+    });
+  }, [gsiReady]);
 
   // Live hint only once the user has typed something to compare against, so the
   // field doesn't read as an error while it's still being filled in.
@@ -110,6 +151,19 @@ export default function AuthPage() {
         <p className="text-sm text-white/50 mb-6">
           {mode === "login" ? "Log in to continue your crossover journey." : "Start comparing across sports."}
         </p>
+
+        {GOOGLE_CLIENT_ID && (
+          <>
+            <div ref={googleButtonRef} className="flex justify-center min-h-[40px]" />
+            <div className="flex items-center gap-3 my-5">
+              <div className="h-px flex-1 bg-white/10" />
+              <span className="font-mono text-[10px] text-white/40 uppercase tracking-wider">
+                Or
+              </span>
+              <div className="h-px flex-1 bg-white/10" />
+            </div>
+          </>
+        )}
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <label className="block">
