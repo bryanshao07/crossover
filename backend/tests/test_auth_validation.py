@@ -38,6 +38,15 @@ def test_signup_rejects_short_password():
         SignupRequest(email="a@b.com", password="short")
 
 
+def test_signup_accepts_minimum_length_password():
+    assert SignupRequest(email="a@b.com", password="12345678").password == "12345678"
+
+
+def test_signup_rejects_password_one_below_minimum():
+    with pytest.raises(ValidationError):
+        SignupRequest(email="a@b.com", password="1234567")
+
+
 def test_signup_rejects_overlong_password():
     with pytest.raises(ValidationError):
         SignupRequest(email="a@b.com", password="x" * 73)

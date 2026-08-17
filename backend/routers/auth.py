@@ -41,7 +41,7 @@ _MAX_AVATAR_BYTES = 5 * 1024 * 1024  # 5MB
 _ACCOUNT_MAX_ATTEMPTS = 5
 _ACCOUNT_WINDOW_SECONDS = 15 * 60  # 15 minutes
 
-_MIN_PASSWORD_LEN = 12
+_MIN_PASSWORD_LEN = 8
 _MAX_PASSWORD_LEN = 72  # bcrypt silently truncates input beyond 72 bytes
 
 
