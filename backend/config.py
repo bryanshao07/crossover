@@ -17,6 +17,9 @@ class Settings(BaseSettings):
     # similarity meaningless. Override per-account via env if a model id retires.
     gemini_card_model: str = "gemini-flash-latest"
     gemini_embed_model: str = "models/gemini-embedding-001"
+    # Google Sign-In client id. Public by design (it ships in the JS bundle).
+    # Absent = the feature is off: /auth/google returns 503 and the button hides.
+    google_client_id: Optional[str] = None
     exports_dir: str = str(_REPO_ROOT / "exports")
     uploads_dir: str = str(_REPO_ROOT / "uploads")
     # Single source of truth for allowed CORS origins (main.py reads this).

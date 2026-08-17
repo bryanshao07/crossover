@@ -1,9 +1,11 @@
+import logging
 import secrets
 from pathlib import Path
 from typing import Annotated, Optional
 
 from fastapi import APIRouter, Depends, File, HTTPException, Request, Response, UploadFile, status
 from pydantic import BaseModel, EmailStr, StringConstraints, field_validator
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 import data_store as ds
@@ -23,6 +25,9 @@ from rate_limit import (
     record_account_attempt,
     reset_account,
 )
+from services.google_oauth import GoogleOAuthUnavailable, InvalidGoogleToken, verify_google_id_token
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
@@ -84,6 +89,10 @@ class SignupRequest(_EmailBody):
     password: Annotated[
         str, StringConstraints(min_length=_MIN_PASSWORD_LEN, max_length=_MAX_PASSWORD_LEN)
     ]
+
+
+class GoogleAuthRequest(BaseModel):
+    credential: str
 
 
 class UserResponse(BaseModel):
@@ -157,10 +166,132 @@ def login(
         account_key, max_attempts=_ACCOUNT_MAX_ATTEMPTS, window_seconds=_ACCOUNT_WINDOW_SECONDS
     )
     user = db.query(User).filter(User.email == body.email).first()
-    if not user or not verify_password(body.password, user.hashed_password):
+    # A Google-created account has no password. The installed passlib (1.7.4)
+    # happens to return False rather than raise for a None hash, so this
+    # short-circuit isn't preventing a crash today — it's defense-in-depth
+    # against that being a passlib implementation detail, not a documented
+    # contract, plus it skips a pointless hash comparison for an account that
+    # can never have a matching password.
+    if not user or not user.hashed_password or not verify_password(
+        body.password, user.hashed_password
+    ):
         record_account_attempt(account_key)
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials")
     reset_account(account_key)
+    _set_auth_cookie(response, create_access_token(user.id))
+    return _user_response(user)
+
+
+@router.post("/google", response_model=UserResponse)
+@limiter.limit("10/minute")
+def google_auth(
+    request: Request, body: GoogleAuthRequest, response: Response, db: Session = Depends(get_db)
+) -> UserResponse:
+    if not settings.google_client_id:
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Google sign-in is not configured.",
+        )
+
+    try:
+        identity = verify_google_id_token(body.credential, settings.google_client_id)
+    except InvalidGoogleToken:
+        # Generic message: the specific reason is useful to an attacker probing
+        # tokens and useless to a legitimate user.
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Could not sign in with Google.",
+        )
+    except GoogleOAuthUnavailable:
+        # Not the user's fault: Google's key service could not be reached. A 401
+        # here would make a Google-side outage indistinguishable from mass
+        # credential forgery, so this gets its own generic 503 instead.
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="Google sign-in is temporarily unavailable.",
+        )
+
+    # Subject id first: it is permanent, whereas a user can change their email.
+    user = db.query(User).filter(User.google_sub == identity.sub).first()
+    if user is None:
+        user = db.query(User).filter(User.email == identity.email).first()
+        if user is not None:
+            if user.google_sub is not None and user.google_sub != identity.sub:
+                # This address is already linked to a DIFFERENT Google identity
+                # (e.g. a Workspace account was deleted and recreated with a new
+                # sub but the same email). Linking a bare password account to
+                # Google and transferring an account between two Google
+                # identities are different operations — only the former is
+                # allowed here. Silently rebinding would let this identity
+                # evict the rightful owner, who could then evict it right back
+                # on their next sign-in. Reject with the same generic message
+                # an invalid token gets, so the response doesn't reveal that
+                # the address is already linked to someone else.
+                raise HTTPException(
+                    status_code=status.HTTP_401_UNAUTHORIZED,
+                    detail="Could not sign in with Google.",
+                )
+            # Link: Google vouched for this address (email_verified was enforced
+            # during verification), so it is the same person. The password, if
+            # any, is left intact and keeps working.
+            user.google_sub = identity.sub
+            db.commit()
+        else:
+            user = User(
+                email=identity.email,
+                hashed_password=None,
+                google_sub=identity.sub,
+                avatar_url=identity.picture,
+            )
+            db.add(user)
+            try:
+                db.commit()
+            except IntegrityError as exc:
+                # Two first-time sign-ins can race (a double-clicked button, a
+                # GIS callback retry): both miss the SELECTs above and both try
+                # to INSERT, and the loser hits the email/google_sub unique
+                # constraint. That's usually a benign, mundane race — but this
+                # bare except also catches any other integrity violation on this
+                # insert (a future NOT NULL/FK/check-constraint bug), so log it
+                # before recovering. Otherwise a genuine server-side defect would
+                # be silently absorbed into a routine-looking sign-in or 401 and
+                # never reach error monitoring.
+                logger.warning(
+                    "IntegrityError inserting Google-auth user (sub=%s): %s", identity.sub, exc
+                )
+                db.rollback()
+                user = db.query(User).filter(User.google_sub == identity.sub).first()
+                if user is None:
+                    user = db.query(User).filter(User.email == identity.email).first()
+                    if user is not None:
+                        if user.google_sub is not None and user.google_sub != identity.sub:
+                            # Same guard as the non-race email-link path above,
+                            # required here too: re-reading by google_sub found
+                            # nothing, but a row for this email now exists and
+                            # belongs to a DIFFERENT Google identity. Without
+                            # this check, the recovery path would sign identity
+                            # A into identity B's account — the exact
+                            # cross-identity takeover the non-race path rejects,
+                            # just reached through the race window instead.
+                            raise HTTPException(
+                                status_code=status.HTTP_401_UNAUTHORIZED,
+                                detail="Could not sign in with Google.",
+                            )
+                        # The row a concurrent request created is a bare
+                        # password account for this address (no Google identity
+                        # attached yet) — link it exactly as the non-race
+                        # email-match path would, rather than signing the caller
+                        # in without recording the link.
+                        user.google_sub = identity.sub
+                        db.commit()
+                if user is None:
+                    raise HTTPException(
+                        status_code=status.HTTP_401_UNAUTHORIZED,
+                        detail="Could not sign in with Google.",
+                    )
+
+    db.refresh(user)
+
     _set_auth_cookie(response, create_access_token(user.id))
     return _user_response(user)
 

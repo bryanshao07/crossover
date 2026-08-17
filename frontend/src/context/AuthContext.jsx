@@ -19,6 +19,12 @@ export function AuthProvider({ children }) {
     return me;
   }
 
+  async function loginWithGoogle(credential) {
+    const me = await api.googleLogin(credential);
+    queryClient.setQueryData(["auth", "me"], me);
+    return me;
+  }
+
   async function signup(email, password) {
     await api.signup(email, password);
     return login(email, password);
@@ -53,6 +59,7 @@ export function AuthProvider({ children }) {
     user: user ?? null,
     loading: isLoading,
     login,
+    loginWithGoogle,
     signup,
     logout,
     uploadAvatar,
