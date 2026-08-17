@@ -21,7 +21,11 @@ class User(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     email = Column(String, unique=True, nullable=False, index=True)
-    hashed_password = Column(String, nullable=False)
+    # NULL for accounts created via Google sign-in, which have no password.
+    hashed_password = Column(String, nullable=True)
+    # Google's stable per-account subject id. NULL for password-only accounts;
+    # unique so one Google account cannot attach to two CrossOver users.
+    google_sub = Column(String, unique=True, nullable=True, index=True)
     avatar_url = Column(String, nullable=True)
     created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
 
