@@ -12,7 +12,7 @@ import rate_limit
 import routers.auth as auth_router
 from auth import hash_password
 from config import settings
-from db import SessionLocal
+from db import SessionLocal, get_db
 from db_models import User
 from main import app
 from services.google_oauth import GoogleIdentity, GoogleOAuthUnavailable, InvalidGoogleToken
@@ -48,6 +48,13 @@ def _stub_verify(monkeypatch, identity=None, raises=None):
         return identity
 
     monkeypatch.setattr(auth_router, "verify_google_id_token", fake)
+
+
+def _delete_user(email):
+    db = SessionLocal()
+    db.query(User).filter(User.email == email).delete()
+    db.commit()
+    db.close()
 
 
 def test_creates_new_user_with_sub_and_avatar(monkeypatch):
@@ -119,6 +126,132 @@ def test_matches_by_sub_when_email_changed(monkeypatch):
     assert r.json()["email"] == EMAIL
 
 
+def test_email_match_with_different_google_identity_is_rejected(monkeypatch):
+    # This address already belongs to a DIFFERENT Google identity (e.g. a
+    # Workspace account was deleted and recreated, keeping the email but
+    # getting a new sub). Rebinding would let identity A silently evict
+    # identity B from B's own account, and B could evict A right back on B's
+    # next sign-in — two identities fighting over one account indefinitely.
+    db = SessionLocal()
+    db.add(User(email=EMAIL, hashed_password=None, google_sub="existing-sub-B"))
+    db.commit()
+    db.close()
+
+    _stub_verify(
+        monkeypatch, GoogleIdentity(sub="new-sub-A", email=EMAIL, picture="https://pic")
+    )
+    r = client.post("/auth/google", json={"credential": "tok"})
+    assert r.status_code == 401
+    # No enumeration: the generic invalid-token message, not a distinct one.
+    assert "already" not in r.json()["detail"].lower()
+
+    db = SessionLocal()
+    user = db.query(User).filter(User.email == EMAIL).first()
+    # Not rebound: identity B still owns the account.
+    assert user.google_sub == "existing-sub-B"
+    db.close()
+
+
+def test_concurrent_first_time_signup_recovers_without_500(monkeypatch):
+    # Simulates two simultaneous first-time sign-ins for the same identity: a
+    # double-clicked button or a GIS callback retry. Both requests miss the
+    # SELECTs above (neither user exists yet) and both try to INSERT; only one
+    # wins the unique constraint. This test lets a second, independent session
+    # genuinely commit the "winning" row mid-request, so the primary session's
+    # own commit hits a real IntegrityError from Postgres — not a fabricated one.
+    real_db = SessionLocal()
+    original_commit = real_db.commit
+    state = {"raised": False}
+
+    def flaky_commit():
+        if not state["raised"]:
+            state["raised"] = True
+            winner = SessionLocal()
+            winner.add(User(email=EMAIL, hashed_password=None, google_sub=SUB))
+            winner.commit()
+            winner.close()
+        return original_commit()
+
+    real_db.commit = flaky_commit
+
+    def override_get_db():
+        yield real_db
+
+    app.dependency_overrides[get_db] = override_get_db
+    try:
+        _stub_verify(monkeypatch, GoogleIdentity(sub=SUB, email=EMAIL, picture="https://pic"))
+        r = client.post("/auth/google", json={"credential": "tok"})
+    finally:
+        app.dependency_overrides.pop(get_db, None)
+        real_db.close()
+
+    # The loser must recover to a normal 200, not surface the constraint
+    # violation as a 500.
+    assert r.status_code == 200
+    assert r.json()["email"] == EMAIL
+
+    db = SessionLocal()
+    assert db.query(User).filter(User.email == EMAIL).count() == 1
+    db.close()
+
+
+def test_sub_match_wins_over_a_different_users_email(monkeypatch):
+    # User A already owns SUB (and address EMAIL). User B owns a different,
+    # unrelated address that happens to match the incoming token's email claim.
+    # Sub is the durable identifier and must be checked first: resolving by
+    # email first would sign the caller into B's account instead of A's.
+    other_email = "other-account@example.com"
+    _delete_user(other_email)
+    db = SessionLocal()
+    db.add(User(email=EMAIL, hashed_password=None, google_sub=SUB))
+    other = User(email=other_email, hashed_password=hash_password("their-password"))
+    db.add(other)
+    db.commit()
+    other_id = other.id
+    other_hash = other.hashed_password
+    db.close()
+
+    try:
+        # Token carries A's sub but B's email.
+        _stub_verify(monkeypatch, GoogleIdentity(sub=SUB, email=other_email, picture=None))
+        r = client.post("/auth/google", json={"credential": "tok"})
+        assert r.status_code == 200
+
+        db = SessionLocal()
+        user_a = db.query(User).filter(User.google_sub == SUB).first()
+        assert r.json()["id"] == user_a.id
+        assert r.json()["email"] == EMAIL
+
+        # B's row must be completely untouched — no rebind, no field changes.
+        user_b = db.get(User, other_id)
+        assert user_b.google_sub is None
+        assert user_b.hashed_password == other_hash
+        assert user_b.avatar_url is None
+        db.close()
+    finally:
+        _delete_user(other_email)
+
+
+def test_verifier_receives_the_posted_credential_and_configured_audience(monkeypatch):
+    # The audience check inside verify_google_id_token is the ONLY thing that
+    # stops a token minted for a different Google app from being replayed
+    # against CrossOver. Pin both arguments the route passes through.
+    received = {}
+
+    def fake(credential, client_id):
+        received["credential"] = credential
+        received["client_id"] = client_id
+        return GoogleIdentity(sub=SUB, email=EMAIL, picture="https://pic")
+
+    monkeypatch.setattr(auth_router, "verify_google_id_token", fake)
+
+    sent_credential = "the-exact-jwt-the-client-posted"
+    r = client.post("/auth/google", json={"credential": sent_credential})
+    assert r.status_code == 200
+    assert received["credential"] == sent_credential
+    assert received["client_id"] == settings.google_client_id
+
+
 def test_rejects_invalid_token(monkeypatch):
     _stub_verify(monkeypatch, raises=InvalidGoogleToken("bad"))
     r = client.post("/auth/google", json={"credential": "tok"})
@@ -152,8 +285,27 @@ def test_password_login_on_passwordless_account_is_generic_401():
     db.close()
 
     r = client.post("/auth/login", json={"email": EMAIL, "password": "any-password"})
-    # 401 not 500: verify_password must never see a None hash.
     assert r.status_code == 401
     detail = r.json()["detail"].lower()
     # No enumeration: must not reveal the account exists or uses Google.
     assert "google" not in detail
+
+
+def test_password_login_on_passwordless_account_never_calls_verify_password(monkeypatch):
+    # Asserts the short-circuit itself, not just the outward status code: the
+    # installed passlib (1.7.4) happens to return False rather than raise for a
+    # None hash, so a status-code-only assertion passes even with the guard
+    # removed. Failing loudly if verify_password is reached at all is what
+    # actually pins the guard's behavior.
+    db = SessionLocal()
+    db.add(User(email=EMAIL, hashed_password=None, google_sub=SUB))
+    db.commit()
+    db.close()
+
+    def boom(*args, **kwargs):
+        raise AssertionError("verify_password must not be called for a passwordless account")
+
+    monkeypatch.setattr(auth_router, "verify_password", boom)
+
+    r = client.post("/auth/login", json={"email": EMAIL, "password": "any-password"})
+    assert r.status_code == 401

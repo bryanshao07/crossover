@@ -4,6 +4,7 @@ from typing import Annotated, Optional
 
 from fastapi import APIRouter, Depends, File, HTTPException, Request, Response, UploadFile, status
 from pydantic import BaseModel, EmailStr, StringConstraints, field_validator
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 import data_store as ds
@@ -162,8 +163,12 @@ def login(
         account_key, max_attempts=_ACCOUNT_MAX_ATTEMPTS, window_seconds=_ACCOUNT_WINDOW_SECONDS
     )
     user = db.query(User).filter(User.email == body.email).first()
-    # A Google-created account has no password. Fall through to the same generic
-    # 401 rather than passing None to verify_password (which would 500).
+    # A Google-created account has no password. The installed passlib (1.7.4)
+    # happens to return False rather than raise for a None hash, so this
+    # short-circuit isn't preventing a crash today — it's defense-in-depth
+    # against that being a passlib implementation detail, not a documented
+    # contract, plus it skips a pointless hash comparison for an account that
+    # can never have a matching password.
     if not user or not user.hashed_password or not verify_password(
         body.password, user.hashed_password
     ):
@@ -208,10 +213,26 @@ def google_auth(
     if user is None:
         user = db.query(User).filter(User.email == identity.email).first()
         if user is not None:
+            if user.google_sub is not None and user.google_sub != identity.sub:
+                # This address is already linked to a DIFFERENT Google identity
+                # (e.g. a Workspace account was deleted and recreated with a new
+                # sub but the same email). Linking a bare password account to
+                # Google and transferring an account between two Google
+                # identities are different operations — only the former is
+                # allowed here. Silently rebinding would let this identity
+                # evict the rightful owner, who could then evict it right back
+                # on their next sign-in. Reject with the same generic message
+                # an invalid token gets, so the response doesn't reveal that
+                # the address is already linked to someone else.
+                raise HTTPException(
+                    status_code=status.HTTP_401_UNAUTHORIZED,
+                    detail="Could not sign in with Google.",
+                )
             # Link: Google vouched for this address (email_verified was enforced
             # during verification), so it is the same person. The password, if
             # any, is left intact and keeps working.
             user.google_sub = identity.sub
+            db.commit()
         else:
             user = User(
                 email=identity.email,
@@ -220,7 +241,26 @@ def google_auth(
                 avatar_url=identity.picture,
             )
             db.add(user)
-    db.commit()
+            try:
+                db.commit()
+            except IntegrityError:
+                # Two first-time sign-ins can race (a double-clicked button, a
+                # GIS callback retry): both miss the SELECTs above and both try
+                # to INSERT, and the loser hits the email/google_sub unique
+                # constraint. That's a benign, mundane race, not evidence of
+                # anything wrong — recover by re-reading the row the winner
+                # created instead of letting the constraint violation surface
+                # as a 500.
+                db.rollback()
+                user = db.query(User).filter(User.google_sub == identity.sub).first()
+                if user is None:
+                    user = db.query(User).filter(User.email == identity.email).first()
+                if user is None:
+                    raise HTTPException(
+                        status_code=status.HTTP_401_UNAUTHORIZED,
+                        detail="Could not sign in with Google.",
+                    )
+
     db.refresh(user)
 
     _set_auth_cookie(response, create_access_token(user.id))
